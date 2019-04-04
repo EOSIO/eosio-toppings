@@ -4,7 +4,7 @@ set -o errexit
 # change to script's directory
 cd "$(dirname "$0")"
 
-echo "=== run docker container from the eosio-gui-nodeos-cdt:1.5.0 image ==="
+echo "starting docker container from the eosio-gui-nodeos-cdt:1.5.0 image"
 # -d: Detach docker container, let it run in background
 # --name: Assign name to the container
 # --mount: Mount filesystem from host to container. 
