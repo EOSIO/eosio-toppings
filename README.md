@@ -27,7 +27,7 @@ A more detailed explanation on how to get started with the EOSIO Toppings tool c
 To get quickly set up and running with this tool, please perform the following steps:
 1. Directly clone this monorepo (using `git clone`)
 2. Navigate to the root level of the cloned repository and run `./first_time_setup.sh` to install and build all the necessary dependencies
-3. Run `./quick_start.sh`, which will automatically start the tool in your browser at `http://localhost:3000` after creating the necessary containers and services
+3. Run `./apps/gui-nodeos/quick_start.sh`, which will automatically start the tool in your browser at `http://localhost:3000` after creating the necessary containers and services
 
 ### Caveats (ports)
 

@@ -14,9 +14,10 @@ EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
+APPS="$SCRIPTPATH/apps/gui-nodeos"
 
 if [ "$1" == "-d" -o "$1" == "--delete" ]; then
-  ./remove_dockers.sh
+  (cd $APPS && ./remove_dockers.sh)
 fi
 
 echo " "
@@ -48,6 +49,7 @@ else
         sleep 10 #else docker fails  sometimes
     fi
   fi
+  echo " "
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
@@ -58,6 +60,7 @@ echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
 (printf "${GREEN}done${NC}")
+echo " "
 
 # wait until eosio blockchain to be started
 waitcounter=0
@@ -74,11 +77,10 @@ do
     waitcounter=$((waitcounter+1))
   else
     echo " "
-    echo "Problem starting docker, removing dockers and restarting"
-    ./remove_dockers.sh
+    echo "problem starting docker, removing dockers and restarting"
+    (cd $APPS && ./remove_dockers.sh)
     echo " "
-    echo "Restarting eosio docker"
-    ./quick_start.sh
+    (cd $APPS && ./quick_start.sh)
     exit 0
   fi
 done
