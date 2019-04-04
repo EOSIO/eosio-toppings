@@ -39,5 +39,5 @@ if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
         docker logs eosio_gui_nodeos_container --follow
     fi
 else
-    echo "docker already running"
+    echo "docker is already running"
 fi

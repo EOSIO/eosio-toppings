@@ -23,6 +23,7 @@ if [ "$(docker ps -q -f name=eosio-mongodb)" ]; then
         if [ "$(docker ps -aq -f status=paused -f name=eosio-mongodb)" ]; then
             echo "resuming paused mongodb container"
             docker unpause eosio-mongodb
+            printf "${GREEN}done${NC}"
         fi
     fi
 else
@@ -41,6 +42,7 @@ if [ "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
         if [ "$(docker ps -aq -f status=paused -f name=eosio_gui_nodeos_container)" ]; then
             echo "resuming paused blockchain container"
             docker unpause eosio_gui_nodeos_container
+            printf "${GREEN}done${NC}"
         fi
     fi
 else
