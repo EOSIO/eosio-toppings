@@ -8,12 +8,14 @@ if find "$ROOTPATH/packages/docker-eosio-nodeos" -mindepth 1 -print -quit 2>/dev
   SCRIPTPATH="../.."
 fi
 
-echo "please run this only for first time setup"
-
-echo "building eosio docker"
+echo " "
+echo "=============================="
+echo "BUILDING EOSIO DOCKER"
+echo "=============================="
 (cd ${SCRIPTPATH}/packages/ && exec docker-eosio-nodeos/build_eosio_docker.sh)
 
-echo "building eosio cdt docker"
+echo " "
+echo "=============================="
+echo "BUILDING EOSIO CDT DOCKER"
+echo "=============================="
 (cd ${SCRIPTPATH}/packages/ && exec api-eosio-compiler/docker-eosio-cdt/build_eosio_cdt_docker.sh)
-
-echo "build finished"
