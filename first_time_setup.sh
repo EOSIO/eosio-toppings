@@ -41,9 +41,6 @@ echo "=============================="
 # remove existing dockers 
 ./remove_dockers.sh
 
-# starting the dockers and gui
-./quick_start.sh
-
 P1=$!
 
 # wait $P1
