@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-echo "=== start of eosio-cdt docker setup ==="
-
 # change to script's directory
 cd "$(dirname "$0")"
 SCRIPTPATH="$( pwd -P )"
@@ -21,8 +18,8 @@ fi
 
 # build docker image, if necessary
 if [[ "$(docker images -q eosio-gui-nodeos-cdt:1.5.0)" == "" ]]; then
-  echo "=== Build docker image eosio-gui-nodeos version cdt1.5.0, this will take some time for the first time run ==="
+  echo "build docker image eosio-gui-nodeos version cdt1.5.0, this may take some time"
   docker build -t eosio-gui-nodeos-cdt:1.5.0 . --no-cache
 else
-  echo "=== Docker image already exists, skip building ==="
+  echo "docker image already exists, skip building"
 fi

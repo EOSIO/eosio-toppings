@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo "start building eosio docker"
-
 # change to script's directory
 cd "$(dirname "$0")"
 SCRIPTPATH="$( pwd -P )"
@@ -21,25 +19,22 @@ fi
 
 # build docker image, if necessary
 if [[ "$(docker images -q eosio-gui-nodeos:eos1.6.3)" == "" ]]; then
-  echo "Build docker image eosio-gui-nodeos version eos1.6.3, this may take some time"
+  echo "build docker image eosio-gui-nodeos version eos1.6.3, this may take some time"
   docker build -t eosio-gui-nodeos:eos1.6.3 . --no-cache
 else
-  echo "Docker image already exists, skip building"
+  echo "docker image already exists, skip building"
 fi
 
 # force remove the perivous container if any
 # create a clean data folder in eosio_docker to preserve block data
-echo "clean up data remnants"
-echo "Checking if previous container is running"
+echo 'checking if docker is already running'
 if [ "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if [ "$(docker ps -aq -f status=running -f name=eosio_gui_nodeos_container)" ]; then
-        echo "Previous container is running, stopping"
+        echo "stopping running container"
         docker rm --force eosio_gui_nodeos_container
     fi
 fi
-if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
-  echo "No container running"
-fi
-echo "Re-initializing block log folder"
+
+echo "cleaning data"
 rm -rf "./data"
 mkdir -p "./data"

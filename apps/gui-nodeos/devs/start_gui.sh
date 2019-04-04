@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 ROOTPATH="../../.."
 SCRIPTPATH="$( pwd -P )"
 if find "$ROOTPATH/packages/ui-gui-nodeos" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
-  SCRIPTPATH="../.."
+  SCRIPTPATH=$ROOTPATH
 fi
 
 echo " "

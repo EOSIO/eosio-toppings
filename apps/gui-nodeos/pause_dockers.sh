@@ -10,8 +10,10 @@ if [ "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
         echo "blockchain container is running, stopping the container"
         docker pause eosio_gui_nodeos_container
     else
-        echo "Blockchain container not running"
+        echo "eosio docker is not running"
     fi
+else
+    echo "eosio docker is not running"
 fi
 
 
@@ -25,8 +27,10 @@ if [ "$(docker ps -aq -f name=eosio-mongodb)" ]; then
         echo "mongodb container is running, stopping the container"
         docker pause eosio-mongodb
     else 
-        echo "mongodb container not running"
+        echo "mongodb docker is not running"
     fi
+else
+     echo "mongodb docker is not running"
 fi
 
 
