@@ -45,16 +45,13 @@ This command does a few things:
 1. Install all required dependencies
 2. Build the docker images
 3. Check and remove any existing docker with names `eosio-mongodb` and `eosio_gui_nodeos_container`
-4. Start the dockers
-5. Setup compiler api
-6. Start the GUI
 
 ## Running Your Application
 
 Run your application using this:
 
 ```bash
-$ ./quick_start.sh
+$ ./apps/gui-nodes/quick_start.sh
 ```
 
 Your application should run on port 3000 with the *development* environment configuration, so in your browser just go to [http://localhost:3000](http://localhost:3000)
@@ -66,14 +63,14 @@ That's it! Your application should be running. To proceed with your development,
 Pause the blockchain/dockers using this:
 
 ```bash
-$ ./pause_dockers.sh
+$ ./apps/gui-nodes/pause_dockers.sh
 ```
 
 This will pause the running dockers (blockchain and mongodb).
 
 You can resume the dockers using
 ```bash
-$ ./quick_start.sh
+$ ./apps/gui-nodes/resume_dockers.sh
 ```
 
 
