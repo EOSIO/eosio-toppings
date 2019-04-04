@@ -4,7 +4,12 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 
+ROOTPATH="../.."
 SCRIPTPATH="$( pwd -P )"
+if find "$ROOTPATH/packages/docker-eosio-nodeos" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
+  SCRIPTPATH="../.."
+fi
+
 EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
@@ -67,6 +72,7 @@ echo "=============================="
 echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
+(printf "${GREEN}done${NC}")
 
 # wait until eosio blockchain to be started
 waitcounter=0
