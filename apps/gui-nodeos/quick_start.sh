@@ -26,6 +26,7 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio-mongodb)" ]; then
   echo 'resuming mongodb docker'
   docker unpause eosio-mongodb
+  (printf "${GREEN}done${NC}")
 else
   (cd $MONGODOCKER && ./start_mongodb_docker.sh && printf "${GREEN}done${NC}")
 fi
@@ -37,6 +38,7 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio_gui_nodeos_container)" ]; then
   echo 'resuming eosio docker'
   docker unpause eosio_gui_nodeos_container
+  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if find "$EOSDOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
