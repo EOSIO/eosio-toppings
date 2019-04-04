@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ROOTPATH="../../.."
 SCRIPTPATH="$( pwd -P )"
 if find "$ROOTPATH/packages/docker-eosio-nodeos" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
