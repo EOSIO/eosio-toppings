@@ -8,7 +8,7 @@ Sample shell script utilities for directly controlling the blockchain container.
 * `start_dockers.sh` - Script to start nodeos and mongodb dockers
 * `pause_dockers.sh` - Script to pause the dockers
 * `resume_dockers.sh` - Script to resume the dockers
-* `clear_all_blockchain_data.sh` - Script to re-initialize all data in the blockchain and MongoDB in case a hard reset is needed
+* `clear_blockchain_data.sh` - Script to re-initialize all data in the blockchain and MongoDB in case a hard reset is needed
 * `remove_dockers.sh` - Script to remove the dockers
 * `quick_start.sh` - Script to start the dockers & gui
 
