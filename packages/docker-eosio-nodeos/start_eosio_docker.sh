@@ -35,7 +35,7 @@ if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
 
     if [ "$1" != "--nolog" ]
     then
-        echo "=== follow eosio_gui_nodeos_container logs ==="
+        echo "follow eosio_gui_nodeos_container logs"
         docker logs eosio_gui_nodeos_container --follow
     fi
 else
