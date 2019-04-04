@@ -5,5 +5,7 @@ set -o errexit
 cd "$(dirname "$0")"
 if [ "$(docker ps -q -f name=eosio-mongodb)" ]; then
   docker stop eosio-mongodb && rm -rf data && mkdir data
+else
+  echo 'mongodb docker is not running'
 fi
 

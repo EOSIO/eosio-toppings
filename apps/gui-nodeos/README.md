@@ -5,7 +5,7 @@ Sample shell script utilities for directly controlling the blockchain container.
 ## Contents
 
 * `build_dockers.sh` - Script to build the Docker images and containers under `packages/docker-eosio-nodeos` and `packages/api-eosio-compiler/docker-eosio-cdt`
-* `start_blockchain.sh` - Script to start the blockchain
+* `start_dockers.sh` - Script to start nodeos and mongodb dockers
 * `pause_dockers.sh` - Script to pause the dockers
 * `resume_dockers.sh` - Script to resume the dockers
 * `clear_all_blockchain_data.sh` - Script to re-initialize all data in the blockchain and MongoDB in case a hard reset is needed

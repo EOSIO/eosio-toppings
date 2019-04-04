@@ -1,7 +1,7 @@
 ROOTPATH="../../.."
 SCRIPTPATH="$( pwd -P )"
 if find "$ROOTPATH/packages/docker-mongodb" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
-  SCRIPTPATH="../.."
+  SCRIPTPATH=$ROOTPATH
 fi
 
 echo " "

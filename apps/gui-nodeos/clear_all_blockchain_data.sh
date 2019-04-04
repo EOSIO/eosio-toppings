@@ -9,18 +9,14 @@ fi
 
 echo " "
 echo "=============================="
-echo "CLEANING BLOCKCHAIN DATA AND RESTARTING"
+echo "CLEANING BLOCKCHAIN DATA"
 echo "=============================="
-echo "Checking if nodeos container is running"
+echo "checking if nodeos container is running"
 if [ "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if [ "$(docker ps -aq -f status=running -f name=eosio_gui_nodeos_container)" ]; then
-        echo "blockchain container is running, stopping the container"
+        echo "stopping the container"
         docker stop eosio_gui_nodeos_container
     fi
+else
+    echo "container is not running"
 fi
-
-echo "reinitializing nodeos"
-(cd ${SCRIPTPATH}/packages/ && exec docker-eosio-nodeos/start_eosio_docker.sh)
-
-echo "reinitializing mongodb"
-(cd ${SCRIPTPATH}/packages/ && exec docker-mongodb/remove_mongodb_docker.sh && exec docker-mongodb/start_mongodb_docker.sh)
