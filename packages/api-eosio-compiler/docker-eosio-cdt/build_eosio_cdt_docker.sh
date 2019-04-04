@@ -18,7 +18,7 @@ fi
 
 # build docker image, if necessary
 if [[ "$(docker images -q eosio-gui-nodeos-cdt:1.5.0)" == "" ]]; then
-  echo "build docker image eosio-gui-nodeos version cdt1.5.0, this may take some time"
+  echo "building docker image eosio-gui-nodeos version cdt1.5.0, this may take some time"
   docker build -t eosio-gui-nodeos-cdt:1.5.0 . --no-cache
 else
   echo "docker image already exists, skip building"
