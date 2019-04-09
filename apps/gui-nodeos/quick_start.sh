@@ -14,19 +14,11 @@ EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
-ISDEV=false
+APPS="$SCRIPTPATH/apps/gui-nodeos"
 
-for arg in $@
-do
-    case $arg in
-      -d|--delete)
-        ./remove_dockers.sh
-        ;;
-      -dev|--develop)
-        ISDEV=true
-        ;;
-  esac
-done
+if [ "$1" == "-d" -o "$1" == "--delete" ]; then
+  (cd $APPS && ./remove_dockers.sh)
+fi
 
 echo " "
 echo "=============================="
@@ -37,14 +29,6 @@ if [ "$(docker ps -q -f status=paused -f name=eosio-mongodb)" ]; then
   docker unpause eosio-mongodb
   (printf "${GREEN}done${NC}")
 else
-  if [ ! "$(docker ps -q -f name=eosio-mongodb)" ]; then
-    if find "$MONGODOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
-        echo "mongodb docker is not running, but data folder exists"
-        echo "cleaning data now"
-        rm -r $MONGODOCKER/data/*
-        sleep 10 #else docker fails  sometimes
-    fi
-  fi
   (cd $MONGODOCKER && ./start_mongodb_docker.sh && printf "${GREEN}done${NC}")
 fi
 
@@ -105,11 +89,7 @@ echo " "
 echo "=============================="
 echo "STARTING GUI"
 echo "=============================="
-if $ISDEV; then
-  ./start_gui.sh -dev
-else
-  ./start_gui.sh
-fi
+(cd $GUI && yarn start)
 
 P1=$!
 
