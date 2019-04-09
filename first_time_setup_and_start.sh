@@ -44,7 +44,7 @@ fi
 # remove existing dockers 
 ./remove_dockers.sh
 
-./quick_start.sh $1
+./start.sh $1
 
 P1=$!
 

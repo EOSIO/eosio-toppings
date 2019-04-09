@@ -12,8 +12,6 @@ if [ "$1" == "-dev" -o "$1" == "--develop" ]; then
   ISDEV=true
 fi
 
-echo 'in start ' + $ISDEV
-
 echo " "
 echo "=============================="
 echo "STARTING GUI"

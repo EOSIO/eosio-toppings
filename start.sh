@@ -4,20 +4,41 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 
-ROOTPATH="../.."
 SCRIPTPATH="$( pwd -P )"
-if find "$ROOTPATH/packages/docker-eosio-nodeos" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
-  SCRIPTPATH="../.."
-fi
-
 EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
-APPS="$SCRIPTPATH/apps/gui-nodeos"
+ISDEV=false
+BUILD=false
 
-if [ "$1" == "-d" -o "$1" == "--delete" ]; then
-  (cd $APPS && ./remove_dockers.sh)
+for arg in $@
+do
+    case $arg in
+      -d|--delete)
+        ./remove_dockers.sh
+        ;;
+      -dev|--develop)
+        ISDEV=true
+        ;;
+      -b|--build)
+        BUILD=true
+        ;;
+  esac
+done
+
+if ($BUILD); then
+  echo "=============================="
+  echo "INSTALLING DEPENDENCIES"
+  echo "=============================="
+  yarn install
+
+  # create a static build of application for production
+  echo " "
+  echo "=============================="
+  echo "BUILDING APPLICATION"
+  echo "=============================="
+  (cd $GUI && yarn build && printf "${GREEN}done${NC}")
 fi
 
 echo " "
@@ -27,8 +48,15 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio-mongodb)" ]; then
   echo 'resuming mongodb docker'
   docker unpause eosio-mongodb
-  (printf "${GREEN}done${NC}")
 else
+  if [ ! "$(docker ps -q -f name=eosio-mongodb)" ]; then
+    if find "$MONGODOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
+        echo "mongodb docker is not running, but data folder exists"
+        echo "cleaning data now"
+        rm -r $MONGODOCKER/data/*
+        sleep 10 #else docker fails  sometimes
+    fi
+  fi
   (cd $MONGODOCKER && ./start_mongodb_docker.sh && printf "${GREEN}done${NC}")
 fi
 
@@ -39,7 +67,6 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio_gui_nodeos_container)" ]; then
   echo 'resuming eosio docker'
   docker unpause eosio_gui_nodeos_container
-  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if find "$EOSDOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
@@ -49,7 +76,6 @@ else
         sleep 10 #else docker fails  sometimes
     fi
   fi
-  echo " "
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
@@ -59,7 +85,7 @@ echo "=============================="
 echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
-(printf "${GREEN}done${NC}")
+printf "${GREEN}done${NC}"
 echo " "
 
 # wait until eosio blockchain to be started
@@ -77,19 +103,21 @@ do
     waitcounter=$((waitcounter+1))
   else
     echo " "
-    echo "problem starting docker, removing dockers and restarting"
-    (cd $APPS && ./remove_dockers.sh)
+    echo "Problem starting docker, removing dockers and restarting"
+    ./remove_dockers.sh
     echo " "
-    (cd $APPS && ./quick_start.sh)
+    echo "Restarting eosio docker"
+    ./quick_start.sh
     exit 0
   fi
 done
 
-echo " "
-echo "=============================="
-echo "STARTING GUI"
-echo "=============================="
-(cd $GUI && yarn start)
+
+if $ISDEV; then
+  ./start_gui.sh -dev
+else
+  ./start_gui.sh
+fi
 
 P1=$!
 
