@@ -21,8 +21,6 @@ do
   esac
 done
 
-echo 'in start ' + $ISDEV
-
 echo " "
 echo "=============================="
 echo "STARTING GUI"

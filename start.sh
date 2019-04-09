@@ -4,12 +4,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 
-ROOTPATH="../.."
 SCRIPTPATH="$( pwd -P )"
-if find "$ROOTPATH/packages/docker-eosio-nodeos" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
-  SCRIPTPATH="../.."
-fi
-
 EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
@@ -35,7 +30,6 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio-mongodb)" ]; then
   echo 'resuming mongodb docker'
   docker unpause eosio-mongodb
-  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio-mongodb)" ]; then
     if find "$MONGODOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
@@ -55,7 +49,6 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio_gui_nodeos_container)" ]; then
   echo 'resuming eosio docker'
   docker unpause eosio_gui_nodeos_container
-  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if find "$EOSDOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
@@ -65,7 +58,6 @@ else
         sleep 10 #else docker fails  sometimes
     fi
   fi
-  echo " "
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
@@ -75,7 +67,7 @@ echo "=============================="
 echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
-(printf "${GREEN}done${NC}")
+printf "${GREEN}done${NC}"
 echo " "
 
 # wait until eosio blockchain to be started
@@ -93,14 +85,16 @@ do
     waitcounter=$((waitcounter+1))
   else
     echo " "
-    echo "problem starting docker, removing dockers and restarting"
-    (cd $APPS && ./remove_dockers.sh)
+    echo "Problem starting docker, removing dockers and restarting"
+    ./remove_dockers.sh
     echo " "
-    (cd $APPS && ./quick_start.sh)
+    echo "Restarting eosio docker"
+    ./quick_start.sh
     exit 0
   fi
 done
 
+<<<<<<< HEAD:apps/gui-nodeos/quick_start.sh
 echo " "
 echo "=============================="
 echo "STARTING GUI"
@@ -111,6 +105,13 @@ if $ISDEV; then
   ./start_gui.sh -dev $2
 else
   ./start_gui.sh $2
+=======
+
+if $ISDEV; then
+  ./start_gui.sh -dev
+else
+  ./start_gui.sh
+>>>>>>> - rename first_time_setup to first_time_setup_and_start:start.sh
 fi
 
 P1=$!
