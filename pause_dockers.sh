@@ -37,9 +37,3 @@ if [ "$(docker ps -aq -f name=eosio-mongodb)" ]; then
 else
      echo "mongodb docker is not running"
 fi
-
-
-
-
-
-

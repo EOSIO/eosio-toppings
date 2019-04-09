@@ -38,7 +38,7 @@ The code comes pre-bundled with a package.json and yarn.lock files that contain 
 
 To install the dependencies, run this in the application folder from the command-line:
 ```sh
-./first_time_setup.sh
+./first_time_setup_and_start.sh
 ```
 This command does a few things:
 
@@ -51,7 +51,7 @@ This command does a few things:
 Run your application using this:
 
 ```bash
-$ ./apps/gui-nodes/quick_start.sh
+$ ./start.sh
 ```
 
 Your application should run on port 3000 with the *development* environment configuration, so in your browser just go to [http://localhost:3000](http://localhost:3000)
@@ -63,12 +63,16 @@ That's it! Your application should be running. To proceed with your development,
 Pause the blockchain/dockers using this:
 
 ```bash
-$ ./apps/gui-nodes/pause_dockers.sh
+$ ./pause_dockers.sh
 ```
 
 This will pause the running dockers (blockchain and mongodb).
 
-You can resume the dockers using
+You can resume the dockers either using
+```bash
+$ ./start.sh
+```
+or
 ```bash
 $ ./apps/gui-nodes/resume_dockers.sh
 ```
