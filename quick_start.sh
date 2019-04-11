@@ -61,12 +61,7 @@ else
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
-# start compiler service in background
-echo " "
-echo "=============================="
-echo "STARTING COMPILER SERVICE"
-echo "=============================="
-(cd $COMPILER && yarn start > compiler.log &)
+
 
 # wait until eosio blockchain to be started
 waitcounter=0
