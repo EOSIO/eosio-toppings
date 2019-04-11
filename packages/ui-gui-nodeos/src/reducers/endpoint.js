@@ -61,7 +61,7 @@ export const combinedEpic = combineEpics(
 //Reducer
 export const pathInitState = {
   nodeos: "http://localhost:8888",
-  mongodb: "mongodb://localhost:27017/mongopluginmainnet",
+  mongodb: "mongodb://eosio-mongodb:27017/mongopluginmainnet",
 }
 
 const pathReducer = (state=pathInitState, action) => {

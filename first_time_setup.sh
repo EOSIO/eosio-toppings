@@ -15,11 +15,6 @@ if [ "$1" == "-dev" -o "$1" == "--develop" ]; then
   ISDEV=true
 fi
 
-echo "=============================="
-echo "INSTALLING DEPENDENCIES"
-echo "=============================="
-yarn install
-
 echo " "
 echo "=============================="
 echo "BUILDING EOSIO DOCKER"
@@ -32,14 +27,11 @@ echo "BUILDING EOSIO_CDT DOCKER USED BY COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && ./build_eosio_cdt_docker.sh && printf "${GREEN}done${NC}")
 
-if !($ISDEV); then
-# create a static build of application for production
 echo " "
 echo "=============================="
-echo "BUILDING APPLICATION"
+echo "BUILDING GUI DOCKER"
 echo "=============================="
-(cd $GUI && yarn build && printf "${GREEN}done${NC}")
-fi
+(./build_gui_docker.sh && printf "${GREEN}done${NC}")
 
 # remove existing dockers 
 ./remove_dockers.sh
