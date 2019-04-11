@@ -18,11 +18,9 @@ app.on('error', function (e) {
 });
 
 app.listen(PORT, ()=>{
-  console.log(`Listening ${process.env.MODE !== `development`  ? `static \`build/\` folder and ` : `` }API calls on port ${PORT} in production mode.`);
-  console.log(``);
+  console.log(`Listening ${process.env.MODE !== `development`  ? `static \`build/\` folder and ` : `` }API calls on port ${PORT} in production mode.`)
   if(`${process.env.MODE}` !== `development`){
     let url = "http://localhost:" + PORT;
-    console.log(`Application is ready on "${url}".`);
-    console.log(`Copy above URL and paste it into the browser to start the application.`);
+    console.log("copy and paste this url in browser to start ", url);
   }
 });

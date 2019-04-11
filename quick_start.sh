@@ -9,7 +9,7 @@ EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
-ISDEV=false
+BUILDGUI=false
 
 for arg in $@
 do
@@ -17,8 +17,8 @@ do
       -d|--delete)
         ./remove_dockers.sh
         ;;
-      -dev|--develop)
-        ISDEV=true
+      -b|--build)
+        BUILDGUI=true
         ;;
   esac
 done
