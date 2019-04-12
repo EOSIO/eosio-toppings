@@ -87,10 +87,6 @@ do
   fi
 done
 
-echo " "
-echo "=============================="
-echo "STARTING GUI"
-echo "=============================="
 ./start_gui_docker.sh
 
 P1=$!
