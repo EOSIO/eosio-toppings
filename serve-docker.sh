@@ -16,8 +16,15 @@ echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
 
 if [ "$1" == "-b" -o "$1" == "--build" ]; then
-  echo "building nodeos-gui docker"
+  echo " "
+  echo "=============================="
+  echo "BUILDING GUI"
+  echo "=============================="
   sh ./build_gui.sh
 fi
 
+echo " "
+echo "=============================="
+echo "STARTING GUI"
+echo "=============================="
 (cd $GUI && yarn serve)
