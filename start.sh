@@ -9,7 +9,9 @@ EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
+APPS="$SCRIPTPATH/apps/gui-nodeos"
 ISDEV=false
+BUILD=false
 
 for arg in $@
 do
@@ -20,8 +22,31 @@ do
       -dev|--develop)
         ISDEV=true
         ;;
+      -b|--build)
+        BUILD=true
+        ;;
   esac
 done
+
+
+
+if [ "$1" == "-d" -o "$1" == "--delete" ]; then
+  (cd $APPS && ./remove_dockers.sh)
+fi
+
+if ($BUILD); then
+  echo "=============================="
+  echo "INSTALLING DEPENDENCIES"
+  echo "=============================="
+  yarn install
+
+  # create a static build of application for production
+  echo " "
+  echo "=============================="
+  echo "BUILDING APPLICATION"
+  echo "=============================="
+  (cd $GUI && yarn build && printf "${GREEN}done${NC}")
+fi
 
 echo " "
 echo "=============================="
@@ -30,6 +55,7 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio-mongodb)" ]; then
   echo 'resuming mongodb docker'
   docker unpause eosio-mongodb
+  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio-mongodb)" ]; then
     if find "$MONGODOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
@@ -49,6 +75,7 @@ echo "=============================="
 if [ "$(docker ps -q -f status=paused -f name=eosio_gui_nodeos_container)" ]; then
   echo 'resuming eosio docker'
   docker unpause eosio_gui_nodeos_container
+  (printf "${GREEN}done${NC}")
 else
   if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     if find "$EOSDOCKER/data" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
@@ -58,6 +85,7 @@ else
         sleep 10 #else docker fails  sometimes
     fi
   fi
+  echo " "
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
@@ -67,7 +95,7 @@ echo "=============================="
 echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
-printf "${GREEN}done${NC}"
+printf "${GREEN}done${NC}"5
 echo " "
 
 # wait until eosio blockchain to be started
@@ -89,12 +117,11 @@ do
     ./remove_dockers.sh
     echo " "
     echo "Restarting eosio docker"
-    ./quick_start.sh
+    ./start.sh
     exit 0
   fi
 done
 
-<<<<<<< HEAD:apps/gui-nodeos/quick_start.sh
 echo " "
 echo "=============================="
 echo "STARTING GUI"
@@ -105,13 +132,6 @@ if $ISDEV; then
   ./start_gui.sh -dev $2
 else
   ./start_gui.sh $2
-=======
-
-if $ISDEV; then
-  ./start_gui.sh -dev
-else
-  ./start_gui.sh
->>>>>>> - rename first_time_setup to first_time_setup_and_start:start.sh
 fi
 
 P1=$!
