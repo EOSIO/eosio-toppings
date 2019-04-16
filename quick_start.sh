@@ -9,7 +9,7 @@ EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
-BUILDGUI=false
+ISDEV=false
 
 for arg in $@
 do
@@ -17,8 +17,8 @@ do
       -d|--delete)
         ./remove_dockers.sh
         ;;
-      -b|--build)
-        BUILDGUI=true
+      -dev|--develop)
+        ISDEV=true
         ;;
   esac
 done
@@ -92,14 +92,12 @@ done
 # echo "STARTING GUI"
 # echo "=============================="
 
-# # $2 should be either argument "--first-time-setup" or null
-# if $ISDEV; then
-#   ./start_gui.sh -dev $2
-# else
-#   ./start_gui.sh $2
-# fi
-
-./start_gui_docker.sh
+# $2 should be either argument "--first-time-setup" or null
+if $ISDEV; then
+  ./start_gui_docker.sh -dev $2
+else
+  ./start_gui_docker.sh $2
+fi
 
 P1=$!
 
