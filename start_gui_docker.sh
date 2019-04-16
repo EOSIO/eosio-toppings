@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-script="./serve-docker.sh -b"
+script="./serve-docker.sh"
 
 echo " "
 echo "=============================="
@@ -18,7 +18,7 @@ if [ ! "$(docker ps -q -f name=nodeos-gui)" ]; then
     --link eosio_gui_nodeos_container \
     -p 5000:5000 \
     -i eosio/nodeos-gui \
-    /bin/bash -c "$script"
+    "$script"
 else
   echo "nodeos-gui docker already running"
 fi

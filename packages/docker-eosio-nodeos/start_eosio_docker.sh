@@ -28,10 +28,11 @@ if [ ! "$(docker ps -q -f name=eosio_gui_nodeos_container)" ]; then
     docker run --rm --name eosio_gui_nodeos_container -d \
     -p 8888:8888 -p 9876:9876 \
     --link eosio-mongodb \
-    --mount type=bind,src="$(pwd)"/contracts,dst=/opt/eosio/bin/contracts \
-    --mount type=bind,src="$(pwd)"/scripts,dst=/opt/eosio/bin/scripts \
-    --mount type=bind,src="$(pwd)"/data,dst=/mnt/dev/data \
-    -w "/opt/eosio/bin/" eosio-gui-nodeos:eos1.6.3 /bin/bash -c "$script"
+    -v /$(pwd)/contracts:/opt/eosio/bin/contracts \
+    -v /$(pwd)/scripts:/opt/eosio/bin/scripts \
+    -v /$(pwd)/data:/mnt/dev/data \
+    -i eosio-gui-nodeos:eos1.6.3 \
+    "$script"
 
     if [ "$1" != "--nolog" ]
     then

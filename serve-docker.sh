@@ -15,13 +15,13 @@ echo "STARTING COMPILER SERVICE"
 echo "=============================="
 (cd $COMPILER && yarn start > compiler.log &)
 
-if [ "$1" == "-b" -o "$1" == "--build" ]; then
+#if [ "$1" == "-b" -o "$1" == "--build" ]; then
   echo " "
   echo "=============================="
   echo "BUILDING GUI"
   echo "=============================="
   sh ./build_gui.sh
-fi
+#fi
 
 echo " "
 echo "=============================="
