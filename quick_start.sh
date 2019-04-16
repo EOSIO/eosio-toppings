@@ -10,6 +10,7 @@ MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
 ISDEV=false
+ISFIRSTTIMESETUP=false
 
 for arg in $@
 do
@@ -19,6 +20,9 @@ do
         ;;
       -dev|--develop)
         ISDEV=true
+        ;;
+      --first-time-setup)
+        ISFIRSTTIMESETUP=true
         ;;
   esac
 done
@@ -93,10 +97,10 @@ done
 # echo "=============================="
 
 # $2 should be either argument "--first-time-setup" or null
-if $ISDEV; then
-  ./start_gui_docker.sh -dev $2
+if $ISFIRSTTIMESETUP; then
+  ./start_gui_docker.sh --first-time-setup
 else
-  ./start_gui_docker.sh $2
+  ./start_gui_docker.sh
 fi
 
 P1=$!
