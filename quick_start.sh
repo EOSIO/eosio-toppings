@@ -87,17 +87,19 @@ do
   fi
 done
 
-echo " "
-echo "=============================="
-echo "STARTING GUI"
-echo "=============================="
+# echo " "
+# echo "=============================="
+# echo "STARTING GUI"
+# echo "=============================="
 
-# $2 should be either argument "--first-time-setup" or null
-if $ISDEV; then
-  ./start_gui.sh -dev $2
-else
-  ./start_gui.sh $2
-fi
+# # $2 should be either argument "--first-time-setup" or null
+# if $ISDEV; then
+#   ./start_gui.sh -dev $2
+# else
+#   ./start_gui.sh $2
+# fi
+
+./start_gui_docker.sh
 
 P1=$!
 

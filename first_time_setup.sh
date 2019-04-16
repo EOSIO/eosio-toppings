@@ -34,7 +34,7 @@ echo "=============================="
 
 # Set environment variable "LAST_FIRST_TIME_SETUP_TIMESTAMP" at build time to create a new timestamp while serving the app.
 (cd $GUI && REACT_APP_LAST_FIRST_TIME_SETUP_TIMESTAMP=$(date +%s) yarn build && printf "${GREEN}done${NC}")
-fi
+(./build_gui_docker.sh && printf "${GREEN}done${NC}")
 
 # remove existing dockers
 ./remove_dockers.sh
