@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-script="./serve-docker.sh"
+script="./start_gui.sh"
+
+for arg in $@
+do
+    case $arg in
+      --first-time-setup)
+        script="./build_and_start_gui.sh"
+        ;;
+  esac
+done
 
 echo " "
 echo "=============================="

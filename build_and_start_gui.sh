@@ -8,23 +8,15 @@ SCRIPTPATH="$( pwd -P )"
 GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
 
-# start compiler service in background
+
 echo " "
 echo "=============================="
-echo "STARTING COMPILER SERVICE"
+echo "BUILDING GUI"
 echo "=============================="
-(cd $COMPILER && yarn start > compiler.log &)
-
-#if [ "$1" == "-b" -o "$1" == "--build" ]; then
-  echo " "
-  echo "=============================="
-  echo "BUILDING GUI"
-  echo "=============================="
-  sh ./build_gui.sh
-#fi
+sh ./build_gui.sh
 
 echo " "
 echo "=============================="
 echo "STARTING GUI"
 echo "=============================="
-(cd $GUI && yarn serve)
+sh ./start_gui.sh

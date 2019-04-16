@@ -21,7 +21,12 @@ do
   esac
 done
 
-echo 'in start ' + $ISDEV
+# start compiler service in background
+echo " "
+echo "=============================="
+echo "STARTING COMPILER SERVICE"
+echo "=============================="
+(cd $COMPILER && yarn start > compiler.log &)
 
 echo " "
 echo "=============================="
