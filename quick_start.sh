@@ -8,7 +8,7 @@ SCRIPTPATH="$( pwd -P )"
 EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler"
-GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
+GUI="$SCRIPTPATH/packages/ui-gui-nodeos/scripts"
 ISDEV=false
 ISFIRSTTIMESETUP=false
 
@@ -98,9 +98,9 @@ done
 
 # $2 should be either argument "--first-time-setup" or null
 if $ISFIRSTTIMESETUP; then
-  ./start_gui_docker.sh --first-time-setup
+  (cd $GUI && ./start_gui_docker.sh --first-time-setup)
 else
-  ./start_gui_docker.sh
+  (cd $GUI && ./start_gui_docker.sh)
 fi
 
 P1=$!

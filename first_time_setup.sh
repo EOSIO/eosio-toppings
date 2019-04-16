@@ -8,7 +8,7 @@ SCRIPTPATH="$( pwd -P )"
 EOSDOCKER="$SCRIPTPATH/packages/docker-eosio-nodeos"
 MONGODOCKER="$SCRIPTPATH/packages/docker-mongodb"
 COMPILER="$SCRIPTPATH/packages/api-eosio-compiler/docker-eosio-cdt"
-GUI="$SCRIPTPATH/packages/ui-gui-nodeos"
+GUI="$SCRIPTPATH/packages/ui-gui-nodeos/scripts"
 ISDEV=false
 
 if [ "$1" == "-dev" -o "$1" == "--develop" ]; then
@@ -31,7 +31,7 @@ echo " "
 echo "=============================="
 echo "BUILDING GUI DOCKER"
 echo "=============================="
-(./build_gui_docker.sh && printf "${GREEN}done${NC}")
+(cd $GUI && ./build_gui_docker.sh && printf "${GREEN}done${NC}")
 
 # remove existing dockers
 ./remove_dockers.sh

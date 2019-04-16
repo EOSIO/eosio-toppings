@@ -22,6 +22,8 @@ if [ "$1" == "-s" -o "$1" == "--stop" ]; then
 fi
 
 if [ ! "$(docker ps -q -f name=nodeos-gui)" ]; then
+  #if the docker is not running it loses the build folder 
+  script="./build_and_start_gui.sh"
   docker run --rm --name nodeos-gui \
     --link eosio-mongodb \
     --link eosio_gui_nodeos_container \
@@ -30,4 +32,5 @@ if [ ! "$(docker ps -q -f name=nodeos-gui)" ]; then
     "$script"
 else
   echo "nodeos-gui docker already running"
+  echo "copy and paste this url in browser to start http://localhost:5000"
 fi
