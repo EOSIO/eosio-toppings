@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
@@ -29,8 +31,6 @@ do
   esac
 done
 
-echo 'in start ' + $ISDEV
-
 echo " "
 echo "=============================="
 echo "STARTING GUI"
@@ -43,5 +43,9 @@ if $ISDEV; then
     (cd $GUI && PORT=$UI_DEV_PORT yarn start)
   fi
 else
-  (cd $GUI && yarn serve)
+  if lsof -Pi :$UI_SERVE_PORT -sTCP:LISTEN -t >/dev/null ; then
+    echo "gui seems to be already running, try browsing http://localhost:$UI_SERVE_PORT"
+  else
+    (cd $GUI && yarn serve)
+  fi
 fi

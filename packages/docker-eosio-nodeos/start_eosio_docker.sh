@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # change to script's directory
 cd "$(dirname "$0")"
 
@@ -26,7 +28,7 @@ fi
 if [ ! "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$NODEOS_VOLUME_NAME)" ]; then
       echo "eosio docker is not running, but eosio volume exists"
-      echo "cleaning data now"
+      echo "cleaning volume"
       docker volume rm --force $NODEOS_VOLUME_NAME
       sleep 10
     fi

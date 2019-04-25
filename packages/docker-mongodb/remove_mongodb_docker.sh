@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+set -e
 
 # change to script's directory
 cd "$(dirname "$0")"

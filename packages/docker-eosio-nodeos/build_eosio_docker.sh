@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 echo "start building eosio docker"
 

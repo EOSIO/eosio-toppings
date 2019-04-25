@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # sourcing variable from config file
 source ../config.file
 

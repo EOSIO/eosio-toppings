@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+set -e
 
 # change to script's directory
 cd "$(dirname "$0")"
@@ -20,7 +20,7 @@ fi
 if [ ! "$(docker ps -q -f name=$MONGODB_CONTAINER_NAME)" ]; then
   if [ "$(docker volume ls --format '{{.Name}}' -f name=$MONGODB_VOLUME_NAME)" ]; then
     echo "mongodb docker is not running, but mongodb volume exists"
-    echo "cleaning mongodb volume"
+    echo "cleaning volume"
     docker volume rm --force $MONGODB_VOLUME_NAME
     sleep 10
   fi

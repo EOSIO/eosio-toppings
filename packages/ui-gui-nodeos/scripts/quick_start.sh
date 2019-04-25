@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # sourcing variable from config file
 source ../config.file
 
@@ -48,7 +50,7 @@ else
   if [ ! "$(docker ps -q -f name=$MONGODB_CONTAINER_NAME)" ]; then
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$MONGODB_VOLUME_NAME)" ]; then
         echo "mongodb docker is not running, but mongo volume exists"
-        echo "removing volume"
+        echo "cleaning volume"
         docker volume rm --force $MONGODB_VOLUME_NAME
         sleep 10 #else docker fails  sometimes
     fi
@@ -67,7 +69,7 @@ else
   if [ ! "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$NODEOS_VOLUME_NAME)" ]; then
       echo "eosio docker is not running, but eosio volume exists"
-      echo "cleaning data now"
+      echo "cleaning volume"
       docker volume rm --force $NODEOS_VOLUME_NAME
       sleep 10
     fi
@@ -81,7 +83,7 @@ echo " "
 echo "=============================="
 echo "STARTING COMPILER SERVICE"
 echo "=============================="
-(cd $COMPILER && yarn start > compiler.log &)
+(cd $COMPILER && yarn start > compiler.log & printf "${GREEN}done${NC}")
 
 # wait until eosio blockchain to be started
 waitcounter=0
@@ -118,11 +120,6 @@ if ( $ISFIRSTTIMESETUP || (!($ISDEV) && $ISDELETE )); then
   # Set environment variable "LAST_FIRST_TIME_SETUP_TIMESTAMP" at build time to create a new timestamp while serving the app.
   (cd $GUI && REACT_APP_LAST_FIRST_TIME_SETUP_TIMESTAMP=$(date +%s) yarn build && printf "${GREEN}done${NC}")
 fi
-
-echo " "
-echo "=============================="
-echo "STARTING GUI"
-echo "=============================="
 
 # If it is ./quick_start.sh with -d or from first time setup, clear the browser storage by adding a new timestamp when start CRA dev.
 if $ISDEV; then
