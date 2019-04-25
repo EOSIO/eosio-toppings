@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+set -e
 
 # this file is used to continue the stopped blockchain
 
@@ -7,8 +7,6 @@ echo "starting blockchain"
 
 # set PATH
 PATH="$PATH:/opt/eosio/bin"
-
-set -m
 
 # start nodeos ( local node of blockchain )
 # run it in a background job such that docker run could continue

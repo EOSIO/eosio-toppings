@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+set -e
 
 # set PATH
 PATH="$PATH:/opt/eosio/bin"

@@ -19,6 +19,7 @@ if [ -f "../config.file.local" ]; then
   source ../config.file.local
 fi
 
+# check for arguments
 for arg in $@
 do
     case $arg in

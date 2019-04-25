@@ -23,6 +23,7 @@ ISDEV=false
 ISDELETE=false
 ISFIRSTTIMESETUP=false
 
+# check for arguments
 for arg in $@
 do
     case $arg in
@@ -43,18 +44,23 @@ echo " "
 echo "=============================="
 echo "STARTING MONGODB DOCKER"
 echo "=============================="
+# check if container is paused
 if [ "$(docker ps -q -f status=paused -f name=$MONGODB_CONTAINER_NAME)" ]; then
   echo 'resuming mongodb docker'
   docker unpause $MONGODB_CONTAINER_NAME
 else
+  # check if container exists
   if [ ! "$(docker ps -q -f name=$MONGODB_CONTAINER_NAME)" ]; then
+    # check if volume exists
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$MONGODB_VOLUME_NAME)" ]; then
         echo "mongodb docker is not running, but mongo volume exists"
         echo "cleaning volume"
+        # remove volume if container doesnt exists
         docker volume rm --force $MONGODB_VOLUME_NAME
         sleep 10 #else docker fails  sometimes
     fi
   fi
+  # start the docker
   (cd $MONGODOCKER && ./start_mongodb_docker.sh && printf "${GREEN}done${NC}")
 fi
 
@@ -62,18 +68,23 @@ echo " "
 echo "=============================="
 echo "STARTING EOSIO DOCKER"
 echo "=============================="
+# check if container is paused
 if [ "$(docker ps -q -f status=paused -f name=$NODEOS_CONTAINER_NAME)" ]; then
   echo 'resuming eosio docker'
   docker unpause $NODEOS_CONTAINER_NAME
 else
+  # check if container exists
   if [ ! "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
+    # check if volume exists
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$NODEOS_VOLUME_NAME)" ]; then
       echo "eosio docker is not running, but eosio volume exists"
       echo "cleaning volume"
+      # remove volume if container doesnt exists
       docker volume rm --force $NODEOS_VOLUME_NAME
       sleep 10
     fi
   fi
+  # start the docker
   (cd $EOSDOCKER && ./start_eosio_docker.sh --nolog && printf "${GREEN}done${NC}")
 fi
 
@@ -99,6 +110,7 @@ do
     sleep 10s
     waitcounter=$((waitcounter+1))
   else
+    # if the blockchain is not running even after a minute, remove the dockers and try to start again
     echo " "
     echo "Problem starting docker, removing dockers and restarting"
     ./remove_dockers.sh
@@ -121,6 +133,7 @@ if ( $ISFIRSTTIMESETUP || (!($ISDEV) && $ISDELETE )); then
   (cd $GUI && REACT_APP_LAST_FIRST_TIME_SETUP_TIMESTAMP=$(date +%s) yarn build && printf "${GREEN}done${NC}")
 fi
 
+# start gui
 # If it is ./quick_start.sh with -d or from first time setup, clear the browser storage by adding a new timestamp when start CRA dev.
 if $ISDEV; then
   if ($ISDELETE || $ISFIRSTTIMESETUP); then

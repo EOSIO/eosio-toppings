@@ -64,6 +64,7 @@ echo "=============================="
 # remove existing dockers
 ./remove_dockers.sh
 
+# start the dockers and gui
 ./quick_start.sh $1 --first-time-setup
 
 P1=$!
