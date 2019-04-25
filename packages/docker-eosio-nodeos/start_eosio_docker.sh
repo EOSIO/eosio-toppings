@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 # change to script's directory
 cd "$(dirname "$0")"
 
@@ -23,15 +25,20 @@ else
     script="./scripts/init_blockchain.sh"
 fi
 
+# if container does not already exists
 if [ ! "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
+    # check if blockchain volume exists and remove it 
     if [ "$(docker volume ls --format '{{.Name}}' -f name=$NODEOS_VOLUME_NAME)" ]; then
       echo "eosio docker is not running, but eosio volume exists"
       echo "cleaning data now"
+      # remove the volume because docker is not running but the volume exists
       docker volume rm --force $NODEOS_VOLUME_NAME
       sleep 10
     fi
 
+    # recreate fresh volume
     docker volume create --name=$NODEOS_VOLUME_NAME
+    # start the blockchain docker
     # --link is to get access to other container
     echo "running docker container from the $NODEOS_IMAGE_NAME image"
     docker run --rm --name $NODEOS_CONTAINER_NAME -d \
@@ -41,6 +48,7 @@ if [ ! "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
     $NODEOS_IMAGE_NAME \
     "$script"
 
+    # check to follow log
     if [ "$1" != "--nolog" ]
     then
         echo "follow $NODEOS_CONTAINER_NAME logs"

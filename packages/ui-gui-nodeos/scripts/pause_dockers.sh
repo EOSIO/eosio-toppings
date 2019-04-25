@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 # sourcing variable from config file
 source ../config.file
 

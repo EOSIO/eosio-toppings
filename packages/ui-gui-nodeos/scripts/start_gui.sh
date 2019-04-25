@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
@@ -17,6 +19,7 @@ if [ -f "../config.file.local" ]; then
   source ../config.file.local
 fi
 
+# check for arguments
 for arg in $@
 do
     case $arg in
@@ -28,8 +31,6 @@ do
         ;;
   esac
 done
-
-echo 'in start ' + $ISDEV
 
 echo " "
 echo "=============================="

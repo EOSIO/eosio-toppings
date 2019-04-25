@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -o errexit
 
 echo "start building eosio docker"
 
@@ -36,7 +37,7 @@ else
 fi
 
 # force remove the perivous container if any
-# create a clean data folder in eosio_docker to preserve block data
+# remove the volume is the container is removed
 echo "clean up data remnants"
 echo "Checking if previous container is running"
 if [ "$(docker ps -q -f name=$NODEOS_CONTAINER_NAME)" ]; then
