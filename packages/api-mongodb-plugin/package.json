@@ -3,7 +3,9 @@
   "version": "0.2.0",
   "main": "dist/index.js",
   "license": "MIT",
-  "private": true,
+  "publishConfig": {
+    "access": "private"
+  },
   "dependencies": {
     "dotenv": "^6.2.0",
     "mongoose": "^5.4.17",
