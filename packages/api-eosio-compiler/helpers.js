@@ -18,7 +18,7 @@ const abiIsEmpty = (abi) => {
     let isEmptyAbi = true;
     abiProps.forEach(prop => {
         let coll = jsonFormattedAbi[prop];
-        if (coll.length > 0) isEmptyAbi = false;
+        if (coll && coll.length > 0) isEmptyAbi = false;
     });
 
     return isEmptyAbi;
