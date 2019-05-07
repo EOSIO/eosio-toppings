@@ -5,11 +5,21 @@
   "author": "Terry Leung <terry.leung@block.one>",
   "license": "MIT",
   "workspaces": [
-     "packages/*"
+    "packages/*"
   ],
   "private": true,
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.13.1",
+    "lerna-changelog": "^0.8.2"
+  },
+  "changelog": {
+    "labels": {
+      "breaking": "Breaking Change",
+      "enhancement": "Enhancement",
+      "bug": "Bug Fix",
+      "documentation": "Documentation",
+      "internal": "Internal"
+    }
   },
   "scripts": {
     "start-gui": "cd packages/eosio-explorer && yarn start",
