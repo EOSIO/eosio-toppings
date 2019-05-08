@@ -6,9 +6,17 @@
 
 This is a monorepo composed of the various packages which work together to create a web-based development tool to help users create applications on the EOSIO blockchain. Users will be able to perform various actions related to smart contract and application development using this tool.
 
-## Package Index
+## Overview
 
-* [EOSIO Explorer Web UI <img alt="NPM Version" src="https://img.shields.io/npm/v/eosio-explorer.svg">](./packages/eosio-explorer): React-based Web Application making use of all the services in this repo
+EOSIO Toppings is a monorepo which consists of the various services and tools needed for the [EOSIO Explorer](https://github.com/EOSIO/eosio-explorer) to run properly. In order to decouple the tool from the reusable parts of the system, the monorepo was created. This also allows the possibility of development work to take place on many parts of the tool system concurrently and makes it easier for users interested in contributing to find out how the entire toolchain works. 
+
+The monorepo contains two categories of packages:
+
+1. :zap: API Services - Services which directly interface with the EOSIO Blockchain, either with the RPC API or through a data store
+2. :computer: Docker-based Services - Responsible for Docker containers which independently run instances of services which the EOSIO Explorer interfaces with
+
+### Package Index
+
 * API Services:
     * [EOSIO Compiler / Deployment Service <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-eosio-compiler.svg">](./packages/api-eosio-compiler): Node.JS/Express API server for compiling and deploying smart contracts to a `nodeos` instance. Spins up a Docker container under the hood for contract compilation.
     * [MongoDB Plugin API <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-mongodb-plugin.svg">](./packages/api-mongodb-plugin): TypeScript API service for interacting with the blockchain MongoDB (`nodeos` run with the MongoDB plugin)
@@ -17,94 +25,28 @@ This is a monorepo composed of the various packages which work together to creat
     * [EOSIO nodeos Docker Container <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/docker-eosio-nodeos.svg">](./packages/docker-eosio-nodeos): Dockerfile and build scripts for the Docker container running a local `nodeos` instance
     * [MongoDB Docker Container <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/docker-mongodb.svg">](./packages/docker-mongodb): Dockerfile and build scripts for the Docker container running a local MongoDB service
 
-## Directory Layout
+### Platform Support
 
-At present there are two main directories:
+* Amazon Linux 2
+* CentOS 7
+* Ubuntu 16.04
+* Ubuntu 18.04
+* MacOS 10.14 (Mojave) 
 
-* **apps** - Utilities that may be useful for developers outside of the main functions and services
-* **packages** - Contains the main services that comprise this monorepo
+### Required Tools
 
-## Documentation
+* [Yarn](https://yarnpkg.com/lang/en/) with support at `^1.15.2` (latest stable)
+* [Docker](https://www.docker.com/) with support at Docker Engine `18.09.2` (latest stable)
+* [Node.JS](https://nodejs.org/en/) with support at `^10.15.3` LTS (latest stable)
 
-In all of our documentation provided within this monorepo, the default settings of all packages are used for any illustration and explanation.
-Please refer to below default settings section.
+## Installation
 
-## Getting Started
-
-A more detailed explanation on how to get started with the EOSIO Toppings tool can be found in the [help document](help.md).
-
-All the startup scripts are put in the app folder "eosio-explorer" (`/packages/eosio-explorer`).
-
-Please refer to this app folder for below sections.
-
-To get quickly set up and running with this tool, please perform the following steps:
-1. Directly clone this monorepo (using `git clone`)
-2. Navigate to the scripts folder of the eosio-explorer package (`/packages/eosio-explorer/scripts`) of the cloned repository and run `./init.sh` to install and build all the necessary dependencies
-3. Run `./start.sh`, which will automatically start the tool in your browser at `http://localhost:3000` after creating the necessary containers and services
-
-### Command line
-
-You may choose to start the tool with command line by `eosio-explorer` command in a terminal.
-
-Examples:
-
-* `eosio-explorer init`
-* `eosio-explorer start`
-* `eosio-explorer start_gui`
-* `eosio-explorer pause_dockers`
-* `eosio-explorer remove_dockers`
-
-If you are cloning the whole eosio-toppings repository, please add `yarn` before above commands and run it in any place inside eosio-toppings folder.
-
-Example: `yarn eosio-explorer init`
-
-## Config
-Configurable settings ( e.g. docker container name and ports of the services ) are defined in `./init_config.file.`
-
-Since every packages should be able to run on thier own without higher level configuration, each package is having their own default config file ( config.file or .env ).
-
-To change the default value for all packages at once, you could apply a global config for all packages.
-To use it, just change the values in`./init_config.file.` and run `./init.sh`.
-
-The init setup script will initialise some local config files ( config.file.local or .env.local ) into different packages hence overriding the original default configs. Noted that all local configs generated will be ignored in git repository.
-
-The list below contains the **default settings** which you will see throughout the source code / documentation in this monorepo.
-
-### Docker MongoDB
-
-```
-MONGODB_CONTAINER_NAME=eosio_mongodb
-MONGODB_PORT=27788
-MONGODB_DB_NAME=eosio_nodeos_mongodb_plugin
-MONGODB_PATH=mongodb://$MONGODB_CONTAINER_NAME:$MONGODB_PORT/$MONGODB_DB_NAME
+```bash
+git clone https://github.com/EOSIO/eosio-toppings.git
+yarn install
 ```
 
-### Docker EOSIO Nodeos
-```
-NODEOS_CONTAINER_NAME=eosio_nodeos
-NODEOS_IMAGE_PREFIX=eosio_nodeos
-NODEOS_VERSION=eos1.6.3
-NODEOS_DOCKERFILE_VERSION=dockerfile1.0
-NODEOS_IMAGE_NAME=$NODEOS_IMAGE_PREFIX:$NODEOS_VERSION-$NODEOS_DOCKERFILE_VERSION
-```
-
-### Api EOSIO CDT Compiler
-```
-LOCAL_SERVICE_PORT=8081
-CDT_CONTAINER_NAME=eosio_nodeos_cdt
-CDT_IMAGE_PREFIX=eosio_nodeos_cdt
-CDT_VERSION=1.5.0
-CDT_DOCKERFILE_VERSION=dockerfile1.0
-CDT_IMAGE_NAME=$CDT_IMAGE_PREFIX:$CDT_VERSION-$CDT_DOCKERFILE_VERSION
-```
-
-### UI APP
-```
-APP_DEV_PORT=3000
-APP_SERVE_PORT=5111
-```
-
-### Caveats (ports)
+### Default Ports
 
 The following ports need to be opened in your local machine by default:
 
