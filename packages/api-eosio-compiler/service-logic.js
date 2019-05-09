@@ -2,7 +2,7 @@
 
 const express = require('express');
 const Router = express.Router();
-const { exec, execSync } = require('child_process');
+const { exec } = require('child_process');
 const fs = require('fs');
 const copy = require('recursive-copy');
 const del = require('del');
@@ -24,8 +24,8 @@ const OPTIONS = {
   junk: false,
   dot: false,
   filter: [
-    '**/*',
-    '!*git*'
+    '**/*.cpp',
+    '**/*.hpp'
   ]
 };
 
