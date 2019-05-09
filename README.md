@@ -4,6 +4,10 @@
 
 <h1 align="center">EOSIO Toppings</h1>
 
+<p align="center">
+  <img alt="EOSIO Labs badge" src="https://img.shields.io/badge/EOSIO-Labs-5cb3ff.svg">
+</p>
+
 This is a monorepo composed of the various packages which work together to create a web-based development tool to help users create applications on the EOSIO blockchain. Users will be able to perform various actions related to smart contract and application development using this tool.
 
 ## Overview
@@ -14,6 +18,10 @@ The monorepo contains two categories of packages:
 
 1. :zap: API Services - Services which directly interface with the EOSIO Blockchain, either with the RPC API or through a data store
 2. :computer: Docker-based Services - Responsible for Docker containers which independently run instances of services which the EOSIO Explorer interfaces with
+
+### About EOSIO Labs
+
+ EOSIO Labs repositories are experimental.  Developers in the community are encouraged to use EOSIO Labs repositories as the basis for code and concepts to incorporate into their applications. Community members are also welcome to contribute and further develop these repositories. Since these repositories are not supported by Block.one, we may not provide responses to issue reports, pull requests, updates to functionality, or other requests from the community, and we encourage the community to take responsibility for these.
 
 ### Package Index
 
