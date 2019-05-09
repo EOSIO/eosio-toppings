@@ -7,7 +7,7 @@ const resolveHomePath = (filepath) => {
     if (filepath[0] === '~') {
         // '~' is bash only, therefore we must detect it in the file path and replace it with process.env.HOME
         return path.join(process.env.HOME, filepath.slice(1));
-    } else if (filepath[0] !== '/') {
+    } else if (!path.isAbsolute(filepath) && filepath[0] !== '/') {
         // We expect absolute file path so we prepend "/" if it doesn't already exist.
         return "/"+filepath;
     }
