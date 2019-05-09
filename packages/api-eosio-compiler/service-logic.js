@@ -45,25 +45,24 @@ Router.post("/deploy", async (req, res) => {
     try {
         const deletedFiles = await del(DEL_TARGETS);
         let results = null;
-        console.log(typeof body["source"]);
-        let compileTarget = path.basename(body["source"]);
-        console.log(compileTarget);
+        let resolvedPath = Helper.resolveHomePath(body["source"]);
+        let compileTarget = path.basename(resolvedPath);
         let endpoint = path.basename(body["endpoint"]);
         let account_name = path.basename(body["account_name"]);
         let private_key = path.basename(body["private_key"]);
         let permission = body["permission"];
         let COMPILE_SCRIPT = "";
 
-        const directories = Helper.parseDirectoriesToInclude(path.dirname(body["source"]));
-        results = await copy(path.dirname(body["source"]), DEST, OPTIONS);
+        const directories = Helper.parseDirectoriesToInclude(path.dirname(resolvedPath));
+        results = await copy(path.dirname(resolvedPath), DEST, OPTIONS);
         COMPILE_SCRIPT = "sh ./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
 
         console.log("Deleted files:\n", deletedFiles.join('\n'));
         results.forEach((file) => console.log("Copied file: ", file["src"]));
         console.log("Target entry file: ", compileTarget);
 
-        if(fs.lstatSync(body["source"]).isDirectory()) 
-            throw new Error(`${body.source} is a directory, not a valid entry file!`);
+        if(fs.lstatSync(resolvedPath).isDirectory()) 
+            throw new Error(`${resolvedPath} is a directory, not a valid entry file!`);
 
         if(body["account_name"] === 'eosio')
           throw new Error(
@@ -167,18 +166,19 @@ Router.post("/compile", async (req, res) => {
     try {
       const deletedFiles = await del(DEL_TARGETS);
       let results = null;
-      let compileTarget = path.basename(body["source"]);
+      let resolvedPath = Helper.resolveHomePath(body["source"]);
+      let compileTarget = path.basename(resolvedPath);
       let COMPILE_SCRIPT = "";
-      const directories = Helper.parseDirectoriesToInclude(path.dirname(body["source"]));
-      results = await copy(path.dirname(body["source"]), DEST, OPTIONS);
+      const directories = Helper.parseDirectoriesToInclude(path.dirname(resolvedPath));
+      results = await copy(path.dirname(resolvedPath), DEST, OPTIONS);
       COMPILE_SCRIPT = "sh ./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
 
       console.log("Deleted files:\n", deletedFiles.join('\n'));
       results.forEach((file) => console.log("Copied file: ", file["src"]));
       console.log("Target entry file: ", compileTarget);
 
-      if(fs.lstatSync(body["source"]).isDirectory()) 
-          throw new Error(`${body.source} is a directory, not a valid entry file!`);
+      if(fs.lstatSync(resolvedPath).isDirectory()) 
+          throw new Error(`${resolvedPath} is a directory, not a valid entry file!`);
 
       exec(COMPILE_SCRIPT, {
         cwd: CWD

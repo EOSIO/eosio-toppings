@@ -3,7 +3,13 @@ const stripAnsi = require('strip-ansi');
 const fileManip = require('file');
 const fs = require('fs');
 
-
+const resolveHomePath = (filepath) => {
+    if (filepath[0] === '~') {
+        return path.join(process.env.HOME, filepath.slice(1));
+    }
+    
+    return filepath;
+}
 
 const getStringDiff = (sourcePath, path) => path.split(sourcePath).join('').substring(1);
 
@@ -97,6 +103,7 @@ const parseLog = (logContent) => {
 }
 
 module.exports = {
+    resolveHomePath: resolveHomePath,
     getStringDiff: getStringDiff,
     fetchDeployableFilesFromDirectory: fetchDeployableFilesFromDirectory,
     parseDirectoriesToInclude: parseDirectoriesToInclude,
