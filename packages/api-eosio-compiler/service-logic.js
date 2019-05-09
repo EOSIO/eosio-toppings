@@ -25,7 +25,9 @@ const OPTIONS = {
   dot: false,
   filter: [
     '**/*.cpp',
-    '**/*.hpp'
+    '**/*.hpp',
+    '**/*.c',
+    '**/*.h'
   ]
 };
 
