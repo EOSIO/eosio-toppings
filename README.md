@@ -57,9 +57,6 @@ The following ports need to be opened in your local machine by default:
 * `9876` [ Nodeos Net Plugin service ] ( not configurable in config file )
 * `27788` [ MongoDB Api service ]
 
-Remember, you can always change the settings by updating config in `./init_config.file.` and running `./init.sh`.
-For the settings that is not configurable in config file, you could search those values and replace them by yourself.
-
 ## License
 
 [MIT](./LICENSE)
