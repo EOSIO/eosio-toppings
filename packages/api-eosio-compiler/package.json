@@ -15,7 +15,7 @@
     "cors": "^2.8.5",
     "del": "^4.0.0",
     "dotenv": "^7.0.0",
-    "eosjs": "^20.0.0-beta3",
+    "eosjs": "20.0.0-beta3",
     "express": "^4.16.4",
     "file": "^0.2.2",
     "recursive-copy": "^2.0.10",
