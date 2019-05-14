@@ -115,6 +115,7 @@ const getFile = (filePath) => {
 }
 
 module.exports = {
+  resolveHomePath: resolveHomePath,
   getStringDiff: getStringDiff,
   fetchDeployableFilesFromDirectory: fetchDeployableFilesFromDirectory,
   parseDirectoriesToInclude: parseDirectoriesToInclude,
