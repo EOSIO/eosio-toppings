@@ -72,13 +72,12 @@ Router.post("/deploy", async (req, res) => {
           for authorizing new accounts. Aborting contract deployment...`
       );
 
-<<<<<<< HEAD
         exec(COMPILE_SCRIPT, {
             cwd: CWD
         }, (err, stdout, stderr) => {
           console.log('compile script ran');
-            let parsedStdOut = Helper.parseLog(fs.readFileSync(LOG_DEST, 'utf-8'));
-            let parsedStdErr = Helper.parseLog(fs.readFileSync(ERR_DEST, 'utf-8'));
+            let parsedStdOut = Helper.parseLog(Helper.getFile(LOG_DEST));
+            let parsedStdErr = Helper.parseLog(Helper.getFile(ERR_DEST));
             if (err) {
                 let message = (err.message) ? err.message : message;
                 res.send({
@@ -140,75 +139,8 @@ Router.post("/deploy", async (req, res) => {
                     });
                 }
             }
-=======
-    exec(COMPILE_SCRIPT, {
-        cwd: CWD
-    }, (err, stdout, stderr) => {
-      console.log('compile script ran');
-      let parsedStdOut = Helper.parseLog(Helper.getFile(LOG_DEST));
-      let parsedStdErr = Helper.parseLog(Helper.getFile(ERR_DEST));
-      if (err) {
-        let message = (err.message) ? err.message : message;
-        res.send({
-          compiled: false,
-          errors: [
-            message
-          ],
-          stdout: parsedStdOut,
-          stderr: parsedStdErr
->>>>>>> Fogbugz - 3388
         });
-      } else {
-        const COMPILED_CONTRACTS = path.resolve(
-          "./docker-eosio-cdt/compiled_contracts/" + 
-          path.basename(compileTarget, '.cpp')
-        );
-        const { wasmPath, abiPath, abiContents = {}, programErrors } = Helper.fetchDeployableFilesFromDirectory(COMPILED_CONTRACTS);
-        if (programErrors.length > 0) {
-          res.send({
-            compiled: false,
-            errors: programErrors,
-            stdout: parsedStdOut,
-            stderr: parsedStdErr
-          })
-        } else {
-          console.log(`stdout: ${stdout}`);
-          let abi = (body["abiSource"] && body["abiSource"] != "null") ? body["abiSource"] : abiPath;
-          console.log(body["abiSource"], abiPath, abi, typeof body["abiSource"]);
-          deployContract(endpoint, account_name, private_key, permission, wasmPath, abi)
-          .then(result => {
-            console.log("Contract deployed successfully ", result);
-            res.send({
-              compiled: true,
-              wasmLocation: wasmPath,
-              abi: abi,
-              deployed: true,
-              abiContents: abiContents,
-              errors: [],
-              output: result,
-              stdout: parsedStdOut,
-              stderr: parsedStdErr
-            });
-          })
-          .catch((err) => {
-            let message = (err.message) ? err.message : err;
-            console.log("Caught error: ", err, message);
-            res.send({
-              compiled: true,
-              wasmLocation: wasmPath,
-              abi: abi,
-              abiContents: abiContents,
-              deployed: false,
-              errors: [
-                message
-              ],
-              stdout: parsedStdOut,
-              stderr: parsedStdErr
-            });
-          });
-        }
-      }
-    });
+      
   } catch (ex) {
     let err = ex;
 
