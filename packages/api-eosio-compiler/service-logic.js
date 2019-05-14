@@ -104,6 +104,7 @@ Router.post("/deploy", async (req, res) => {
                 } else {
                     console.log(`stdout: ${stdout}`);
                     let abi = (body["abiSource"] && body["abiSource"] != "null") ? body["abiSource"] : abiPath;
+                    let _abiContents = (body["abiSource"] && body["abiSource"] != "null") ? fs.readFileSync(body["abiSource"], 'utf-8') : abiContents;
                     console.log(body["abiSource"], abiPath, abi, typeof body["abiSource"]);
                     deployContract(endpoint, account_name, private_key, permission, wasmPath, abi)
                     .then(result => {
@@ -113,7 +114,7 @@ Router.post("/deploy", async (req, res) => {
                         wasmLocation: wasmPath,
                         abi: abi,
                         deployed: true,
-                        abiContents: abiContents,
+                        abiContents: _abiContents,
                         errors: [],
                         output: result,
                         stdout: parsedStdOut,
@@ -127,7 +128,7 @@ Router.post("/deploy", async (req, res) => {
                         compiled: true,
                         wasmLocation: wasmPath,
                         abi: abi,
-                        abiContents: abiContents,
+                        abiContents: _abiContents,
                         deployed: false,
                         errors: [
                           message
