@@ -42,7 +42,7 @@ const OPTIONS = {
  * 5. <abiSource> - Optional path to supply as replacement ABI in case we imported
  */
 Router.post("/deploy", async (req, res) => {
-    const { body } = req;
+  const { body } = req;
 
     try {
         const deletedFiles = await del(DEL_TARGETS);
@@ -57,27 +57,27 @@ Router.post("/deploy", async (req, res) => {
 
         const directories = Helper.parseDirectoriesToInclude(path.dirname(resolvedPath));
         results = await copy(path.dirname(resolvedPath), DEST, OPTIONS);
-        COMPILE_SCRIPT = "sh ./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
+        COMPILE_SCRIPT = "./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
 
-        console.log("Deleted files:\n", deletedFiles.join('\n'));
-        results.forEach((file) => console.log("Copied file: ", file["src"]));
-        console.log("Target entry file: ", compileTarget);
+    console.log("Deleted files:\n", deletedFiles.join('\n'));
+    results.forEach((file) => console.log("Copied file: ", file["src"]));
+    console.log("Target entry file: ", compileTarget);
 
         if(fs.lstatSync(resolvedPath).isDirectory()) 
             throw new Error(`${resolvedPath} is a directory, not a valid entry file!`);
 
-        if(body["account_name"] === 'eosio')
-          throw new Error(
-            `Chosen account name is ${account_name}, which owns the system contract used
-             for authorizing new accounts. Aborting contract deployment...`
-          );
+    if(body["account_name"] === 'eosio')
+      throw new Error(
+        `Chosen account name is ${account_name}, which owns the system contract used
+          for authorizing new accounts. Aborting contract deployment...`
+      );
 
         exec(COMPILE_SCRIPT, {
             cwd: CWD
         }, (err, stdout, stderr) => {
           console.log('compile script ran');
-            let parsedStdOut = Helper.parseLog(fs.readFileSync(LOG_DEST, 'utf-8'));
-            let parsedStdErr = Helper.parseLog(fs.readFileSync(ERR_DEST, 'utf-8'));
+            let parsedStdOut = Helper.parseLog(Helper.getFile(LOG_DEST));
+            let parsedStdErr = Helper.parseLog(Helper.getFile(ERR_DEST));
             if (err) {
                 let message = (err.message) ? err.message : message;
                 res.send({
@@ -140,21 +140,22 @@ Router.post("/deploy", async (req, res) => {
                 }
             }
         });
-    } catch (ex) {
-      let err = ex;
+      
+  } catch (ex) {
+    let err = ex;
 
-      if (typeof ex === 'object') {
-        err = ex.message;
-      }
-
-      res.send({
-        compiled: false,
-        stderr: err,
-        errors: [
-            ex.message
-        ]
-      })
+    if (typeof ex === 'object') {
+      err = ex.message;
     }
+
+    res.send({
+      compiled: false,
+      stderr: err,
+      errors: [
+          ex.message
+      ]
+    })
+  }
 });
 
 /**
@@ -164,7 +165,7 @@ Router.post("/deploy", async (req, res) => {
  * 1. <source> - Absolute source file path
  */
 Router.post("/compile", async (req, res) => {
-    const { body } = req;
+  const { body } = req;
 
     try {
       const deletedFiles = await del(DEL_TARGETS);
@@ -174,68 +175,71 @@ Router.post("/compile", async (req, res) => {
       let COMPILE_SCRIPT = "";
       const directories = Helper.parseDirectoriesToInclude(path.dirname(resolvedPath));
       results = await copy(path.dirname(resolvedPath), DEST, OPTIONS);
-      COMPILE_SCRIPT = "sh ./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
+      COMPILE_SCRIPT = "./setup_eosio_cdt_docker.sh "+compileTarget+" "+directories.join(' ');
 
-      console.log("Deleted files:\n", deletedFiles.join('\n'));
-      results.forEach((file) => console.log("Copied file: ", file["src"]));
-      console.log("Target entry file: ", compileTarget);
+    console.log("Deleted files:\n", deletedFiles.join('\n'));
+    results.forEach((file) => console.log("Copied file: ", file["src"]));
+    console.log("Target entry file: ", compileTarget);
 
       if(fs.lstatSync(resolvedPath).isDirectory()) 
           throw new Error(`${resolvedPath} is a directory, not a valid entry file!`);
 
-      exec(COMPILE_SCRIPT, {
-        cwd: CWD
-      }, (err, stdout, stderr) => {
-        let parsedStdOut = Helper.parseLog(fs.readFileSync(LOG_DEST, 'utf-8'));
-        let parsedStdErr = Helper.parseLog(fs.readFileSync(ERR_DEST, 'utf-8'));
-        if (err) {
-            res.send({
-                compiled: false,
-                errors: Helper.parseLog(err.message),
-                stdout: parsedStdOut,
-                stderr: parsedStdErr
-            });
-        } else {
-          const COMPILED_CONTRACTS = path.resolve(
-            "./docker-eosio-cdt/compiled_contracts/" + 
-            path.basename(compileTarget, '.cpp')
-        );
-          const { wasmPath, abiPath, abiContents = {}, programErrors } = Helper.fetchDeployableFilesFromDirectory(COMPILED_CONTRACTS);
-          if (programErrors.length > 0) {
-              res.send({
-                  compiled: false,
-                  errors: programErrors,
-                  stdout: parsedStdOut,
-                  stderr: parsedStdErr
-              })
-          } else {
-            res.send({
-              compiled: true,
-              wasmLocation: wasmPath,
-              abi: abiPath,
-              abiContents: abiContents,
-              errors: programErrors,
-              stdout: parsedStdOut,
-              stderr: parsedStdErr
-            });
-          }
-        }
-      })
-    } catch (ex) {
-      let err = ex;
-
-      if (typeof ex === 'object') {
-        err = ex.message;
+    exec(COMPILE_SCRIPT, {
+      cwd: CWD
+    }, (err, stdout, stderr) => {
+      if(!fs.existsSync(LOG_DEST)) {
+        fs.closeSync(fs.openSync(LOG_DEST, 'aw'))
       }
+      let parsedStdOut = Helper.parseLog(Helper.getFile(LOG_DEST));
+      let parsedStdErr = Helper.parseLog(Helper.getFile(ERR_DEST));
+      if (err) {
+        res.send({
+          compiled: false,
+          errors: Helper.parseLog(err.message),
+          stdout: parsedStdOut,
+          stderr: parsedStdErr
+        });
+      } else {
+        const COMPILED_CONTRACTS = path.resolve(
+          "./docker-eosio-cdt/compiled_contracts/" + 
+          path.basename(compileTarget, '.cpp')
+      );
+        const { wasmPath, abiPath, abiContents = {}, programErrors } = Helper.fetchDeployableFilesFromDirectory(COMPILED_CONTRACTS);
+        if (programErrors.length > 0) {
+          res.send({
+            compiled: false,
+            errors: programErrors,
+            stdout: parsedStdOut,
+            stderr: parsedStdErr
+          })
+        } else {
+          res.send({
+            compiled: true,
+            wasmLocation: wasmPath,
+            abi: abiPath,
+            abiContents: abiContents,
+            errors: programErrors,
+            stdout: parsedStdOut,
+            stderr: parsedStdErr
+          });
+        }
+      }
+    })
+  } catch (ex) {
+    let err = ex;
 
-      res.send({
-        compiled: false,
-        stderr: err,
-        errors: [
-            ex.message
-        ]
-      })
+    if (typeof ex === 'object') {
+      err = ex.message;
     }
+
+    res.send({
+      compiled: false,
+      stderr: err,
+      errors: [
+        ex.message
+      ]
+    })
+  }
 });
 
 /****
@@ -246,51 +250,51 @@ Router.post("/compile", async (req, res) => {
  * 2. <content>
  */
 Router.post("/import", async (req, res) => {
-    const { body } = req;
-    const IMPORT_FOLDER = path.resolve("./docker-eosio-cdt/imported_abi/");
-    const DESTINATION = path.resolve("./docker-eosio-cdt/imported_abi/"+body["abiName"]);
-    try {
+  const { body } = req;
+  const IMPORT_FOLDER = path.resolve("./docker-eosio-cdt/imported_abi/");
+  const DESTINATION = path.resolve("./docker-eosio-cdt/imported_abi/"+body["abiName"]);
+  try {
 
-      if (!fs.lstatSync(IMPORT_FOLDER).isDirectory())
-        fs.mkdirSync(IMPORT_FOLDER, {recursive:true});
-      else {
-        const clearImport = await del(["./docker-eosio-cdt/imported_abi/"+body["abiName"]]);
-        console.log("Cleared old import: ", clearImport);
-      }
-
-      fs.writeFile(DESTINATION, body["content"], (err) => {
-        if (err) {
-          console.log(err);
-          res.send({
-            imported: false,
-            errors: [
-              err.message
-            ]
-          });
-        } else {
-          console.log("ABI imported to path: "+DESTINATION);
-          res.send({
-            imported: true,
-            abiPath: DESTINATION.toString(),
-            errors: []
-          });
-        }
-      })
-    } catch (ex) {
-      let err = ex;
-
-      if (typeof ex === 'object') {
-        err = ex.message;
-      }
-
-      res.send({
-        compiled: false,
-        stderr: err,
-        errors: [
-            ex.message
-        ]
-      })
+    if (!fs.lstatSync(IMPORT_FOLDER).isDirectory())
+      fs.mkdirSync(IMPORT_FOLDER, {recursive:true});
+    else {
+      const clearImport = await del(["./docker-eosio-cdt/imported_abi/"+body["abiName"]]);
+      console.log("Cleared old import: ", clearImport);
     }
+
+    fs.writeFile(DESTINATION, body["content"], (err) => {
+      if (err) {
+        console.log(err);
+        res.send({
+          imported: false,
+          errors: [
+            err.message
+          ]
+        });
+      } else {
+        console.log("ABI imported to path: "+DESTINATION);
+        res.send({
+          imported: true,
+          abiPath: DESTINATION.toString(),
+          errors: []
+        });
+      }
+    })
+  } catch (ex) {
+    let err = ex;
+
+    if (typeof ex === 'object') {
+      err = ex.message;
+    }
+
+    res.send({
+      compiled: false,
+      stderr: err,
+      errors: [
+        ex.message
+      ]
+    })
+  }
 })
 
 async function deployContract(blockchainUrl, account_name, private_key, permission, wasm_path, abi_path){
