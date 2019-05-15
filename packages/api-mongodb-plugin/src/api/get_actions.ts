@@ -25,6 +25,7 @@ const get_actions = async (query: {
       query_gen.where("act.account").equals(account_name) : "";
 
     query_gen.where("act.name").ne("onblock");
+    query_gen.where("except").equals(null);
 
     (records_count !== undefined) ?
         query_gen.limit(parseInt(records_count)): query_gen.limit(100);  
