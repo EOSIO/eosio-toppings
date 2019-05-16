@@ -1,9 +1,18 @@
 {
   "name": "@eosio-toppings/api-eosio-compiler",
   "version": "0.2.2",
-  "description": "Local node process to consume smart contract source files and compile to WASM/ABI files",
   "main": "local_service.js",
   "license": "MIT",
+  "author": "block.one",
+  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-eosio-compiler",
+  "contributors": [
+    "Terry Leung",
+    "Jonathan Cardenas",
+    "Varsha Nagaraja",
+    "Matthew Kelly",
+    "Ajay Matharu"
+  ],
+  "description": "Local node process to consume smart contract source files and compile to WASM/ABI files",
   "publishConfig": {
     "access": "private"
   },

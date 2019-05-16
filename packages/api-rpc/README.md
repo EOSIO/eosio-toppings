@@ -1,5 +1,5 @@
 # api-rpc <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-rpc.svg">
-RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from the blockchain that can not be fetched using `api-mongodb-plugin`.
+RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from nodeos.
 
 ## Manual Usage
 Install TypeScript and `tsc` (TypeScript Compiler) globally with
@@ -19,7 +19,7 @@ The following API functions all accept a single parameter, a query which is basi
 
 ### `create_account`
 
-Given a connected `endpoint` with `private_key, actor, permission` credentials, make an account consisting of `new_account_name` with the public `new_account_owner_key` and public `new_account_active_key`. 
+Given a connected `endpoint` with `private_key, actor, permission` credentials, make an account consisting of `new_account_name` with the public `new_account_owner_key` and public `new_account_active_key`.
 
 * `endpoint` - string
 * `private_key` - string

@@ -1,5 +1,5 @@
 # api-mongodb-plugin <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-mongodb-plugin.svg">
-RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from the blockchain that can not be fetched using `api-mongodb-plugin`.
+RESTful API service making use of mongoose obtain data from MongoDB which written by nodeos with mongodb-plugin.
 
 ## Manual Usage
 Install TypeScript and `tsc` (TypeScript Compiler) globally with
@@ -35,7 +35,7 @@ Get the details of the account at `account_name`
 
 ### `get_action_details`
 
-Get the details of a particular action based on its `block_num` (block number) and/or `global_sequence`. 
+Get the details of a particular action based on its `block_num` (block number) and/or `global_sequence`.
 
 * `block_num` - string or number
 * `global_sequence` - string or number
@@ -76,7 +76,7 @@ Get the list of all available smart contracts based on the number of `records_co
 
 ### `get_transaction_details`
 
-Get the details for a particular transaction based on its `id`. 
+Get the details for a particular transaction based on its `id`.
 
 * `id` - string
 

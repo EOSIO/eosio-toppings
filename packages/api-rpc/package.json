@@ -3,6 +3,16 @@
   "version": "0.2.2",
   "main": "dist/index.js",
   "license": "MIT",
+  "author": "block.one",
+  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-rpc",
+  "contributors": [
+    "Terry Leung",
+    "Jonathan Cardenas",
+    "Varsha Nagaraja",
+    "Matthew Kelly",
+    "Ajay Matharu"
+  ],
+  "description": "RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from nodeos",
   "publishConfig": {
     "access": "private"
   },
