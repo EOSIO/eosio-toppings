@@ -2,6 +2,16 @@
   "name": "@eosio-toppings/docker-mongodb",
   "version": "0.2.1",
   "license": "MIT",
+  "author": "block.one",
+  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/docker-mongodb",
+  "contributors": [
+    "Terry Leung",
+    "Jonathan Cardenas",
+    "Varsha Nagaraja",
+    "Matthew Kelly",
+    "Ajay Matharu"
+  ],
+  "description": "A Docker container that runs a MongoDB service.",
   "publishConfig": {
     "access": "private"
   }

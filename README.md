@@ -1,7 +1,3 @@
-<p align="center">
-  <img width="200" height="200" src="./public/eos_spinning_logo.gif" alt="EOSIO Logo">
-</p>
-
 <h1 align="center">EOSIO Toppings</h1>
 
 <p align="center">
@@ -12,7 +8,7 @@ This is a monorepo composed of the various packages which work together to creat
 
 ## Overview
 
-EOSIO Toppings is a monorepo which consists of the various services and tools needed for the [EOSIO Explorer](https://github.com/EOSIO/eosio-explorer) to run properly. In order to decouple the tool from the reusable parts of the system, the monorepo was created. This also allows the possibility of development work to take place on many parts of the tool system concurrently and makes it easier for users interested in contributing to find out how the entire toolchain works. 
+EOSIO Toppings is a monorepo which consists of the various services and tools needed for the [EOSIO Labs™: EOSIO Explorer](https://github.com/EOSIO/eosio-explorer) to run properly. In order to decouple the tool from the reusable parts of the system, the monorepo was created. This also allows the possibility of development work to take place on many parts of the tool system concurrently and makes it easier for users interested in contributing to find out how the entire toolchain works.
 
 The monorepo contains two categories of packages:
 
@@ -39,7 +35,7 @@ The monorepo contains two categories of packages:
 * CentOS 7
 * Ubuntu 16.04
 * Ubuntu 18.04
-* MacOS 10.14 (Mojave) 
+* MacOS 10.14 (Mojave)
 
 ### Required Tools
 

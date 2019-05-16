@@ -1,9 +1,17 @@
 {
   "name": "eosio-toppings",
   "version": "independent",
-  "repository": "git@github.com:EOSIO/eosio-toppings.git",
-  "author": "Terry Leung <terry.leung@block.one>",
   "license": "MIT",
+  "author": "block.one",
+  "repository": "https://github.com/EOSIO/eosio-toppings",
+  "contributors": [
+    "Terry Leung",
+    "Jonathan Cardenas",
+    "Varsha Nagaraja",
+    "Matthew Kelly",
+    "Ajay Matharu"
+  ],
+  "description": "A monorepo composed of the various packages of services and tools could be used on top of EOSIO blockchain",
   "workspaces": [
     "packages/*"
   ],
@@ -20,14 +28,5 @@
       "documentation": "Documentation",
       "internal": "Internal"
     }
-  },
-  "scripts": {
-    "start-gui": "cd packages/eosio-explorer && yarn start",
-    "start-nodeos": "cd packages/docker-eosio-nodeos && ./start_eosio_docker.sh --nolog",
-    "start-mongodb": "cd packages/docker-mongodb && ./start_mongodb_docker.sh",
-    "remove-nodeos": "cd packages/docker-eosio-nodeos && ./remove_eosio_docker.sh",
-    "remove-mongodb": "cd packages/docker-mongodb && ./remove_mongodb_docker.sh",
-    "start-dockers": "yarn start-mongodb && yarn start-nodeos",
-    "remove-dockers": "yarn remove-nodeos && yarn remove-mongodb"
   }
 }

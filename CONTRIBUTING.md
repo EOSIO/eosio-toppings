@@ -1,46 +1,150 @@
-# Contributing
+# Contributing to EOSIO Toppings
 
-Contributions are always welcome. We want to make contributing to this project as easy and transparent as possible, whether it's:
+Interested in contributing? That's awesome! Here are some guidelines to get started quickly and easily:
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing and adding new features
+- [Reporting An Issue](#reporting-an-issue)
+  - [Bug Reports](#bug-reports)
+  - [Feature Requests](#feature-requests)
+  - [Change Requests](#change-requests)
+- [Working on EOSIO Toppings](#working-on-eosio-toppings)
+  - [Feature Branches](#feature-branches)
+  - [Submitting Pull Requests](#submitting-pull-requests)
+  - [Testing and Quality Assurance](#testing-and-quality-assurance)
+- [Conduct](#conduct)
+- [Contributor License & Acknowledgments](#contributor-license--acknowledgments)
+- [References](#references)
 
-# Open Development
+## Reporting An Issue
 
-All work on Eosio Toppings happens directly on GitHub. Both core team members and external contributors send pull requests which go through the same review process.
+If you're about to raise an issue because you think you've found a problem with EOSIO Toppings, or you'd like to make a request for a new feature in the codebase, or any other reason… please read this first.
 
-# Branch Organization
+The GitHub issue tracker is the preferred channel for [bug reports](#bug-reports), [feature requests](#feature-requests), and [submitting pull requests](#submitting-pull-requests), but please respect the following restrictions:
 
-We aim to keep the master branch stable so if you create a pull request, please do it against the `develop branch`.
+* Please **search for existing issues**. Help us keep duplicate issues to a minimum by checking to see if someone has already reported your problem or requested your idea.
 
-# Bugs
+* Please **be civil**. Keep the discussion on topic and respect the opinions of others. See also our [Contributor Code of Conduct](#conduct).
 
-If you would like to report a bug, please use [GitHub Issues](https://github.com/EOSIO/eosio-toppings/issues/new). Before filing a new issue, please check if it has already been reported.
+### Bug Reports
 
-# Proposing a Change
+A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 
-If you intend to change the APIs or make any non-trivial changes to the implementation, we recommend filing an issue. This lets us reach an agreement on your proposal before you put significant effort into it.
+Guidelines for bug reports:
 
-If you’re only fixing a bug, it’s fine to submit a pull request right away but we still recommend to file an issue detailing what you’re fixing. This is helpful in case we don’t accept that specific fix but want to keep track of the issue.
+1. **Use the GitHub issue search** &mdash; check if the issue has already been
+   reported.
 
-# Sending a Pull Request
+1. **Check if the issue has been fixed** &mdash; look for [closed issues in the
+   current milestone](https://github.com/EOSIO/eosio-toppings/issues?q=is%3Aissue+is%3Aclosed) or try to reproduce it
+   using the latest `develop` branch.
 
-The core team is monitoring for pull requests. We will review your pull request and either merge it, request changes to it, or close it with an explanation. For API changes we may need to fix our internal uses, which could cause some delay. We’ll do our best to provide updates and feedback throughout the process.
+A good bug report shouldn't leave others needing to chase you up for more information. Be sure to include the details of your environment and relevant tests that demonstrate the failure.
 
-# Publishing
+[Report a bug](https://github.com/EOSIO/eosio-toppings/issues/new?title=Bug%3A)
 
-Right before making a PR which merge develop into master for a release, the maintainer of this repository should use `lerna` cli to version and push the publishing commit and tags.
+### Feature Requests
 
-Steps:
-1. In your local, make sure you are in develop branch and pulled the latest code.
-2. Run `lerna version` and update the version number of each of the packages.
-   - Ref: https://github.com/lerna/lerna/tree/master/commands/version#readme
-3. Lerna will commit a publishing commit and tag with all updated version number of each of the packages and push to git origin automatically.
+Feature requests are welcome. Before you submit one be sure to have:
 
-You can now create a PR to merge from develop into master with the updated versioning in packages and tags in git.
+1. **Use the GitHub search** and check the feature hasn't already been requested.
+1. Take a moment to think about whether your idea fits with the scope and aims of the project.
+1. Remember, it's up to *you* to make a strong case to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible, this means explaining the use case and why it is likely to be common.
 
-# License
+### Change Requests
 
-By contributing to Eosio Toppings, you agree that your contributions will be licensed under its [MIT license](./LICENSE).
+Change requests cover both architectural and functional changes to how EOSIO Toppings works. If you have an idea for a new or different dependency, a refactor, or an improvement to a feature, etc - please be sure to:
+
+1. **Use the GitHub search** and check someone else didn't get there first
+1. Take a moment to think about the best way to make a case for, and explain what you're thinking. Are you sure this shouldn't really be
+   a [bug report](#bug-reports) or a [feature request](#feature-requests)?  Is it really one idea or is it many? What's the context? What problem are you solving? Why is what you are suggesting better than what's already there?
+
+## Working on EOSIO Toppings
+
+Code contributions are welcome and encouraged! If you are looking for a good place to start, check out the [good first issue](https://github.com/EOSIO/eosio-toppings/labels/good%20first%20issue) label in GitHub issues.
+
+Also, please follow these guidelines when submitting code:
+
+### Feature Branches
+
+To get it out of the way:
+
+- **[develop](https://github.com/EOSIO/eosio-toppings/tree/develop)** is the development branch. All work on the next release happens here so you should generally branch off `develop`. Do **NOT** use this branch for a production site.
+- **[master](https://github.com/EOSIO/eosio-toppings/tree/master)** contains the latest release of EOSIO Toppings. This branch may be used in production. Do **NOT** use this branch to work on EOSIO Toppings's source.
+
+### Submitting Pull Requests
+
+Pull requests are awesome. If you're looking to raise a PR for something which doesn't have an open issue, please think carefully about [raising an issue](#reporting-an-issue) which your PR can close, especially if you're fixing a bug. This makes it more likely that there will be enough information available for your PR to be properly tested and merged.
+
+### Testing and Quality Assurance
+
+Never underestimate just how useful quality assurance is. If you're looking to get involved with the code base and don't know where to start, checking out and testing a pull request is one of the most useful things you could do.
+
+Essentially, [check out the latest develop branch](#working-on-eosio-toppings), take it for a spin, and if you find anything odd, please follow the [bug report guidelines](#bug-reports) and let us know!
+
+## Conduct
+
+While contributing, please be respectful and constructive, so that participation in our project is a positive experience for everyone.
+
+Examples of behavior that contributes to creating a positive environment include:
+- Using welcoming and inclusive language
+- Being respectful of differing viewpoints and experiences
+- Gracefully accepting constructive criticism
+- Focusing on what is best for the community
+- Showing empathy towards other community members
+
+Examples of unacceptable behavior include:
+- The use of sexualized language or imagery and unwelcome sexual attention or advances
+- Trolling, insulting/derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others’ private information, such as a physical or electronic address, without explicit permission
+- Other conduct which could reasonably be considered inappropriate in a professional setting
+
+
+
+## Contributor License & Acknowledgments
+
+Whenever you make a contribution to this project, you license your contribution under the same terms as set out in LICENSE, and you represent and warrant that you have the right to license your contribution under those terms.  Whenever you make a contribution to this project, you also certify in the terms of the Developer’s Certificate of Origin set out below:
+
+```
+Developer Certificate of Origin
+Version 1.1
+
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
+1 Letterman Drive
+Suite D4700
+San Francisco, CA, 94129
+
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+
+Developer's Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+```
+
+## References
+
+* Overall CONTRIB adapted from https://github.com/mathjax/MathJax/blob/master/CONTRIBUTING.md
+* Conduct section adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
