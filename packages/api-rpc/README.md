@@ -61,3 +61,14 @@ Given a connected `endpoint` with `private_key, actor, permission` credentials, 
 * `permission` - string
 * `action_name` - string
 * `payload` - object
+
+### `update_auth`
+
+Given a connected `endpoint` with `private_key, account_name` credentials, push one or two `updateauth` actions in a single transaction in order to update the public key(s) of `account_name`
+The `new_active_key` and `new_owner_key` denote public keys, and can either be passed at the same time or passed one at a time.
+
+* `endpoint` - string
+* `account_name` - string
+* `private_key` - string
+* `new_active_key` - string
+* `new_owner_key` - string
