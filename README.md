@@ -58,7 +58,6 @@ The following ports need to be opened in your local machine by default:
 * `5111` [ UI - Frontend app service ]
 * `8081` [ EOSIO compiler/deployment service ]
 * `8888` [ Nodeos RPC Api service ] ( not configurable in config file )
-* `9876` [ Nodeos Net Plugin service ] ( not configurable in config file )
 * `27788` [ MongoDB Api service ]
 
 ## License
