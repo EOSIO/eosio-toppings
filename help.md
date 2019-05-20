@@ -1,4 +1,4 @@
-# EOSIO Toppings
+# EOSIO Labs™: EOSIO Toppings
 
 A monorepo with tools working on top of nodeos
 

@@ -1,4 +1,4 @@
-<h1 align="center">EOSIO Toppings</h1>
+<h1 align="center">EOSIO Labs™: EOSIO Toppings</h1>
 
 <p align="center">
   <img alt="EOSIO Labs badge" src="https://img.shields.io/badge/EOSIO-Labs-5cb3ff.svg">
@@ -8,7 +8,7 @@ This is a monorepo composed of the various packages which work together to creat
 
 ## Overview
 
-EOSIO Toppings is a monorepo which consists of the various services and tools needed for the [EOSIO Labs™: EOSIO Explorer](https://github.com/EOSIO/eosio-explorer) to run properly. In order to decouple the tool from the reusable parts of the system, the monorepo was created. This also allows the possibility of development work to take place on many parts of the tool system concurrently and makes it easier for users interested in contributing to find out how the entire toolchain works.
+EOSIO Labs™: EOSIO Toppings is a monorepo which consists of the various services and tools needed for the [EOSIO Labs™: EOSIO Explorer](https://github.com/EOSIO/eosio-explorer) to run properly. In order to decouple the tool from the reusable parts of the system, the monorepo was created. This also allows the possibility of development work to take place on many parts of the tool system concurrently and makes it easier for users interested in contributing to find out how the entire toolchain works.
 
 The monorepo contains two categories of packages:
 
