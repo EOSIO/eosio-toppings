@@ -42,7 +42,7 @@ if [ ! "$(docker ps -q -f name=^$NODEOS_CONTAINER_NAME$)" ]; then
   # --link is to get access to other container
   echo "running docker container from the $NODEOS_IMAGE_NAME image"
   docker run --rm --name $NODEOS_CONTAINER_NAME -d \
-  -p 8888:8888 -p 9876:9876 \
+  -p 8888:8888 \
   --link $MONGODB_CONTAINER_NAME \
   -v $NODEOS_VOLUME_NAME:/mnt/dev/data \
   $NODEOS_IMAGE_NAME \
