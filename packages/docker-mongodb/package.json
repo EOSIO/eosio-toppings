@@ -13,6 +13,6 @@
   ],
   "description": "A Docker container that runs a MongoDB service.",
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   }
 }

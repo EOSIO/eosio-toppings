@@ -14,7 +14,7 @@
   ],
   "description": "RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from nodeos",
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "dependencies": {
     "eosjs": "20.0.0-beta3",
