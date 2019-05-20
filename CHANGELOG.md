@@ -1,5 +1,13 @@
 # Changelog
 
+## docker-eosio-nodeos v0.3.0-alpha.0 (2019-05-20)
+
+#### Bug Fix
+* `docker-eosio-nodeos`
+  * [#80](https://github.com/EOSIO/eosio-toppings/pull/80) Remove -p 9876:9876 from docker initialization of nodeos ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
 ## All packages v0.3.0-alpha (2019-05-17)
 
 #### Enhancement
