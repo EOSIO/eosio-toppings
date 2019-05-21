@@ -1,5 +1,17 @@
 # Changelog
 
+## All packages v0.3.0 (2019-05-21)
+
+#### Documentation
+* [#82](https://github.com/EOSIO/eosio-toppings/pull/82) adds wallet legal rider ([@terrylks](https://github.com/terrylks))
+
+#### Internal
+* `api-eosio-compiler`, `api-mongodb-plugin`, `api-rpc`, `docker-eosio-nodeos`, `docker-mongodb`
+  * [#81](https://github.com/EOSIO/eosio-toppings/pull/81) Pre-release v0.3.0 and release to public. ([@terrylks](https://github.com/terrylks))
+
+#### Committers: 1
+- Terry Leung ([@terrylks](https://github.com/terrylks))
+
 ## docker-eosio-nodeos v0.3.0-alpha.0 (2019-05-20)
 
 #### Bug Fix
@@ -8,6 +20,7 @@
 
 #### Committers: 1
 - Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
 ## All packages v0.3.0-alpha (2019-05-17)
 
 #### Enhancement
