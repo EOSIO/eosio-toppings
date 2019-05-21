@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/api-eosio-compiler",
-  "version": "0.3.0-alpha",
+  "version": "0.3.0",
   "main": "local_service.js",
   "license": "MIT",
   "author": "block.one",
