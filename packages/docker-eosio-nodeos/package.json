@@ -13,6 +13,6 @@
   ],
   "description": "A Docker container that runs a local instance of `nodeos` and writes data into MongoDB with mongodb-plugin",
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   }
 }

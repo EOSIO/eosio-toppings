@@ -14,7 +14,7 @@
   ],
   "description": "Local node process to consume smart contract source files and compile to WASM/ABI files",
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "scripts": {
     "start": "node local-service.js"

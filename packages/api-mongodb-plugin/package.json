@@ -14,7 +14,7 @@
   ],
   "description": "RESTful API service making use of mongoose obtain data from MongoDB which written by nodeos with mongodb-plugin.",
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "dependencies": {
     "dotenv": "^6.2.0",
