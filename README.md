@@ -38,7 +38,7 @@ The monorepo contains two categories of packages:
 
     * [MongoDB Docker Container <img alt="npm" src="https://img.shields.io/npm/v/@eosio-toppings/docker-mongodb.svg"> <img alt="npm" src="https://img.shields.io/npm/dm/@eosio-toppings/docker-mongodb.svg">](./packages/docker-mongodb):
         * Dockerfile and build scripts for the Docker container running a local MongoDB service
-        
+
 
 ### Platform Support
 
@@ -78,3 +78,5 @@ The following ports need to be opened in your local machine by default:
 ## Important
 
 See LICENSE for copyright and license terms.  Block.one makes its contribution on a voluntary basis as a member of the EOSIO community and is not responsible for ensuring the overall performance of the software or any related applications.  We make no representation, warranty, guarantee or undertaking in respect of the software or any related documentation, whether expressed or implied, including but not limited to the warranties or merchantability, fitness for a particular purpose and noninfringement. In no event shall we be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or documentation or the use or other dealings in the software or documentation.  Any test results or performance figures are indicative and will not reflect performance under all conditions.  Any reference to any third party or third-party product, service or other resource is not an endorsement or recommendation by Block.one.  We are not responsible, and disclaim any and all responsibility and liability, for your use of or reliance on any of these resources. Third-party resources may be updated, changed or terminated at any time, so the information here may be out of date or inaccurate.
+
+Wallets and related components are complex software that require the highest levels of security.  If incorrectly built or used, they may compromise users’ private keys and digital assets. Wallet applications and related components should undergo thorough security evaluations before being used.  Only experienced developers should work with this software.
