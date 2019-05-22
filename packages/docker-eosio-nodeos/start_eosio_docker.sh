@@ -21,10 +21,6 @@ HARDREPLAY=false
 NOLOG=false
 SAMPLEDATA=false
 
-#todo: remove this
-docker build -t $NODEOS_IMAGE_NAME .
-
-
 # check for arguments
 for arg in $@
 do
