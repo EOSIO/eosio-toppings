@@ -1,4 +1,4 @@
-# api-mongodb-plugin <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-mongodb-plugin.svg">
+# api-mongodb-plugin <a href="https://www.npmjs.com/package/@eosio-toppings/api-mongodb-plugin"><img alt="NPM Version" src="https://img.shields.io/npm/v/@eosio-toppings/api-mongodb-plugin.svg"></a>
 RESTful API service making use of mongoose obtain data from MongoDB which written by nodeos with mongodb-plugin.
 
 ## Manual Usage
