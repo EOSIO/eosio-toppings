@@ -27,6 +27,7 @@
     "eosjs": "20.0.0-beta3",
     "express": "^4.16.4",
     "file": "^0.2.2",
+    "node-fetch": "^2.3.0",
     "recursive-copy": "^2.0.10",
     "strip-ansi": "^5.1.0"
   }
