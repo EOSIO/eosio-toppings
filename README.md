@@ -2,7 +2,7 @@
 
 <p align="center">
   <img alt="EOSIO Labs badge" src="https://img.shields.io/badge/EOSIO-Labs-5cb3ff.svg">
-  <img alt="PRs welcome badge" src="https://img.shields.io/badge/PRs-welcome-green.svg">
+  <a href="https://github.com/EOSIO/eosio-toppings/pulls"><img alt="PRs welcome badge" src="https://img.shields.io/badge/PRs-welcome-green.svg"></a>
 </p>
 
 This is a monorepo composed of the various packages which work together to create a web-based development tool to help users create applications on the EOSIO blockchain. Users will be able to perform various actions related to smart contract and application development using this tool.

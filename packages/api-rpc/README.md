@@ -1,4 +1,4 @@
-# api-rpc <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/api-rpc.svg">
+# api-rpc <a href="https://www.npmjs.com/package/@eosio-toppings/api-rpc"><img alt="NPM Version" src="https://img.shields.io/npm/v/@eosio-toppings/api-rpc.svg"></a>
 RESTful API service making use of the nodeos RPC API wrapper `eosjs` to obtain data from nodeos.
 
 ## Manual Usage

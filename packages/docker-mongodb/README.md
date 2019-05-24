@@ -1,4 +1,4 @@
-# docker-mongodb <img alt="NPM Version" src="https://img.shields.io/npm/v/EOSIO/docker-mongodb.svg">
+# docker-mongodb <a href="https://www.npmjs.com/package/@eosio-toppings/docker-mongodb"><img alt="NPM Version" src="https://img.shields.io/npm/v/@eosio-toppings/docker-mongodb.svg"></a>
 `docker-mongodb` is responsible for creating a Docker container that runs a MongoDB service. This directory also contains the data written to the MongoDB from the `nodeos` container courtesy of the MongoDB plugin upon startup of the `nodeos` instance.
 
 ## Manual Usage
