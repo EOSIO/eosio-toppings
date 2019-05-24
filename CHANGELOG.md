@@ -1,5 +1,25 @@
 # Changelog
 
+## All packages v0.3.1-alpha.0 (2019-05-24)
+
+#### Enhancement
+* `api-eosio-compiler`, `api-mongodb-plugin`, `api-rpc`, `docker-eosio-nodeos`, `docker-mongodb`
+  * [#84](https://github.com/EOSIO/eosio-toppings/pull/84) Tidying up files for publishing to npm ([@terrylks](https://github.com/terrylks))
+* `docker-eosio-nodeos`, `docker-mongodb`
+  * [#83](https://github.com/EOSIO/eosio-toppings/pull/83) Fogbugz 3442 - Handle docker volumes after restart  ([@matharuajay](https://github.com/matharuajay))
+
+#### Bug Fix
+* `docker-eosio-nodeos`, `docker-mongodb`
+  * [#83](https://github.com/EOSIO/eosio-toppings/pull/83) Fogbugz 3442 - Handle docker volumes after restart  ([@matharuajay](https://github.com/matharuajay))
+
+#### Documentation
+* `api-eosio-compiler`, `api-mongodb-plugin`, `api-rpc`, `docker-eosio-nodeos`, `docker-mongodb`
+  * [#84](https://github.com/EOSIO/eosio-toppings/pull/84) Tidying up files for publishing to npm ([@terrylks](https://github.com/terrylks))
+
+#### Committers: 2
+- Ajay Matharu ([@matharuajay](https://github.com/matharuajay))
+- Terry Leung ([@terrylks](https://github.com/terrylks))
+
 ## All packages v0.3.0 (2019-05-21)
 
 #### Documentation
