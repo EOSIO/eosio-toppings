@@ -18,7 +18,8 @@ const get_actions = async (query: {
       "createdAt": 1,
       "_id": 1,
       "act.authorization": 1,
-      "block_num": 1
+      "block_num": 1,
+      "block_time": 1
     });
 
     (account_name !== undefined) ?

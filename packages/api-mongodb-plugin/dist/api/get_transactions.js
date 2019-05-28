@@ -52,6 +52,7 @@ var get_transactions = function (query) { return __awaiter(_this, void 0, void 0
                     .find({}, {
                     "trx_id": 1,
                     "block_num": 1,
+                    "expiration": 1,
                     "createdAt": 1
                 });
                 (id !== undefined) ?

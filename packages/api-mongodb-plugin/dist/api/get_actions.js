@@ -57,7 +57,8 @@ var get_actions = function (query) { return __awaiter(_this, void 0, void 0, fun
                     "createdAt": 1,
                     "_id": 1,
                     "act.authorization": 1,
-                    "block_num": 1
+                    "block_num": 1,
+                    "block_time": 1
                 });
                 (account_name !== undefined) ?
                     query_gen.where("act.account").equals(account_name) : "";

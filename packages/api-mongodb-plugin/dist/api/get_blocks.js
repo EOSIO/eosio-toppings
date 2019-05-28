@@ -52,7 +52,8 @@ var get_blocks = function (query) { return __awaiter(_this, void 0, void 0, func
                     "block_id": 1,
                     "block_num": 1,
                     "createdAt": 1,
-                    "block.transactions.trx.id": 1
+                    "block.transactions.trx.id": 1,
+                    "block.timestamp": 1
                 }) : block_1.default.find({});
                 (show_empty === undefined || show_empty !== 'true') ?
                     query_gen.exists("block.transactions.status") : "";
