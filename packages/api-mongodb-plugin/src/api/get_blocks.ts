@@ -14,7 +14,8 @@ const get_blocks = async (query: {
             "block_id": 1,
             "block_num": 1,
             "createdAt": 1,
-            "block.transactions.trx.id": 1
+            "block.transactions.trx.id": 1,
+            "block.timestamp": 1
           }) : BlockModel.find({});
 
     (show_empty === undefined || show_empty !== 'true')?
