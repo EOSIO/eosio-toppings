@@ -14,14 +14,16 @@ const get_actions = async (query: {
       "receipt.global_sequence": 1,
       "act.name": 1,
       "act.account": 1,
+      "act.data": 1,
       "trx_id": 1,
       "createdAt": 1,
       "_id": 1,
       "act.authorization": 1,
+      "except": 1,
       "block_num": 1,
       "block_time": 1
     });
-
+    
     (account_name !== undefined) ?
       query_gen.where("act.account").equals(account_name) : "";
 

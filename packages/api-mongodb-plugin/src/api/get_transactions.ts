@@ -14,6 +14,7 @@ const get_transactions = async (query: {
         {
           "trx_id": 1,
           "block_num": 1,
+          "accepted": 1,
           "expiration": 1,
           "createdAt": 1
         });
