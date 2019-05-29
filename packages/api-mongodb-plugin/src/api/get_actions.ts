@@ -2,10 +2,11 @@ import ActionsModel from '../models/actions';
 
 const get_actions = async (query: {
   account_name: string,
-  records_count: string
+  records_count: string,
+  fetch_failed_action: string
 }) => {
   try{
-    let { account_name, records_count } = query;
+    let { account_name, records_count, fetch_failed_action } = query;
     let result: object;
 
     let query_gen = ActionsModel
@@ -28,13 +29,16 @@ const get_actions = async (query: {
       query_gen.where("act.account").equals(account_name) : "";
 
     query_gen.where("act.name").ne("onblock");
-    query_gen.where("except").equals(null);
+
+    (fetch_failed_action === undefined || fetch_failed_action === 'false' )
+     ? query_gen.where("except").equals(null)
+     : "";
 
     (records_count !== undefined) ?
         query_gen.limit(parseInt(records_count)): query_gen.limit(100);  
 
     query_gen.sort({block_num: -1});
-
+    
     result = await query_gen.exec();
     return result;
   }catch(err){
