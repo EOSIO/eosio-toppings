@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
-echo "creating blockchain accounts and deploying smart contract"
+# get the current datetime
+CURRENTDATE=`date +"%Y-%m-%dT%T"`
 
 # set PATH
 PATH="$PATH:/opt/eosio/bin:/opt/eosio/bin/scripts"
@@ -34,6 +35,7 @@ nodeos -e -p eosio -d /mnt/dev/data \
   --contracts-console \
   --max-transaction-time 300 \
   --verbose-http-errors \
+  --genesis-timestamp $CURRENTDATE \
   --genesis-json "./scripts/genesis.json" &
 
 # wait for blockchain to start
