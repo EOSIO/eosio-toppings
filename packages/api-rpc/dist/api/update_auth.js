@@ -49,7 +49,6 @@ var update_auth = function (query) { return __awaiter(_this, void 0, void 0, fun
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, new_key = query.new_key, permission = query.permission, parent_1 = query.parent;
-                console.log("query ", query);
                 rpc = new eosjs_1.JsonRpc(endpoint);
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });

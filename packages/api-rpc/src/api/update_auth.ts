@@ -12,7 +12,6 @@ const update_auth = async (query: {
 }) => {
   try{
     let { endpoint, account_name, private_key, new_key, permission, parent } = query;
-    console.log("query ",query);
     const rpc = new JsonRpc(endpoint);
     const signatureProvider = new JsSignatureProvider([private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
