@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
+echo "creating blockchain accounts and deploying smart contract"
+
 # get the current datetime
 CURRENTDATE=`date +"%Y-%m-%dT%T"`
 
