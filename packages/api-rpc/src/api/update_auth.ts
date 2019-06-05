@@ -6,30 +6,18 @@ const update_auth = async (query: {
   endpoint: string,
   account_name: string,
   private_key: string,
-  new_active_key: string,
-  new_owner_key: string
+  new_key: string,
+  permission: string,
+  parent: string
 }) => {
   try{
-    let { endpoint, account_name, private_key, new_active_key, new_owner_key } = query;
-
+    let { endpoint, account_name, private_key, new_key, permission, parent } = query;
+    console.log("query ",query);
     const rpc = new JsonRpc(endpoint);
     const signatureProvider = new JsSignatureProvider([private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
-
-    let generatedActions;
-    console.log(new_active_key);
-    if (new_active_key && new_owner_key){
-      let generateActiveAction = generate_action(account_name, "active", "owner", new_active_key);
-      let generateOwnerAction = generate_action(account_name, "owner", "", new_owner_key);
-      generatedActions = [ generateActiveAction, generateOwnerAction ];
-    }
-    else if (new_active_key){
-      generatedActions =  [ generate_action(account_name, "active", "owner", new_active_key) ] ;
-    }
-    else if (new_owner_key){
-      generatedActions = [ generate_action(account_name, "owner", "", new_owner_key) ];
-    }
+    let generatedActions =  [ generate_action(account_name, permission, parent, new_key) ];
 
     const result = await api.transact({
       actions: generatedActions
