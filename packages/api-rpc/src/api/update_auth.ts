@@ -8,17 +8,16 @@ const update_auth = async (query: {
   private_key: string,
   new_key: string,
   permission: string,
-  permission_to_update: string,
   parent: string
 }) => {
   try{
-    let { endpoint, account_name, private_key, new_key, permission, permission_to_update, parent } = query;
+    let { endpoint, account_name, private_key, new_key, permission, parent } = query;
     console.log("query ",query);
     const rpc = new JsonRpc(endpoint);
     const signatureProvider = new JsSignatureProvider([private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
-    let generatedActions =  [ generate_action(account_name, permission,  permission_to_update, parent, new_key) ];
+    let generatedActions =  [ generate_action(account_name, permission, parent, new_key) ];
 
     const result = await api.transact({
       actions: generatedActions
@@ -36,7 +35,6 @@ const update_auth = async (query: {
 const generate_action = (
   account_name: string,
   permission: string,
-  permission_to_update: string,
   parent: string,
   new_key: string
 ) => {
@@ -49,7 +47,7 @@ const generate_action = (
     }],
     data: {
       account: account_name,
-      permission: permission_to_update,
+      permission: permission,
       parent: parent,
       auth: {
         "threshold":1,
