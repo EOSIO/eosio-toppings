@@ -43,17 +43,17 @@ var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
 var update_auth = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, account_name, private_key, new_key, permission, parent_1, rpc, signatureProvider, api, generatedActions, result, e_1;
+    var endpoint, account_name, private_key, new_key, permission, permission_to_update, parent_1, rpc, signatureProvider, api, generatedActions, result, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, new_key = query.new_key, permission = query.permission, parent_1 = query.parent;
+                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, new_key = query.new_key, permission = query.permission, permission_to_update = query.permission_to_update, parent_1 = query.parent;
                 console.log("query ", query);
                 rpc = new eosjs_1.JsonRpc(endpoint);
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
-                generatedActions = [generate_action(account_name, permission, parent_1, new_key)];
+                generatedActions = [generate_action(account_name, permission, permission_to_update, parent_1, new_key)];
                 return [4 /*yield*/, api.transact({
                         actions: generatedActions
                     }, {
@@ -71,17 +71,17 @@ var update_auth = function (query) { return __awaiter(_this, void 0, void 0, fun
         }
     });
 }); };
-var generate_action = function (account_name, permission, parent, new_key) {
+var generate_action = function (account_name, permission, permission_to_update, parent, new_key) {
     return {
         account: "eosio",
         name: "updateauth",
         authorization: [{
                 actor: account_name,
-                permission: "owner",
+                permission: permission,
             }],
         data: {
             account: account_name,
-            permission: permission,
+            permission: permission_to_update,
             parent: parent,
             auth: {
                 "threshold": 1,
