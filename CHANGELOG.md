@@ -1,5 +1,20 @@
 # Changelog
 
+## api-rpc, docker-eosio-nodeos, api-mongodb-plugin v0.3.2-alpha.0 (2019-06-27)
+
+#### Enhancement
+* `api-rpc`, `docker-eosio-nodeos`
+  * [#89](https://github.com/EOSIO/eosio-toppings/pull/89) Update api-rpc updateAuth to accept any permissions ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `docker-eosio-nodeos`
+  * [#88](https://github.com/EOSIO/eosio-toppings/pull/88) push eosio account in MongoDB ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-mongodb-plugin`
+  * [#86](https://github.com/EOSIO/eosio-toppings/pull/86) Add extra columns in get_actions and get_transactions api ([@varshajnagaraja](https://github.com/varshajnagaraja))
+  * [#85](https://github.com/EOSIO/eosio-toppings/pull/85) Fogbugz 3434 - Update timestamp colums ([@matharuajay](https://github.com/matharuajay))
+
+#### Committers: 2
+- Ajay Matharu ([@matharuajay](https://github.com/matharuajay))
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
 ## All packages v0.3.1-alpha.0 (2019-05-24)
 
 #### Enhancement
