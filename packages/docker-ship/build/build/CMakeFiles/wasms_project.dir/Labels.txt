@@ -1,0 +1,14 @@
+# Target labels
+ wasms_project
+# Source files and their labels
+/root/history-tools/build/CMakeFiles/wasms_project
+/root/history-tools/build/CMakeFiles/wasms_project.rule
+/root/history-tools/build/CMakeFiles/wasms_project-complete.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-install.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-mkdir.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-download.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-update.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-patch.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-configure.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-build.rule
+/root/history-tools/build/wasms_project-prefix/src/wasms_project-stamp/wasms_project-test.rule

@@ -1,0 +1,18 @@
+{
+  "name": "@eosio-toppings/api-ship-plugin",
+  "version": "0.3.1",
+  "license": "MIT",
+  "author": "block.one",
+  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-ship-plugin",
+  "contributors": [
+    "Terry Leung",
+    "Jonathan Cardenas",
+    "Varsha Nagaraja",
+    "Matthew Kelly",
+    "Ajay Matharu"
+  ],
+  "description": "RESTful API service making use of postgres obtain data from prostgresql which written by nodeos with ship-plugin.",
+  "publishConfig": {
+    "access": "public"
+  }
+}

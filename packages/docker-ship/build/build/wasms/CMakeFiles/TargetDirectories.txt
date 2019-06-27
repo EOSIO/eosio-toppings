@@ -1,0 +1,13 @@
+/root/history-tools/build/wasms/CMakeFiles/rebuild_cache.dir
+/root/history-tools/build/wasms/CMakeFiles/edit_cache.dir
+/root/history-tools/build/wasms/chain/CMakeFiles/rebuild_cache.dir
+/root/history-tools/build/wasms/chain/CMakeFiles/edit_cache.dir
+/root/history-tools/build/wasms/chain/CMakeFiles/chain-server.dir
+/root/history-tools/build/wasms/chain/CMakeFiles/chain-client.dir
+/root/history-tools/build/wasms/legacy/CMakeFiles/rebuild_cache.dir
+/root/history-tools/build/wasms/legacy/CMakeFiles/legacy-server.dir
+/root/history-tools/build/wasms/legacy/CMakeFiles/edit_cache.dir
+/root/history-tools/build/wasms/token/CMakeFiles/rebuild_cache.dir
+/root/history-tools/build/wasms/token/CMakeFiles/edit_cache.dir
+/root/history-tools/build/wasms/token/CMakeFiles/token-server.dir
+/root/history-tools/build/wasms/token/CMakeFiles/token-client.dir
