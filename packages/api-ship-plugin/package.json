@@ -14,5 +14,8 @@
   "description": "RESTful API service making use of postgres obtain data from prostgresql which written by nodeos with ship-plugin.",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "pg": "^7.11.0"
   }
 }
