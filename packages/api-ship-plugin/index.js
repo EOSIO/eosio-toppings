@@ -1,6 +1,7 @@
 
-import get_blocks from './api/get_blocks';
+// import get_blocks from './api/get_blocks';
+const get_blocks = require('./api/get_blocks');
 
-export default {
+module.exports = {
   get_blocks,
 };

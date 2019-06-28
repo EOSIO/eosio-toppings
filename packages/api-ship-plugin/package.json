@@ -3,6 +3,7 @@
   "version": "0.3.1",
   "license": "MIT",
   "author": "block.one",
+  "main": "index.js",
   "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-ship-plugin",
   "contributors": [
     "Terry Leung",
