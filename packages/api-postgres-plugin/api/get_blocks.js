@@ -8,7 +8,7 @@ const get_blocks = async () => {
       if (err) {
         console.error('Error executing query', err.stack)
       }else{
-        console.log("get blocks res ,",result.rows);
+        console.log("get blocks response ,",result.rows);
       }      
       return result;
     })

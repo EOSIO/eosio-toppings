@@ -1,5 +1,5 @@
 {
-  "name": "@eosio-toppings/api-ship-plugin",
+  "name": "@eosio-toppings/api-postgres-plugin",
   "version": "0.3.1",
   "license": "MIT",
   "author": "block.one",
