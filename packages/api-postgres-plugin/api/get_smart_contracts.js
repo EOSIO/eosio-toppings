@@ -1,11 +1,9 @@
 const db = require('./db');
+var sd = require('string_decoder').StringDecoder;
 
-const get_all_permissions = async () => {
+const get_smart_contracts = async () => {
   try{
-    let query_gen = `
-      SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated 
-      FROM chain.permission 
-      WHERE auth_keys::text <> '{}'::text`;
+    let query_gen = `SELECT * FROM chain.account WHERE abi <> ''`;
 
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
@@ -25,4 +23,4 @@ const get_all_permissions = async () => {
   }
 }
 
-module.exports = get_all_permissions;
+module.exports = get_smart_contracts;
