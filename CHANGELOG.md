@@ -1,5 +1,15 @@
 # Changelog
 
+## docker-eosio-nodeos v0.3.3 (2019-07-05)
+
+#### Enhancement
+* `docker-eosio-nodeos`
+  * [#91](https://github.com/EOSIO/eosio-toppings/pull/91) Upgrade eos version to 1.8 ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
+#### Committers: 1
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
+
 ## api-rpc, docker-eosio-nodeos, api-mongodb-plugin v0.3.2-alpha.0 (2019-06-27)
 
 #### Enhancement
