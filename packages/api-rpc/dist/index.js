@@ -9,6 +9,7 @@ var push_action_1 = __importDefault(require("./api/push_action"));
 var get_table_rows_1 = __importDefault(require("./api/get_table_rows"));
 var get_account_details_1 = __importDefault(require("./api/get_account_details"));
 var get_producer_schedule_1 = __importDefault(require("./api/get_producer_schedule"));
+var get_producers_1 = __importDefault(require("./api/get_producers"));
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
 var get_block_1 = __importDefault(require("./api/get_block"));
@@ -28,6 +29,7 @@ exports.default = {
     get_account_details: get_account_details_1.default,
     update_auth: update_auth_1.default,
 <<<<<<< HEAD
+<<<<<<< HEAD
     get_abi: get_abi_1.default,
     get_block: get_block_1.default,
     stake_cpu: stake_cpu_1.default,
@@ -41,4 +43,8 @@ exports.default = {
 =======
     get_producer_schedule: get_producer_schedule_1.default
 >>>>>>> api-rpc: Added the get_producer_schedule api call
+=======
+    get_producer_schedule: get_producer_schedule_1.default,
+    get_producers: get_producers_1.default
+>>>>>>> api-rpc: Added the get_producers api call
 };
