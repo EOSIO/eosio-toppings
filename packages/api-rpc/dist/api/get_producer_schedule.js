@@ -34,59 +34,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
-var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
-var text_encoding_1 = require("text-encoding");
-var push_action = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, account_name, private_key, actor, permission, action_name, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, result, e_1;
+var get_producer_schedule = function (query) { return __awaiter(_this, void 0, void 0, function () {
+    var endpoint, rpc, response, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, actor = query.actor, permission = query.permission, action_name = query.action_name, payload = query.payload;
+                endpoint = query.endpoint;
                 rpc = new eosjs_1.JsonRpc(endpoint);
-                signatureProvider = new eosjs_jssig_1.default([private_key]);
-                api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
-                if (account_name === "eosio" && action_name === "setabi") {
-                    buffer = new eosjs_1.Serialize.SerialBuffer({
-                        textEncoder: api.textEncoder,
-                        textDecoder: api.textDecoder,
-                    });
-                    abi = payload.abi;
-                    abiDefinition = api.abiTypes.get('abi_def');
-                    // need to make sure abi has every field in abiDefinition.fields
-                    // otherwise serialize throws error
-                    abi = abiDefinition.fields.reduce(function (acc, _a) {
-                        var _b;
-                        var fieldName = _a.name;
-                        return Object.assign(acc, (_b = {}, _b[fieldName] = acc[fieldName] || [], _b));
-                    }, abi);
-                    abiDefinition.serialize(buffer, abi);
-                    abi = Buffer.from(buffer.asUint8Array()).toString('hex');
-                    payload.abi = abi;
-                }
-                return [4 /*yield*/, api.transact({
-                        actions: [{
-                                account: account_name,
-                                name: action_name,
-                                authorization: [{
-                                        actor: actor,
-                                        permission: permission,
-                                    }],
-                                data: payload,
-                            }]
-                    }, {
-                        blocksBehind: 3,
-                        expireSeconds: 30,
-                    })];
+                return [4 /*yield*/, rpc.get_producer_schedule()];
             case 1:
-                result = _a.sent();
-                return [2 /*return*/, result];
+                response = _a.sent();
+                return [2 /*return*/, response];
             case 2:
                 e_1 = _a.sent();
                 console.log('Caught exception: ' + e_1);
@@ -95,4 +57,4 @@ var push_action = function (query) { return __awaiter(_this, void 0, void 0, fun
         }
     });
 }); };
-exports.default = push_action;
+exports.default = get_producer_schedule;
