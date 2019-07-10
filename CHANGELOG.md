@@ -1,5 +1,14 @@
 # Changelog
 
+## docker-eosio-nodeos v0.3.4 (2019-07-10)
+
+#### Enhancement
+* `docker-eosio-nodeos`
+  * [#92](https://github.com/EOSIO/eosio-toppings/pull/92) update eos to 1.8.1 ([@matharuajay](https://github.com/matharuajay))
+
+#### Committers: 1
+- Ajay Matharu ([@matharuajay](https://github.com/matharuajay))
+
 ## docker-eosio-nodeos v0.3.3 (2019-07-05)
 
 #### Enhancement
