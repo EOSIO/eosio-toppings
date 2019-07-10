@@ -14,7 +14,7 @@ import buy_ram from './api/buy_ram';
 import sell_ram from './api/sell_ram';
 import create_account_with_delegate from './api/create_account_with_delegate';
 import deploy_contract from './api/deploy_contract';
-
+import get_producer_schedule from './api/get_producer_schedule';
 
 export default {
     get_info,
@@ -33,4 +33,5 @@ export default {
     sell_ram,
     create_account_with_delegate,
     deploy_contract,
+    get_producer_schedule
 }
