@@ -5,6 +5,7 @@ import get_table_rows from './api/get_table_rows';
 import get_account_details from './api/get_account_details';
 import update_auth from './api/update_auth';
 import get_abi from './api/get_abi';
+import get_block from './api/get_block';
 
 export default {
     get_info,
@@ -13,5 +14,6 @@ export default {
     get_table_rows,
     get_account_details,
     update_auth,
-    get_abi
+    get_abi,
+    get_block
 }

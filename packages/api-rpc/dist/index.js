@@ -10,6 +10,7 @@ var get_table_rows_1 = __importDefault(require("./api/get_table_rows"));
 var get_account_details_1 = __importDefault(require("./api/get_account_details"));
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
+var get_block_1 = __importDefault(require("./api/get_block"));
 exports.default = {
     get_info: get_info_1.default,
     create_account: create_account_1.default,
@@ -17,5 +18,6 @@ exports.default = {
     get_table_rows: get_table_rows_1.default,
     get_account_details: get_account_details_1.default,
     update_auth: update_auth_1.default,
-    get_abi: get_abi_1.default
+    get_abi: get_abi_1.default,
+    get_block: get_block_1.default
 };
