@@ -2,7 +2,7 @@ const db = require('./db');
 
 const get_block_details = async (query) => {
   try{
-    let { id_or_num = "101" } = query;
+    let { id_or_num } = query;
     let result = [];
     let block_query_gen = `
         SELECT * FROM chain.block_info 
