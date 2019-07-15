@@ -1,5 +1,14 @@
 # Changelog
 
+## api-eosio-compiler, docker-eosio-nodeos v0.3.5 (2019-07-15)
+
+#### Enhancement
+* `api-eosio-compiler`, `docker-eosio-nodeos`
+  * [#95](https://github.com/EOSIO/eosio-toppings/pull/95) Bump up eosio.cdt version from 1.6.1 to 1.6.2 ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
 ## docker-eosio-nodeos v0.3.4 (2019-07-10)
 
 #### Enhancement
