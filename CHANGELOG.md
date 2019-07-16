@@ -1,6 +1,6 @@
 # Changelog
 
-## api-eosio-compiler v0.3.7 (2019-07-16)
+## api-eosio-compiler v0.3.8 (2019-07-16)
 
 #### Bug Fix
 * `api-eosio-compiler`
