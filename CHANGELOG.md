@@ -1,5 +1,14 @@
 # Changelog
 
+## api-eosio-compiler v0.3.7 (2019-07-16)
+
+#### Bug Fix
+* `api-eosio-compiler`
+  * [#97](https://github.com/EOSIO/eosio-toppings/pull/97) Roll back changes from erroneous release ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
 ## api-eosio-compiler v0.3.6 (2019-07-16)
 
 #### Bug Fix
