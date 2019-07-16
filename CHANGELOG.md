@@ -1,5 +1,14 @@
 # Changelog
 
+## docker-eosio-nodeos v0.3.6 (2019-07-16)
+
+#### Update
+* `docker-eosio-nodeos`
+  * Reverted back to using fixed genesis block for local test blockchain.
+
+#### Committers: 1
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
 ## api-eosio-compiler, docker-eosio-nodeos v0.3.5 (2019-07-15)
 
 #### Enhancement
