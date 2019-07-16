@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/docker-eosio-nodeos",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "license": "MIT",
   "author": "block.one",
   "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/docker-eosio-nodeos",
