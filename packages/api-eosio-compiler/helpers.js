@@ -76,7 +76,7 @@ const fetchDeployableFilesFromDirectory = (directory) => {
 const filterHeaderFiles = (fileName) => (fileName.includes('.hpp') || fileName.includes('.md') || fileName.includes('.yml') || fileName.includes('yaml'));
 
 const parseDirectoriesToInclude = (sourcePath) => {
-  let directories = ['/opt/eosio/bin/contracts/'];
+  let directories = [];
   let i = 0;
 
   try {
