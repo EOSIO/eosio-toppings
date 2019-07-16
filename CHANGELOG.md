@@ -1,5 +1,14 @@
 # Changelog
 
+## api-eosio-compiler v0.3.6 (2019-07-16)
+
+#### Bug Fix
+* `api-eosio-compiler`
+  * [#96](https://github.com/EOSIO/eosio-toppings/pull/96) Fixed ricardian contracts not properly importing ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
 ## docker-eosio-nodeos v0.3.6 (2019-07-16)
 
 #### Update
