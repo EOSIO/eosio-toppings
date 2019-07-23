@@ -4,14 +4,14 @@ FROM ubuntu:19.04
 
 RUN apt-get -y update
 ENV DEBIAN_FRONTEND=noninteractive 
-RUN apt-get -y install build-essential git libssl-dev libboost-all-dev cmake libpqxx-dev ninja-build libgmp-dev
+RUN apt-get -y install postgresql-server-dev-all build-essential git libssl-dev libboost-all-dev cmake libpqxx-dev ninja-build libgmp-dev
 RUN apt-get -y install wget
 
 WORKDIR /root
 RUN git clone --recursive https://github.com/EOSIO/history-tools.git
 
 WORKDIR /root/history-tools/
-RUN git checkout for-nodeos-1.8
+
 RUN git submodule update --init --recursive
 RUN mkdir /root/history-tools/build
 

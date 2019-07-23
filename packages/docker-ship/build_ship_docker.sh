@@ -13,7 +13,7 @@ source ./config.file
 if [ -f "./config.file.local" ]; then
   source ./config.file.local
 fi
-docker build -t $SHIP_IMAGE_NAME .
+
 # build docker image, if necessary
 if [[ "$(docker images -q $SHIP_IMAGE_NAME)" == "" ]]; then
   echo "Build docker image $SHIP_IMAGE_PREFIX version $SHIP_VERSION, this may take some time"
