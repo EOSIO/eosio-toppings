@@ -43,10 +43,11 @@ if [ ! "$(docker ps -q -f name=^$SHIP_CONTAINER_NAME$)" ]; then
   # start the blockchain docker
   # --link is to get access to other container
   echo "running state history plugin docker container"
-  docker run -it --name $SHIP_CONTAINER_NAME -d \
+  docker run -it --name eosio_nodeos_ship -d \
+  -e SHIP_PLUGIN_ENDPOINT='localhost:8080' \
   --net host \
-  $SHIP_IMAGE_NAME \
-  "$script"
+  nodeos_ship:dockerfile1.6 \
+  "./start_history_tool.sh"
 else
     echo "docker is already running"
 fi

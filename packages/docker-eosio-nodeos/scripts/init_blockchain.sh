@@ -3,9 +3,6 @@ set -o errexit
 
 echo "creating blockchain accounts and deploying smart contract"
 
-# get the current datetime
-CURRENTDATE=`date +"%Y-%m-%dT%T"`
-
 # set PATH
 PATH="$PATH:/opt/eosio/bin:/opt/eosio/bin/scripts"
 
@@ -41,7 +38,6 @@ nodeos -e -p eosio -d /mnt/dev/data \
   --trace-history \
   --chain-state-history \
   --disable-replay-opt \
-  --genesis-timestamp $CURRENTDATE \
   --genesis-json "./scripts/genesis.json" &
 
 # wait for blockchain to start

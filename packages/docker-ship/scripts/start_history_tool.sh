@@ -19,4 +19,4 @@ fi
 # sleep 10
 export PGHOST=$POSTGRES_HOST && export PGUSER=$POSTGRES_USER && export PGPASSWORD=$POSTGRES_PASSWORD && export PGDATABASE=$POSTGRES_DATABASE
 
-./build/fill-pg --fpg-create
+./build/fill-pg --fpg-create --fill-connect-to $SHIP_PLUGIN_ENDPOINT
