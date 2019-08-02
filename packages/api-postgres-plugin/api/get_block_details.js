@@ -19,7 +19,7 @@ const get_block_details = async (query) => {
       })
     })    
     let resultObj = await blocksPromise;  
-
+    console.log("resultObj ",resultObj);
     // If block ID/ block num found then get the transaction traces, else return empty array
     if(resultObj.length > 0 && resultObj[0].hasOwnProperty("block_num")){
       let transaction_query_gen = `
@@ -39,10 +39,12 @@ const get_block_details = async (query) => {
           })
         })   
       let transaction_traces = await transactionPromise;
+      console.log("transaction_traces ",transaction_traces);
       result.push({
           ...resultObj[0],
           "transactions" : transaction_traces
       });
+      console.log("result ", result);
       return result;
     }else{
       return resultObj;

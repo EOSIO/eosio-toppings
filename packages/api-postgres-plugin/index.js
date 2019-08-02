@@ -8,6 +8,7 @@ const get_all_permissions = require('./api/get_all_permissions');
 const get_smart_contracts = require('./api/get_smart_contracts');
 const get_actions = require('./api/get_actions');
 const get_action_details = require('./api/get_action_details');
+const { connectToDB } = require('./api/db');
 
 module.exports = {
   get_blocks,
@@ -17,5 +18,6 @@ module.exports = {
   get_all_permissions,
   get_smart_contracts,
   get_actions,
-  get_action_details
+  get_action_details,
+  connectToDB
 };

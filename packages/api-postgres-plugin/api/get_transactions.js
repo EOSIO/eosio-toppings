@@ -5,9 +5,6 @@ const get_transactions = async (query) => {
     let { records_count} = query;
     let query_gen = `
       SELECT tt.id, tt.block_num, tt.partial_expiration, tt.status FROM chain.transaction_trace tt 
-      INNER JOIN chain.action_trace at
-      ON tt.id = at.transaction_id
-      WHERE at.act_name <> 'onblock'
       ORDER BY block_num DESC
       LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100}`;
 

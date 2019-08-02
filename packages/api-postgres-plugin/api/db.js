@@ -16,7 +16,7 @@ pool.on('error', (err, client) => {
   if(err){
     console.log("DB Error ", err);
   }else{
-    console.log("DB error client ", client);
+    console.log("DB error client " , client);
   }
 })
 

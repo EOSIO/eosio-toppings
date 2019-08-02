@@ -17,7 +17,7 @@ const get_all_permissions = async () => {
         }     
       })
     })    
-    return await promise;   
+    return await promise;  
     
   }catch(err){
     console.log("caught exception ", err)
