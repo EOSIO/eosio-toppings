@@ -26,7 +26,7 @@ if [ ! -x "$(command -v docker)" ] ||
   echo ""
   exit
 fi
-
+docker build -t $NODEOS_IMAGE_NAME .
 # build docker image, if necessary
 if [[ "$(docker images -q $NODEOS_IMAGE_NAME)" == "" ]]; then
   echo "Build docker image $NODEOS_IMAGE_PREFIX version $NODEOS_VERSION, this may take some time"

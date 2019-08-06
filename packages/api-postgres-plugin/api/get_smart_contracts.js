@@ -3,7 +3,7 @@ var sd = require('string_decoder').StringDecoder;
 
 const get_smart_contracts = async () => {
   try{
-    let query_gen = `SELECT * FROM chain.account WHERE abi <> ''`;
+    let query_gen = `SELECT * FROM chain.account WHERE abi <> '' LIMIT 100`;
 
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {

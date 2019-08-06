@@ -56,8 +56,8 @@ cleos wallet import -n eosio --private-key 5Jr65kdYmn33C3UabzhmWDm2PuqbRfPuDStts
 echo "deploying bios contract"
 deploy_contract.sh eosio.bios eosio eosio $(cat eosio_wallet_password.txt) true
 
-cleos set account permission eosio active EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L owner -p eosio@owner
-cleos set account permission eosio owner EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L -p eosio@owner
+# cleos set account permission eosio active EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L owner -p eosio@owner
+# cleos set account permission eosio owner EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L -p eosio@owner
 
 echo "end of setting up blockchain accounts and smart contract"
 

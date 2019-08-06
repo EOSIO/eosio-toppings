@@ -10,7 +10,7 @@ const get_actions = async (query) => {
     FROM chain.action_trace AT
     ${(account_name !== undefined) ? `WHERE at.act_account = '${account_name}'`:  '' }
     ORDER BY at.block_num DESC
-    LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  x}`;
+    LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  100}`;
     
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
