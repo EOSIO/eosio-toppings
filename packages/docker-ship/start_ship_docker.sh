@@ -17,13 +17,20 @@ if [ "$(docker ps -q -f status=exited -f name=^$SHIP_CONTAINER_NAME$)" ]; then
   docker rm $SHIP_CONTAINER_NAME
 fi
 
-script="./start_history_tool.sh"
+if [ "$(docker ps -q -f status=exited -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
+  docker rm $POSTGRES_CONTAINER_NAME
+fi
+
+script="./resume_history_tool.sh"
 
 # check if container does not already exists
 if [ ! "$(docker ps -q -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
-  if [ ! "$(docker volume ls --format '{{.Name}}' -f name=^$NODEOS_VOLUME_NAME$)" ]; then
+  if [ ! "$(docker volume ls --format '{{.Name}}' -f name=^$POSTGRES_VOLUME_NAME$)" ]; then
+    #If the volume is created then call start_history_tool script
+    script="./start_history_tool.sh"
     # recreate fresh volume
     docker volume create --name=$POSTGRES_VOLUME_NAME
+    
   fi
 
   # start the postgres docker
@@ -44,7 +51,6 @@ if [ ! "$(docker ps -q -f name=^$SHIP_CONTAINER_NAME$)" ]; then
   # --link is to get access to other container
   echo "running state history plugin docker container"
   docker run -it --name $SHIP_CONTAINER_NAME -d \
-  -e SHIP_PLUGIN_ENDPOINT='localhost:8080' \
   --net host \
   $SHIP_IMAGE_NAME \
   "$script"

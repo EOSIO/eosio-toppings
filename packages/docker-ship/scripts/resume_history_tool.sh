@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 
-echo "starting postgres"
+echo "starting postgres resume"
 
 set -m
 # sourcing variable from config file
@@ -21,4 +21,4 @@ export PGHOST=$POSTGRES_HOST && export PGUSER=$POSTGRES_USER && export PGPASSWOR
 
 SHIP_PLUGIN_ENDPOINT="$NODE_ENDPOINT_DOMAIN_NAME:$SHIP_PLUGIN_PORT"
 echo $SHIP_PLUGIN_ENDPOINT
-./build/fill-pg --fpg-create --ignore-onblock --remove_old_delta_row --fill-connect-to $SHIP_PLUGIN_ENDPOINT
+./build/fill-pg --ignore-onblock --remove_old_delta_row --fill-connect-to $SHIP_PLUGIN_ENDPOINT
