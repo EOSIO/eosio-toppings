@@ -3,7 +3,7 @@ declare namespace Postgres {
 
   interface ListQuery { records_count: number }
 
-  interface BlocksQuery extends ListQuery { show_empty: boolean }
+  interface BlocksQuery extends ListQuery { show_empty: string }
   interface BlockDetailsQuery { id_or_num: string }
 
   interface TransactionsQuery extends ListQuery { }
