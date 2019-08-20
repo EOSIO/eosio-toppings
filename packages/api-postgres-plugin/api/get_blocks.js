@@ -1,6 +1,6 @@
 const db = require('./db');
 
-const get_block_details = async (query) => {
+const get_blocks = async (query) => {
   try{
     let { show_empty, records_count} = query;
     let query_gen = 
@@ -24,7 +24,7 @@ const get_block_details = async (query) => {
         }     
       })
     })    
-    return await promise;   
+    return await promise;
 
   }catch(err){
     console.log("caught exception ", err)
@@ -32,4 +32,4 @@ const get_block_details = async (query) => {
   }
 }
 
-module.exports = get_block_details;
+module.exports = get_blocks;
