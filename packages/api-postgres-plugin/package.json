@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/api-postgres-plugin",
-  "version": "0.3.1",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "block.one",
   "main": "index.js",
@@ -12,11 +12,11 @@
     "Matthew Kelly",
     "Ajay Matharu"
   ],
-  "description": "RESTful API service making use of postgres obtain data from prostgresql which written by nodeos with ship-plugin.",
+  "description": "A module to serve the data from PostgresDB which is filled by fill-pg tool from Nodeos",
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
+  },  
+  "dependencies": {
     "pg": "^7.11.0"
   }
 }

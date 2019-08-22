@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/docker-ship",
-  "version": "0.3.1",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "block.one",
   "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/docker-ship",
@@ -11,7 +11,7 @@
     "Matthew Kelly",
     "Ajay Matharu"
   ],
-  "description": "A Docker container that runs a State History Plugin service.",
+  "description": "A Docker container that runs a State History Plugin service(fill-pg).",
   "publishConfig": {
     "access": "public"
   }

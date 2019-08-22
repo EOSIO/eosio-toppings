@@ -20,5 +20,11 @@ fi
 export PGHOST=$POSTGRES_HOST && export PGUSER=$POSTGRES_USER && export PGPASSWORD=$POSTGRES_PASSWORD && export PGDATABASE=$POSTGRES_DATABASE
 
 SHIP_PLUGIN_ENDPOINT="$NODE_ENDPOINT_DOMAIN_NAME:$SHIP_PLUGIN_PORT"
-echo $SHIP_PLUGIN_ENDPOINT
-./build/fill-pg --ignore-onblock --remove_old_delta_row --fill-connect-to $SHIP_PLUGIN_ENDPOINT
+
+if [ $POSTGRES_HOST == "localhost" ]; then
+  POSTGRES="127.0.0.1"
+else
+  POSTGRES=$POSTGRES_HOST
+fi
+
+./build/fill-pg --ignore-onblock --remove_old_delta_row --dbstring="hostaddr=$POSTGRES port=$POSTGRES_PORT" --fill-connect-to $SHIP_PLUGIN_ENDPOINT
