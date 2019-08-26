@@ -64,7 +64,7 @@ if [ ! "$(docker ps -q -f name=^$NODEOS_CONTAINER_NAME$)" ]; then
   echo "running docker container from the $NODEOS_IMAGE_NAME image"
   docker run --name $NODEOS_CONTAINER_NAME -d \
   -p 8888:8888 \
-  --link $MONGODB_CONTAINER_NAME \
+  -p 8080:8080 \
   -v $NODEOS_VOLUME_NAME:/mnt/dev/data \
   $NODEOS_IMAGE_NAME \
   "$script"

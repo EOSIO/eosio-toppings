@@ -24,16 +24,20 @@ set -m
 nodeos -e -p eosio -d /mnt/dev/data \
   --signature-provider EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L=KEY:5Jr65kdYmn33C3UabzhmWDm2PuqbRfPuDStts3ZFNSBLM7TqaiL \
   --config-dir /mnt/dev/config \
-  --plugin eosio::mongo_db_plugin -m $MONGODB_PATH  \
   --http-validate-host=false \
   --plugin eosio::producer_plugin \
   --plugin eosio::chain_api_plugin \
   --plugin eosio::http_plugin \
+  --plugin eosio::state_history_plugin \
   --http-server-address=0.0.0.0:8888 \
+  --state-history-endpoint=0.0.0.0:8080 \
   --access-control-allow-origin=* \
   --contracts-console \
   --max-transaction-time 300 \
   --verbose-http-errors \
+  --trace-history \
+  --chain-state-history \
+  --disable-replay-opt \
   --genesis-json "./scripts/genesis.json" &
 
 # wait for blockchain to start
@@ -52,8 +56,8 @@ cleos wallet import -n eosio --private-key 5Jr65kdYmn33C3UabzhmWDm2PuqbRfPuDStts
 echo "deploying bios contract"
 deploy_contract.sh eosio.bios eosio eosio $(cat eosio_wallet_password.txt) true
 
-cleos set account permission eosio active EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L owner -p eosio@owner
-cleos set account permission eosio owner EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L -p eosio@owner
+# cleos set account permission eosio active EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L owner -p eosio@owner
+# cleos set account permission eosio owner EOS5GnobZ231eekYUJHGTcmy2qve1K23r5jSFQbMfwWTtPB7mFZ1L -p eosio@owner
 
 echo "end of setting up blockchain accounts and smart contract"
 
