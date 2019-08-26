@@ -1,5 +1,77 @@
 # Changelog
 
+## api-eosio-compiler v0.3.8 (2019-07-16)
+
+#### Bug Fix
+* `api-eosio-compiler`
+  * [#97](https://github.com/EOSIO/eosio-toppings/pull/97) Roll back changes from erroneous release ([@jcardenas9x](https://github.com/jcardenas9x))
+* `api-eosio-compiler`
+  * [#98](https://github.com/EOSIO/eosio-toppings/pull/98) Follow up from #97 ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
+## api-eosio-compiler v0.3.6 (2019-07-16)
+
+#### Bug Fix
+* `api-eosio-compiler`
+  * [#96](https://github.com/EOSIO/eosio-toppings/pull/96) Fixed ricardian contracts not properly importing ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
+## docker-eosio-nodeos v0.3.6 (2019-07-16)
+
+#### Update
+* `docker-eosio-nodeos`
+  * Reverted back to using fixed genesis block for local test blockchain.
+
+#### Committers: 1
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
+## api-eosio-compiler, docker-eosio-nodeos v0.3.5 (2019-07-15)
+
+#### Enhancement
+* `api-eosio-compiler`, `docker-eosio-nodeos`
+  * [#95](https://github.com/EOSIO/eosio-toppings/pull/95) Bump up eosio.cdt version from 1.6.1 to 1.6.2 ([@jcardenas9x](https://github.com/jcardenas9x))
+
+#### Committers: 1
+- Jonathan Cardenas ([@jcardenas9x](https://github.com/jcardenas9x))
+
+## docker-eosio-nodeos v0.3.4 (2019-07-10)
+
+#### Enhancement
+* `docker-eosio-nodeos`
+  * [#92](https://github.com/EOSIO/eosio-toppings/pull/92) update eos to 1.8.1 ([@matharuajay](https://github.com/matharuajay))
+
+#### Committers: 1
+- Ajay Matharu ([@matharuajay](https://github.com/matharuajay))
+
+## docker-eosio-nodeos v0.3.3 (2019-07-05)
+
+#### Enhancement
+* `docker-eosio-nodeos`
+  * [#91](https://github.com/EOSIO/eosio-toppings/pull/91) Upgrade eos version to 1.8 ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
+#### Committers: 1
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
+
+## api-rpc, docker-eosio-nodeos, api-mongodb-plugin v0.3.2-alpha.0 (2019-06-27)
+
+#### Enhancement
+* `api-rpc`, `docker-eosio-nodeos`
+  * [#89](https://github.com/EOSIO/eosio-toppings/pull/89) Update api-rpc updateAuth to accept any permissions ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `docker-eosio-nodeos`
+  * [#88](https://github.com/EOSIO/eosio-toppings/pull/88) push eosio account in MongoDB ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-mongodb-plugin`
+  * [#86](https://github.com/EOSIO/eosio-toppings/pull/86) Add extra columns in get_actions and get_transactions api ([@varshajnagaraja](https://github.com/varshajnagaraja))
+  * [#85](https://github.com/EOSIO/eosio-toppings/pull/85) Fogbugz 3434 - Update timestamp colums ([@matharuajay](https://github.com/matharuajay))
+
+#### Committers: 2
+- Ajay Matharu ([@matharuajay](https://github.com/matharuajay))
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
 ## All packages v0.3.1-alpha.0 (2019-05-24)
 
 #### Enhancement

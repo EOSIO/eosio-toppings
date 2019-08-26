@@ -27,6 +27,6 @@ fi
 if [ "$#" -ge 2 ]; then
     shift 1
     (
-        eosio-cpp -abigen "$CONTRACTSPATH/$FULLFILEPATH" -o "$COMPILEDCONTRACTSPATH/$CONTRACTNAME/$CONTRACTNAME.wasm" -contract "$CONTRACTNAME" -I=$@
+        eosio-cpp -abigen "$CONTRACTSPATH/$FULLFILEPATH" -o "$COMPILEDCONTRACTSPATH/$CONTRACTNAME/$CONTRACTNAME.wasm" -contract "$CONTRACTNAME" -I=$@ -R=$@
     ) 
 fi
