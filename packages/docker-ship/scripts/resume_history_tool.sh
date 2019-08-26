@@ -4,6 +4,8 @@ set -o errexit
 echo "starting postgres resume"
 
 set -m
+
+sleep 10
 # sourcing variable from config file
 source ./config.file
 

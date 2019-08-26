@@ -23,5 +23,3 @@ RUN ninja
 
 WORKDIR /root/history-tools/
 COPY ./scripts .
-COPY ./config.file .
-COPY ./config.file.local .

@@ -54,6 +54,9 @@ if [ ! "$(docker ps -q -f name=^$SHIP_CONTAINER_NAME$)" ]; then
   --net host \
   $SHIP_IMAGE_NAME \
   "$script"
+
+  docker cp config.file.local $SHIP_CONTAINER_NAME:/root/history-tools/
+  docker cp config.file $SHIP_CONTAINER_NAME:/root/history-tools/
 else
     echo "docker is already running"
 fi

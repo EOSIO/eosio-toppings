@@ -4,6 +4,9 @@ set -o errexit
 echo "starting postgres"
 
 set -m
+
+sleep 10
+
 # sourcing variable from config file
 source ./config.file
 
