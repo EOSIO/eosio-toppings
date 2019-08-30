@@ -3,6 +3,7 @@
 const get_blocks = require('./api/get_blocks');
 const get_block_details = require('./api/get_block_details');
 const get_transactions = require('./api/get_transactions');
+const get_trx_action_list = require('./api/get_trx_action_list');
 const get_transaction_details = require('./api/get_transaction_details');
 const get_all_permissions = require('./api/get_all_permissions');
 const get_smart_contracts = require('./api/get_smart_contracts');
@@ -14,6 +15,7 @@ module.exports = {
   get_blocks,
   get_block_details,
   get_transactions,
+  get_trx_action_list,
   get_transaction_details,
   get_all_permissions,
   get_smart_contracts,
