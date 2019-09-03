@@ -5,7 +5,10 @@ const get_transaction_details = async (query) => {
     let { id } = query;
     let result = [];
     let transaction_query_gen = `
-        SELECT * FROM chain.transaction_trace 
+        SELECT tt.*,
+        (SELECT ata.actor FROM chain.action_trace_authorization ata WHERE ata.block_num = tt.block_num AND ata.transaction_id = tt.id AND ata.action_ordinal=1 LIMIT 1),
+        (SELECT ata.permission FROM chain.action_trace_authorization ata WHERE ata.block_num = tt.block_num AND ata.transaction_id = tt.id AND ata.action_ordinal=1 LIMIT 1) 
+        FROM chain.transaction_trace as tt
         WHERE id = '${id}'`;    
     
     let transactionPromise = new Promise((resolve, reject)=>{
