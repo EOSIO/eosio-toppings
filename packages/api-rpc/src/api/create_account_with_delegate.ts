@@ -13,6 +13,8 @@ const create_account_with_delegate = async (query: {
 }) => {
   try{
     let { endpoint, private_key: creator_private_key, actor: creator_account_name, permission: creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key } = query;
+    let initial_ram_bytes = 8192;
+    let initial_net_cpu_quantity = '1.0000 TNT';
 
     const rpc = new JsonRpc(endpoint);
     const signatureProvider = new JsSignatureProvider([creator_private_key]);
@@ -59,7 +61,7 @@ const create_account_with_delegate = async (query: {
         data: {
           payer: 'eosio',
           receiver: new_account_name,
-          bytes: 8192,
+          bytes: initial_ram_bytes,
         },
       },
       {
@@ -72,8 +74,8 @@ const create_account_with_delegate = async (query: {
         data: {
           from: 'eosio',
           receiver: new_account_name,
-          stake_net_quantity: '1.0000 TNT',
-          stake_cpu_quantity: '1.0000 TNT',
+          stake_net_quantity: initial_net_cpu_quantity,
+          stake_cpu_quantity: initial_net_cpu_quantity,
           transfer: false,
         }
       }]
