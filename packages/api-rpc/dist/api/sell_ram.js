@@ -42,57 +42,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
-var push_action = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, account_name, private_key, actor, permission, action_name, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, result, e_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+var sell_ram = function (query) { return __awaiter(_this, void 0, void 0, function () {
+    var endpoint, private_key, actor, permission, _a, quantity, rpc, signatureProvider, api, result, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, actor = query.actor, permission = query.permission, action_name = query.action_name, payload = query.payload;
+                _b.trys.push([0, 2, , 3]);
+                endpoint = query.endpoint, private_key = query.private_key, actor = query.actor, permission = query.permission, _a = query.quantity, quantity = _a === void 0 ? '10000' : _a;
                 rpc = new eosjs_1.JsonRpc(endpoint);
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
-                if (account_name === "eosio" && action_name === "setabi") {
-                    buffer = new eosjs_1.Serialize.SerialBuffer({
-                        textEncoder: api.textEncoder,
-                        textDecoder: api.textDecoder,
-                    });
-                    abi = payload.abi;
-                    abiDefinition = api.abiTypes.get('abi_def');
-                    // need to make sure abi has every field in abiDefinition.fields
-                    // otherwise serialize throws error
-                    abi = abiDefinition.fields.reduce(function (acc, _a) {
-                        var _b;
-                        var fieldName = _a.name;
-                        return Object.assign(acc, (_b = {}, _b[fieldName] = acc[fieldName] || [], _b));
-                    }, abi);
-                    abiDefinition.serialize(buffer, abi);
-                    abi = Buffer.from(buffer.asUint8Array()).toString('hex');
-                    payload.abi = abi;
-                }
                 return [4 /*yield*/, api.transact({
                         actions: [{
-                                account: account_name,
-                                name: action_name,
+                                account: "eosio",
+                                name: "sellram",
                                 authorization: [{
                                         actor: actor,
                                         permission: permission,
                                     }],
-                                data: payload,
+                                data: {
+                                    account: actor,
+                                    bytes: quantity
+                                }
                             }]
                     }, {
                         blocksBehind: 3,
                         expireSeconds: 30,
                     })];
             case 1:
-                result = _a.sent();
+                result = _b.sent();
                 return [2 /*return*/, result];
             case 2:
-                e_1 = _a.sent();
+                e_1 = _b.sent();
                 console.log('Caught exception: ' + e_1);
                 throw (e_1);
             case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.default = push_action;
+exports.default = sell_ram;

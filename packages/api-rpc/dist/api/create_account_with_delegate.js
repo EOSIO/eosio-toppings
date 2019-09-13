@@ -42,43 +42,74 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
-var push_action = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, account_name, private_key, actor, permission, action_name, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, result, e_1;
+var create_account_with_delegate = function (query) { return __awaiter(_this, void 0, void 0, function () {
+    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, rpc, signatureProvider, api, result, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, actor = query.actor, permission = query.permission, action_name = query.action_name, payload = query.payload;
+                endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key;
                 rpc = new eosjs_1.JsonRpc(endpoint);
-                signatureProvider = new eosjs_jssig_1.default([private_key]);
+                signatureProvider = new eosjs_jssig_1.default([creator_private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
-                if (account_name === "eosio" && action_name === "setabi") {
-                    buffer = new eosjs_1.Serialize.SerialBuffer({
-                        textEncoder: api.textEncoder,
-                        textDecoder: api.textDecoder,
-                    });
-                    abi = payload.abi;
-                    abiDefinition = api.abiTypes.get('abi_def');
-                    // need to make sure abi has every field in abiDefinition.fields
-                    // otherwise serialize throws error
-                    abi = abiDefinition.fields.reduce(function (acc, _a) {
-                        var _b;
-                        var fieldName = _a.name;
-                        return Object.assign(acc, (_b = {}, _b[fieldName] = acc[fieldName] || [], _b));
-                    }, abi);
-                    abiDefinition.serialize(buffer, abi);
-                    abi = Buffer.from(buffer.asUint8Array()).toString('hex');
-                    payload.abi = abi;
-                }
                 return [4 /*yield*/, api.transact({
                         actions: [{
-                                account: account_name,
-                                name: action_name,
+                                account: 'eosio',
+                                name: 'newaccount',
                                 authorization: [{
-                                        actor: actor,
-                                        permission: permission,
+                                        actor: creator_account_name,
+                                        permission: creator_account_permission,
                                     }],
-                                data: payload,
+                                data: {
+                                    creator: creator_account_name,
+                                    name: new_account_name,
+                                    owner: {
+                                        threshold: 1,
+                                        keys: [{
+                                                key: new_account_owner_key,
+                                                weight: 1
+                                            }],
+                                        accounts: [],
+                                        waits: []
+                                    },
+                                    active: {
+                                        threshold: 1,
+                                        keys: [{
+                                                key: new_account_active_key,
+                                                weight: 1
+                                            }],
+                                        accounts: [],
+                                        waits: []
+                                    },
+                                },
+                            },
+                            {
+                                account: 'eosio',
+                                name: 'buyrambytes',
+                                authorization: [{
+                                        actor: creator_account_name,
+                                        permission: creator_account_permission,
+                                    }],
+                                data: {
+                                    payer: 'eosio',
+                                    receiver: new_account_name,
+                                    bytes: 8192,
+                                },
+                            },
+                            {
+                                account: 'eosio',
+                                name: 'delegatebw',
+                                authorization: [{
+                                        actor: creator_account_name,
+                                        permission: creator_account_permission,
+                                    }],
+                                data: {
+                                    from: 'eosio',
+                                    receiver: new_account_name,
+                                    stake_net_quantity: '1.0000 TNT',
+                                    stake_cpu_quantity: '1.0000 TNT',
+                                    transfer: false,
+                                }
                             }]
                     }, {
                         blocksBehind: 3,
@@ -95,4 +126,4 @@ var push_action = function (query) { return __awaiter(_this, void 0, void 0, fun
         }
     });
 }); };
-exports.default = push_action;
+exports.default = create_account_with_delegate;

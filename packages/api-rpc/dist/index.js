@@ -11,6 +11,12 @@ var get_account_details_1 = __importDefault(require("./api/get_account_details")
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
 var get_block_1 = __importDefault(require("./api/get_block"));
+var stake_cpu_1 = __importDefault(require("./api/stake_cpu"));
+var unstake_cpu_1 = __importDefault(require("./api/unstake_cpu"));
+var stake_net_1 = __importDefault(require("./api/stake_net"));
+var unstake_net_1 = __importDefault(require("./api/unstake_net"));
+var buy_ram_1 = __importDefault(require("./api/buy_ram"));
+var sell_ram_1 = __importDefault(require("./api/sell_ram"));
 exports.default = {
     get_info: get_info_1.default,
     create_account: create_account_1.default,
@@ -19,5 +25,11 @@ exports.default = {
     get_account_details: get_account_details_1.default,
     update_auth: update_auth_1.default,
     get_abi: get_abi_1.default,
-    get_block: get_block_1.default
+    get_block: get_block_1.default,
+    stake_cpu: stake_cpu_1.default,
+    unstake_cpu: unstake_cpu_1.default,
+    stake_net: stake_net_1.default,
+    unstake_net: unstake_net_1.default,
+    buy_ram: buy_ram_1.default,
+    sell_ram: sell_ram_1.default
 };
