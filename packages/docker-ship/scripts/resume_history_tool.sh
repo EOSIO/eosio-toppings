@@ -5,7 +5,9 @@ echo "starting postgres resume"
 
 set -m
 
-sleep 10
+# wait for config file to be copied to container
+sleep 5
+
 # sourcing variable from config file
 source ./config.file
 
