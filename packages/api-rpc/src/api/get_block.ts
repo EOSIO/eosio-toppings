@@ -1,4 +1,5 @@
 import { JsonRpc } from 'eosjs';
+const fetch = require('node-fetch');
 
 const get_block = async (query: {
   endpoint: string,
@@ -6,8 +7,8 @@ const get_block = async (query: {
 }) => {
   try{
     let { endpoint, id_or_num } = query;
-    console.log("block num ", id_or_num);
-    const rpc = new JsonRpc(endpoint);
+    
+    const rpc = new JsonRpc(endpoint,{ fetch });
     const result = await rpc.get_block(id_or_num);
     return result;
   }catch(e){

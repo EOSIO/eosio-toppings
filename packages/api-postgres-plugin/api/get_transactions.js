@@ -5,7 +5,7 @@ const get_transactions = async (query) => {
     let { records_count} = query;
     let query_gen = `
       SELECT tt.id, tt.block_num, tt.partial_expiration, tt.status FROM chain.transaction_trace tt 
-      ORDER BY block_num DESC
+      ORDER BY block_num DESC, transaction_ordinal DESC
       LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100}`;
 
     let promise = new Promise((resolve, reject)=>{

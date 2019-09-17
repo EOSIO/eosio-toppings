@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@eosio-toppings/api-rpc@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@eosio-toppings/api-rpc/-/api-rpc-0.3.1.tgz#2f1b2e8d24d9007af76acb1fe5ec7e5802944ecd"
+  integrity sha512-iuqFQFndx7A5q5YiaJOxanyxI8InB2XgIK9oR5y1H6hrozfF4c3GWBBZWfUsbGxsKy+CNDiHDKzBw4PPRvmZ7w==
+  dependencies:
+    eosjs "20.0.0-beta3"
+    text-encoding "^0.7.0"
+
 "@lerna/add@3.13.1":
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/@lerna/add/-/add-3.13.1.tgz#2cd7838857edb3b43ed73e3c21f69a20beb9b702"
@@ -1590,11 +1598,6 @@ dotenv@^6.2.0:
 dotenv@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-7.0.0.tgz#a2be3cd52736673206e8a85fb5210eea29628e7c"
-
-dotenv@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
-  integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
 
 duplexer@^0.1.1:
   version "0.1.1"
@@ -3282,6 +3285,11 @@ node-fetch-npm@^2.0.2:
 node-fetch@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+
+node-fetch@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 node-gyp@^3.8.0:
   version "3.8.0"

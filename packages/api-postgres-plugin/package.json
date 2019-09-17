@@ -15,8 +15,9 @@
   "description": "A module to serve the data from PostgresDB which is filled by fill-pg tool from Nodeos",
   "publishConfig": {
     "access": "public"
-  },  
+  },
   "dependencies": {
-    "pg": "^7.11.0"
+    "pg": "^7.11.0",
+    "@eosio-toppings/api-rpc": "^0.3.1"
   }
 }

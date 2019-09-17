@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
+var fetch = require('node-fetch');
 var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, function () {
     var endpoint, contract_name, table_name, scope_name, rpc, result, e_1;
     return __generator(this, function (_a) {
@@ -44,7 +45,7 @@ var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name;
-                rpc = new eosjs_1.JsonRpc(endpoint);
+                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 return [4 /*yield*/, rpc.get_table_rows({
                         "json": true,
                         "code": contract_name,

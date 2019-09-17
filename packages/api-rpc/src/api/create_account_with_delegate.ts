@@ -1,7 +1,7 @@
 import { Api, JsonRpc } from 'eosjs';
 import JsSignatureProvider from 'eosjs/dist/eosjs-jssig'
 import { TextDecoder, TextEncoder } from 'text-encoding';
-
+const fetch = require('node-fetch');
 const create_account_with_delegate = async (query: {
   endpoint: string,
   private_key: string,
@@ -16,7 +16,7 @@ const create_account_with_delegate = async (query: {
     let initial_ram_bytes = 8192;
     let initial_net_cpu_quantity = '1.0000 TNT';
 
-    const rpc = new JsonRpc(endpoint);
+    const rpc = new JsonRpc(endpoint, { fetch });
     const signatureProvider = new JsSignatureProvider([creator_private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 

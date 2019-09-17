@@ -1,6 +1,7 @@
 import { Api, JsonRpc } from 'eosjs';
 import JsSignatureProvider from 'eosjs/dist/eosjs-jssig';
 import { TextDecoder, TextEncoder } from 'text-encoding';
+const fetch = require('node-fetch');
 
 const update_auth = async (query: {
   endpoint: string,
@@ -12,7 +13,7 @@ const update_auth = async (query: {
 }) => {
   try{
     let { endpoint, account_name, private_key, new_key, permission, parent } = query;
-    const rpc = new JsonRpc(endpoint);
+    const rpc = new JsonRpc(endpoint,{ fetch });
     const signatureProvider = new JsSignatureProvider([private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
