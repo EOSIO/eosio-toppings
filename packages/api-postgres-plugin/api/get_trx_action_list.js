@@ -6,7 +6,7 @@ const get_trx_action_list = async (query) => {
     let query_gen = `
       SELECT transaction_id AS id, block_num, timestamp, act_account, act_name
       FROM chain.action_trace 
-      WHERE at.creator_action_ordinal = 0 ${(account_name !== undefined) ? `AND at.act_account = '${account_name}'`:  '' }
+      WHERE creator_action_ordinal = 0 ${(account_name !== undefined) ? `AND act_account = '${account_name}'`:  '' }
       ORDER BY receipt_global_sequence DESC      
       ${ no_limit ? '' : `LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100} `}`;
 
