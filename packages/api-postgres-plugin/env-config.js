@@ -3,7 +3,7 @@ config = {
         user: "postgres",
         database: "postgres",
         password: "password",
-        host: "18.136.194.62",
+        host: "localhost",
         port: 5431
     }    
 }
