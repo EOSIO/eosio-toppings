@@ -6,7 +6,7 @@ declare namespace Postgres {
   interface BlocksQuery extends ListQuery { show_empty: string }
   interface BlockDetailsQuery { id_or_num: string }
 
-  interface TransactionsQuery extends ListQuery { }
+  interface TransactionsQuery extends ListQuery { account_name?: string, no_limit?: boolean }
   interface TransactionDetailsQuery { id: string }
 
   interface ActionsQuery extends ListQuery { account_name: string, fetch_failed_action: boolean, no_limit: boolean}
