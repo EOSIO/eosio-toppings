@@ -15,9 +15,21 @@ declare namespace Rpc {
     payload: any
   }
 
+  interface DeployContractQuery {
+    endpoint: string,
+    account_name: string,
+    private_key: string,
+    permission: string,
+    payload: {
+      wasm: string;
+      abi: string;
+    }
+  }
+
   function get_info(query: GetInfoQuery) : Promise<any>;
   function get_block(query: GetBlockQuery) : Promise<any>;
   function push_action(query: PushActionQuery) : Promise<any>;
+  function deploy_contract(query: DeployContractQuery): Promise<any>;
 }
 
 export = Rpc;

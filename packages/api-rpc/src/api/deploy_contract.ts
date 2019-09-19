@@ -80,4 +80,4 @@ const deploy_contract = async (query: {
   }
 }
 
-export default push_action;
+export default deploy_contract;
