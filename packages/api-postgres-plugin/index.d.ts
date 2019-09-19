@@ -12,6 +12,8 @@ declare namespace Postgres {
   interface ActionsQuery extends ListQuery { account_name: string, fetch_failed_action: boolean }
   interface ActionDetailsQuery { id: string, action_ordinal: number }
 
+  interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
+
   interface BlockResult {
     block_num: string,
     block_id: string,
@@ -112,6 +114,14 @@ declare namespace Postgres {
     action_traces: ActionTrace[]
   }
 
+  interface SmartContractsResult {
+    abi: any,
+    block_num: string,
+    creation_date: string,
+    name: string,
+    present: boolean
+  }
+
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult>;
 
@@ -121,6 +131,8 @@ declare namespace Postgres {
 
   function get_actions(query: ActionsQuery) : Promise<ActionResult[]>;
   function get_action_details(query: ActionDetailsQuery) : Promise<ActionDetailsResult>;
+
+  function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
 }
 
 export = Postgres;
