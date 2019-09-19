@@ -76,7 +76,7 @@ const create_account_with_delegate = async (query: {
           receiver: new_account_name,
           stake_net_quantity: initial_net_cpu_quantity,
           stake_cpu_quantity: initial_net_cpu_quantity,
-          transfer: false,
+          transfer: true,
         }
       }]
     }, {
