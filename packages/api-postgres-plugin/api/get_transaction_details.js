@@ -1,8 +1,9 @@
 const db = require('./db');
+const apiRpc = require('@eosio-toppings/api-rpc').default;
 
 const get_transaction_details = async (query) => {
   try{
-    let { id } = query;
+    let { id, endpoint } = query;
     let result = [];
     let transaction_query_gen = `
         SELECT tt.*,
@@ -23,26 +24,18 @@ const get_transaction_details = async (query) => {
     })    
     let resultObj = await transactionPromise;  
 
-    // If block ID/ block num found then get the transaction traces, else return empty array
-    if(resultObj.length > 0 && resultObj[0].hasOwnProperty("id")){
-      let transaction_query_gen = `
-        SELECT * FROM chain.action_trace WHERE transaction_id = '${resultObj[0].id}'`; 
+    if(resultObj.length > 0 && resultObj[0].hasOwnProperty("block_num")){     
 
-      let actionPromise = new Promise((resolve, reject)=>{
-          db.query(transaction_query_gen, "", (err, result) => {
-            if (err) {
-              console.error('Error executing query', err.stack);
-              resolve([]);
-            }else{
-              resolve(result.rows);     
-            }     
-          })
-        })   
-      let action_traces = await actionPromise;
+      let blockDetailsRpcRes = await apiRpc["get_block"]({endpoint: endpoint, id_or_num: resultObj[0].block_num});
+
+      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => eachTrx.trx.id.toUpperCase() === resultObj[0].id);
+      let action_traces = transaction.length > 0 ? transaction[0].trx.transaction : [];
+        
       result.push({
           ...resultObj[0],
-          "action_traces" : action_traces
+          "transaction" : action_traces
       });
+
       return result;
     }else{
       return resultObj;

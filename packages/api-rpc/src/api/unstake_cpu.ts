@@ -1,6 +1,7 @@
 import { Api, JsonRpc, Serialize } from 'eosjs';
 import JsSignatureProvider from 'eosjs/dist/eosjs-jssig';
 import { TextDecoder, TextEncoder } from 'text-encoding';
+const fetch = require('node-fetch');
 
 const unstake_cpu = async (query: {
   endpoint: string,
@@ -12,7 +13,7 @@ const unstake_cpu = async (query: {
   try{
     let { endpoint, private_key, actor, permission, quantity = '1.0000 TNT' } = query;
     console.log("query ", query)
-    const rpc = new JsonRpc(endpoint);
+    const rpc = new JsonRpc(endpoint,{ fetch });
     const signatureProvider = new JsSignatureProvider([private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 

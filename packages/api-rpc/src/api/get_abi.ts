@@ -1,4 +1,5 @@
 import { JsonRpc } from 'eosjs';
+const fetch = require('node-fetch');
 
 const get_abi = async (query: {
   endpoint: string,
@@ -7,7 +8,7 @@ const get_abi = async (query: {
   try{
     let { endpoint, account_name } = query;
     
-    const rpc = new JsonRpc(endpoint);
+    const rpc = new JsonRpc(endpoint,{ fetch });
     const result = await rpc.get_abi(account_name);
     return result;
   }catch(e){

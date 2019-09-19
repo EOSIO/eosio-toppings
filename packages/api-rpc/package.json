@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "eosjs": "20.0.0-beta3",
+    "node-fetch": "^2.6.0",
     "text-encoding": "^0.7.0"
   },
   "devDependencies": {

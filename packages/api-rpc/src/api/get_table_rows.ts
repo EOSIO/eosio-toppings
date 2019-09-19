@@ -1,4 +1,5 @@
 import { JsonRpc } from 'eosjs';
+const fetch = require('node-fetch');
 
 const get_table_rows = async (query: {
   endpoint: string,
@@ -8,7 +9,7 @@ const get_table_rows = async (query: {
 }) => {
   try{
     let { endpoint, contract_name, table_name, scope_name } = query;
-    const rpc = new JsonRpc(endpoint);
+    const rpc = new JsonRpc(endpoint,{ fetch });
     const result = await rpc.get_table_rows({
       "json": true,
       "code": contract_name,    // contract who owns the table

@@ -42,14 +42,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
+var fetch = require('node-fetch');
 var create_account_with_delegate = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, rpc, signatureProvider, api, result, e_1;
+    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, initial_ram_bytes, initial_net_cpu_quantity, rpc, signatureProvider, api, result, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key;
-                rpc = new eosjs_1.JsonRpc(endpoint);
+                initial_ram_bytes = 8192;
+                initial_net_cpu_quantity = '1.0000 TNT';
+                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 signatureProvider = new eosjs_jssig_1.default([creator_private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
                 return [4 /*yield*/, api.transact({
@@ -93,7 +96,7 @@ var create_account_with_delegate = function (query) { return __awaiter(_this, vo
                                 data: {
                                     payer: 'eosio',
                                     receiver: new_account_name,
-                                    bytes: 8192,
+                                    bytes: initial_ram_bytes,
                                 },
                             },
                             {
@@ -106,8 +109,8 @@ var create_account_with_delegate = function (query) { return __awaiter(_this, vo
                                 data: {
                                     from: 'eosio',
                                     receiver: new_account_name,
-                                    stake_net_quantity: '1.0000 TNT',
-                                    stake_cpu_quantity: '1.0000 TNT',
+                                    stake_net_quantity: initial_net_cpu_quantity,
+                                    stake_cpu_quantity: initial_net_cpu_quantity,
                                     transfer: false,
                                 }
                             }]

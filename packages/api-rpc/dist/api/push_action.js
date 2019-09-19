@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
+var fetch = require('node-fetch');
 var push_action = function (query) { return __awaiter(_this, void 0, void 0, function () {
     var endpoint, account_name, private_key, actor, permission, action_name, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, result, e_1;
     return __generator(this, function (_a) {
@@ -49,7 +50,7 @@ var push_action = function (query) { return __awaiter(_this, void 0, void 0, fun
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, actor = query.actor, permission = query.permission, action_name = query.action_name, payload = query.payload;
-                rpc = new eosjs_1.JsonRpc(endpoint);
+                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
                 if (account_name === "eosio" && action_name === "setabi") {

@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
+var fetch = require('node-fetch');
 var buy_ram = function (query) { return __awaiter(_this, void 0, void 0, function () {
     var endpoint, private_key, actor, permission, _a, quantity, rpc, signatureProvider, api, result, e_1;
     return __generator(this, function (_b) {
@@ -50,7 +51,7 @@ var buy_ram = function (query) { return __awaiter(_this, void 0, void 0, functio
                 _b.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, private_key = query.private_key, actor = query.actor, permission = query.permission, _a = query.quantity, quantity = _a === void 0 ? '10000' : _a;
                 console.log("query ", query);
-                rpc = new eosjs_1.JsonRpc(endpoint);
+                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
                 return [4 /*yield*/, api.transact({

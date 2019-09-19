@@ -17,6 +17,7 @@ var stake_net_1 = __importDefault(require("./api/stake_net"));
 var unstake_net_1 = __importDefault(require("./api/unstake_net"));
 var buy_ram_1 = __importDefault(require("./api/buy_ram"));
 var sell_ram_1 = __importDefault(require("./api/sell_ram"));
+var create_account_with_delegate_1 = __importDefault(require("./api/create_account_with_delegate"));
 exports.default = {
     get_info: get_info_1.default,
     create_account: create_account_1.default,
@@ -31,5 +32,6 @@ exports.default = {
     stake_net: stake_net_1.default,
     unstake_net: unstake_net_1.default,
     buy_ram: buy_ram_1.default,
-    sell_ram: sell_ram_1.default
+    sell_ram: sell_ram_1.default,
+    create_account_with_delegate: create_account_with_delegate_1.default
 };

@@ -9,7 +9,7 @@ declare namespace Postgres {
   interface TransactionsQuery extends ListQuery { }
   interface TransactionDetailsQuery { id: string }
 
-  interface ActionsQuery extends ListQuery { account_name: string, fetch_failed_action: boolean }
+  interface ActionsQuery extends ListQuery { account_name?: string, fetch_failed_action?: boolean, no_limit?: boolean}
   interface ActionDetailsQuery { id: string, action_ordinal: number }
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
@@ -126,7 +126,7 @@ declare namespace Postgres {
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult>;
 
   function get_transactions(query: TransactionsQuery) : Promise<TransactionResult[]>;
-  function get_trx_action_list(query: TransactionsQuery) : Promise<TransactionResult[]>;
+  function get_trx_action_list(query: ActionsQuery) : Promise<TransactionResult[]>;
   function get_transaction_details(query: TransactionDetailsQuery) : Promise<any>;
 
   function get_actions(query: ActionsQuery) : Promise<ActionResult[]>;

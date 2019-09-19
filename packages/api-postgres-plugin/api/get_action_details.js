@@ -1,15 +1,13 @@
 const db = require('./db');
+const apiRpc = require('@eosio-toppings/api-rpc').default;
 
 const get_action_details = async (query) => {
   try{
-    let { id, action_ordinal } = query;
+    let result = [];
+    let { id, action_ordinal, endpoint } = query;
     let query_gen = `
-        SELECT at.*, ata.actor, ata.permission, bi.timestamp, ata.actor, ata.permission, bi.timestamp FROM chain.action_trace at
-        INNER JOIN chain.action_trace_authorization ata
-        ON at.transaction_id = ata.transaction_id AND at.action_ordinal = ata.action_ordinal
-        INNER JOIN chain.block_info bi
-        ON at.block_num = bi.block_num
-        WHERE at.transaction_id = '${id}' AND at.action_ordinal = ${action_ordinal}`;
+        SELECT * FROM chain.action_trace
+        WHERE transaction_id = '${id}' AND action_ordinal = ${action_ordinal}`;
 
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
@@ -21,7 +19,25 @@ const get_action_details = async (query) => {
         }     
       })
     })    
-    return await promise;   
+    let resultObj = await promise;
+
+    if(resultObj.length > 0 && resultObj[0].hasOwnProperty("transaction_id")){  
+      // Delete serialized act data from response
+      delete resultObj[0].act_data;
+      // Fetch action data from blockchain
+      let blockDetailsRpcRes = await apiRpc["get_block"]({endpoint: endpoint, id_or_num: resultObj[0].block_num});
+      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => eachTrx.trx.id.toUpperCase() === resultObj[0].transaction_id);
+      let action_data = transaction.length > 0 ? transaction[0].trx.transaction.actions[action_ordinal-1] : {};
+
+      result.push({
+        ...resultObj[0],
+        "action_data" : action_data
+      });
+    }else{
+      result = resultObj;
+    } 
+    
+    return result;   
 
   }catch(err){
     console.log("caught exception ", err)
