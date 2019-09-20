@@ -24,15 +24,13 @@ const deploy_contract = async (query: {
     });
     let { abi } = payload;
     const abiDefinition = api.abiTypes.get('abi_def');
-    // @ts-ignore
-    abi = abiDefinition.fields.reduce(
+    abi = abiDefinition!.fields.reduce(
       (res, { name: fieldName }) => ({
         ...res,
         [fieldName]: res[fieldName],
       }),
       JSON.parse(abi)
     );
-
     return await api.transact(
       {
         actions: [
