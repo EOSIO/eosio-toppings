@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -43,54 +54,66 @@ var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
 var fetch = require('node-fetch');
-var create_account = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, rpc, signatureProvider, api, result, e_1;
+var deploy_contract = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+    var endpoint, account_name, private_key, permission, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key;
+                endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, permission = query.permission, payload = query.payload;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
-                signatureProvider = new eosjs_jssig_1.default([creator_private_key]);
+                signatureProvider = new eosjs_jssig_1.default([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
+                buffer = new eosjs_1.Serialize.SerialBuffer({
+                    textEncoder: api.textEncoder,
+                    textDecoder: api.textDecoder,
+                });
+                abi = payload.abi;
+                abiDefinition = api.abiTypes.get('abi_def');
+                // @ts-ignore
+                abi = abiDefinition.fields.reduce(function (res, _a) {
+                    var _b;
+                    var fieldName = _a.name;
+                    return (__assign(__assign({}, res), (_b = {}, _b[fieldName] = res[fieldName], _b)));
+                }, JSON.parse(abi));
                 return [4 /*yield*/, api.transact({
-                        actions: [{
+                        actions: [
+                            {
                                 account: 'eosio',
-                                name: 'newaccount',
-                                authorization: [{
-                                        actor: creator_account_name,
-                                        permission: creator_account_permission,
-                                    }],
+                                name: 'setcode',
+                                authorization: [
+                                    {
+                                        actor: account_name,
+                                        permission: permission,
+                                    },
+                                ],
                                 data: {
-                                    creator: creator_account_name,
-                                    name: new_account_name,
-                                    owner: {
-                                        threshold: 1,
-                                        keys: [{
-                                                key: new_account_owner_key,
-                                                weight: 1
-                                            }],
-                                        accounts: [],
-                                        waits: []
-                                    },
-                                    active: {
-                                        threshold: 1,
-                                        keys: [{
-                                                key: new_account_active_key,
-                                                weight: 1
-                                            }],
-                                        accounts: [],
-                                        waits: []
-                                    },
+                                    account: account_name,
+                                    vmtype: 0,
+                                    vmversion: 0,
+                                    code: payload.wasm,
                                 },
-                            }]
+                            },
+                            {
+                                account: 'eosio',
+                                name: 'setabi',
+                                authorization: [
+                                    {
+                                        actor: account_name,
+                                        permission: permission,
+                                    },
+                                ],
+                                data: {
+                                    account: account_name,
+                                    abi: Buffer.from(buffer.asUint8Array()).toString('hex'),
+                                },
+                            },
+                        ],
                     }, {
                         blocksBehind: 3,
                         expireSeconds: 30,
                     })];
-            case 1:
-                result = _a.sent();
-                return [2 /*return*/, result];
+            case 1: return [2 /*return*/, _a.sent()];
             case 2:
                 e_1 = _a.sent();
                 console.log('Caught exception: ' + e_1);
@@ -99,4 +122,4 @@ var create_account = function (query) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); };
-exports.default = create_account;
+exports.default = deploy_contract;

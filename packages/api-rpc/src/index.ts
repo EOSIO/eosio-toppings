@@ -13,6 +13,7 @@ import unstake_net from './api/unstake_net';
 import buy_ram from './api/buy_ram';
 import sell_ram from './api/sell_ram';
 import create_account_with_delegate from './api/create_account_with_delegate';
+import deploy_contract from './api/deploy_contract';
 
 
 export default {
@@ -30,5 +31,6 @@ export default {
     unstake_net,
     buy_ram,
     sell_ram,
-    create_account_with_delegate
+    create_account_with_delegate,
+    deploy_contract,
 }
