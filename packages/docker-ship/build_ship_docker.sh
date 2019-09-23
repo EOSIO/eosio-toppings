@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "start building state history plugin docker"
+echo "start pulling fill-pg docker image"
 
 # change to script's directory
 cd "$(dirname "$0")"
@@ -13,14 +13,19 @@ source ./config.file
 if [ -f "./config.file.local" ]; then
   source ./config.file.local
 fi
-docker build -t $SHIP_IMAGE_NAME .
-# build docker image, if necessary
-if [[ "$(docker images -q $SHIP_IMAGE_NAME)" == "" ]]; then
-  echo "Build docker image $SHIP_IMAGE_PREFIX version $SHIP_VERSION, this may take some time"
-  docker build -t $SHIP_IMAGE_NAME . --no-cache
-else
-  echo "docker image already exists, skip building"
-fi
+
+echo "Pulling docker image $SHIP_IMAGE_PREFIX version $SHIP_VERSION, this may take some time..."
+docker pull $SHIP_IMAGE_NAME
+
+# # docker build -t $SHIP_IMAGE_NAME .
+# # build docker image, if necessary
+# if [[ "$(docker images -q $SHIP_IMAGE_NAME)" == "" ]]; then
+#   echo "Pulling docker image $SHIP_IMAGE_PREFIX version $SHIP_VERSION, this may take some time..."
+#   # docker build -t $SHIP_IMAGE_NAME . --no-cache
+#   docker pull eosio/eosio-explorer:fill-pg-test1.0
+# else
+#   echo "docker image already exists, skip pulling"
+# fi
 
 # force remove the perivous container if any
 # create a clean data folder in eosio_docker to preserve block data
