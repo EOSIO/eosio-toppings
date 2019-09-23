@@ -7,10 +7,10 @@ declare namespace Postgres {
   interface BlockDetailsQuery { id_or_num: string }
 
   interface TransactionsQuery extends ListQuery { }
-  interface TransactionDetailsQuery { id: string }
+  interface TransactionDetailsQuery { id: string, endpoint: string }
 
   interface ActionsQuery extends ListQuery { account_name?: string, fetch_failed_action?: boolean, no_limit?: boolean}
-  interface ActionDetailsQuery { id: string, action_ordinal: number }
+  interface ActionDetailsQuery { id: string, action_ordinal: number, endpoint: string }
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
 
