@@ -1,7 +1,9 @@
 const { Pool } = require('pg')
 const config = require('../env-config');
 
-const pool = new Pool({
+let pool;
+
+pool = new Pool({
   host: config.db.host,
   user: config.db.user,
   database: config.db.database,
@@ -9,6 +11,21 @@ const pool = new Pool({
   port: config.db.port,
   max: 30
 });
+
+const connectToDB = () => {
+  pool = new Pool({
+    host: config.db.host,
+    user: config.db.user,
+    database: config.db.database,
+    password: config.db.password,
+    port: config.db.port,
+    max: 30
+  });
+}
+
+const getPool = () => {
+  return pool;
+}
 
 pool.on('connect', (client) => {
   console.log("DB connected ");
@@ -23,7 +40,6 @@ pool.on('error', (err, client) => {
 })
 
 module.exports = {
-  query: (psql_query, params, callback) => {
-    return pool.query(psql_query, params, callback)
-  }
+  connectToDB,
+  getPool
 }

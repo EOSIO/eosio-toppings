@@ -10,17 +10,26 @@ const get_trx_action_list = async (query) => {
       ORDER BY receipt_global_sequence DESC      
       ${ no_limit ? '' : `LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100} `}`;
 
-    let promise = new Promise((resolve, reject)=>{
-      db.query(query_gen, "", (err, result) => {
-        if (err) {
-          console.error('Error executing query', err.stack);
-          resolve([]);
-        }else{
-          resolve(result.rows);     
-        }     
-      })
-    })    
-    return await promise;   
+    // let promise = new Promise((resolve, reject)=>{
+    //   db.query(query_gen, "", (err, result) => {
+    //     if (err) {
+    //       console.error('Error executing query', err.stack);
+    //       resolve([]);
+    //     }else{
+    //       resolve(result.rows);     
+    //     }     
+    //   })
+    // })    
+    // return await promise; 
+    
+    let pool = db.getPool();
+    const client = await pool.connect();
+    try {
+      const res = await client.query(query_gen);
+      return res.rows;
+    } finally {
+      client.release();
+    }
 
   }catch(err){
     console.log("caught exception ", err)
