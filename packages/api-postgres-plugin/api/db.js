@@ -6,7 +6,8 @@ const pool = new Pool({
   user: config.db.user,
   database: config.db.database,
   password: config.db.password,
-  port: config.db.port
+  port: config.db.port,
+  max: 30
 });
 
 pool.on('connect', (client) => {
