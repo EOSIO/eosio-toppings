@@ -7,22 +7,11 @@ const get_trx_action_list = async (query) => {
       SELECT transaction_id AS id, block_num, timestamp, act_account, act_name
       FROM chain.action_trace 
       WHERE creator_action_ordinal = 0 ${(account_name !== undefined) ? `AND act_account = '${account_name}'`:  '' }
-      ORDER BY receipt_global_sequence DESC      
+      ORDER BY block_num DESC      
       ${ no_limit ? '' : `LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100} `}`;
-
-    // let promise = new Promise((resolve, reject)=>{
-    //   db.query(query_gen, "", (err, result) => {
-    //     if (err) {
-    //       console.error('Error executing query', err.stack);
-    //       resolve([]);
-    //     }else{
-    //       resolve(result.rows);     
-    //     }     
-    //   })
-    // })    
-    // return await promise; 
-    
+         
     let pool = db.getPool();
+
     const client = await pool.connect();
     try {
       const res = await client.query(query_gen);
