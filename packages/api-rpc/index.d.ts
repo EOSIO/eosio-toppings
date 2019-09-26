@@ -64,7 +64,7 @@ declare namespace Rpc {
   function deploy_contract(query: DeployContractQuery): Promise<any>;
   function stake_cpu(query: StakeCpuQuery): Promise<any>;
   function unstake_cpu(query: UnstakeCpuQuery): Promise<any>;  
-  function buy_ram(query: StakeCpuQuery): Promise<any>;
+  function buy_ram(query: BuyRamQuery): Promise<any>;
   function sell_ram(query: SellRamQuery): Promise<any>;
 }
 
