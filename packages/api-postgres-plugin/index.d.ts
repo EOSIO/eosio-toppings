@@ -145,7 +145,7 @@ declare namespace Postgres {
   }
 
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
-  function get_block_details(query: BlockDetailsQuery, endpoint: string) : Promise<BlockDetailsResult | ErrorResult>;
+  function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
 
   function get_transactions(query: TransactionsQuery) : Promise<TransactionResult[]>;
   function get_trx_action_list(query: ActionsQuery) : Promise<TransactionResult[]>;
