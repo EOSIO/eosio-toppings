@@ -7,7 +7,7 @@ const get_action_details = async (query) => {
     let { id, action_ordinal, endpoint, block_num } = query;
     let query_gen = `
         SELECT * FROM chain.action_trace
-        WHERE transaction_id = '${id}' AND action_ordinal = ${action_ordinal} AND block_num = '${block_num}'`;
+        WHERE transaction_id = '${id}' AND action_ordinal = ${action_ordinal} ${(block_num !== undefined) ? `AND block_num = '${block_num}'` : ''}`;
     
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
