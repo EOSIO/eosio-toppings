@@ -4,7 +4,7 @@ declare namespace Postgres {
   interface ListQuery { records_count: number }
 
   interface BlocksQuery extends ListQuery { show_empty: string }
-  interface BlockDetailsQuery { id_or_num: string }
+  interface BlockDetailsQuery { id_or_num: string, endpoint: string }
 
   interface TransactionsQuery extends ListQuery { }
   interface TransactionDetailsQuery { id: string, endpoint: string }
@@ -13,6 +13,21 @@ declare namespace Postgres {
   interface ActionDetailsQuery { id: string, action_ordinal: number, endpoint: string, block_num: number }
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
+
+  interface PermissionQuery extends ListQuery { public_key: string }
+
+  interface ErrorResult {
+    json: {
+      code: number;
+      message: string;
+      error: {
+        code: number;
+        name: string;
+        what: string;
+        details: string[];
+      }
+    }
+  }
 
   interface BlockResult {
     block_num: string,
@@ -130,9 +145,15 @@ declare namespace Postgres {
     port?: string | number,
     max?: string | number
   }
+  interface PermissionResult {
+    account: string;
+    permission: string;
+    public_key: string;
+    last_updated: string;
+  }
 
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
-  function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult>;
+  function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
 
   function get_transactions(query: TransactionsQuery) : Promise<TransactionResult[]>;
   function get_trx_action_list(query: ActionsQuery) : Promise<TransactionResult[]>;
@@ -143,6 +164,7 @@ declare namespace Postgres {
 
   function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
   function connectToDB(query?: DBConnectionQuery) : Promise<string>
+  function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
 }
 
 export = Postgres;
