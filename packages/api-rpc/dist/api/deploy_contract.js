@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -52,10 +41,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
-var text_encoding_1 = require("text-encoding");
 var fetch = require('node-fetch');
 var deploy_contract = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-    var endpoint, account_name, private_key, permission, payload, rpc, signatureProvider, api, buffer, abi, abiDefinition, e_1;
+    var endpoint, account_name, private_key, permission, payload, rpc, signatureProvider, api, buffer, abiString, abi, abiDefinition, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -63,19 +51,21 @@ var deploy_contract = function (query) { return __awaiter(void 0, void 0, void 0
                 endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, permission = query.permission, payload = query.payload;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 signatureProvider = new eosjs_jssig_1.default([private_key]);
-                api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
+                api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
                 buffer = new eosjs_1.Serialize.SerialBuffer({
                     textEncoder: api.textEncoder,
                     textDecoder: api.textDecoder,
                 });
-                abi = payload.abi;
+                abiString = payload.abi;
+                abi = JSON.parse(abiString);
                 abiDefinition = api.abiTypes.get('abi_def');
-                // @ts-ignore
-                abi = abiDefinition.fields.reduce(function (res, _a) {
+                abi = abiDefinition.fields.reduce(function (acc, _a) {
                     var _b;
                     var fieldName = _a.name;
-                    return (__assign(__assign({}, res), (_b = {}, _b[fieldName] = res[fieldName], _b)));
-                }, JSON.parse(abi));
+                    return Object.assign(acc, (_b = {}, _b[fieldName] = acc[fieldName] || [], _b));
+                }, abi);
+                abiDefinition.serialize(buffer, abi);
+                abi = Buffer.from(buffer.asUint8Array()).toString('hex');
                 return [4 /*yield*/, api.transact({
                         actions: [
                             {
@@ -105,7 +95,7 @@ var deploy_contract = function (query) { return __awaiter(void 0, void 0, void 0
                                 ],
                                 data: {
                                     account: account_name,
-                                    abi: Buffer.from(buffer.asUint8Array()).toString('hex'),
+                                    abi: abi,
                                 },
                             },
                         ],

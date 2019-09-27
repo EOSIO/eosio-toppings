@@ -5,24 +5,22 @@ const get_transaction_details = async (query) => {
   try{
     let { id, endpoint } = query;
     let result = [];
-    let transaction_query_gen = `
+    let resultObj = null;
+    let query_gen = `
         SELECT tt.*,
         (SELECT ata.actor FROM chain.action_trace_authorization ata WHERE ata.block_num = tt.block_num AND ata.transaction_id = tt.id AND ata.action_ordinal=1 LIMIT 1),
         (SELECT ata.permission FROM chain.action_trace_authorization ata WHERE ata.block_num = tt.block_num AND ata.transaction_id = tt.id AND ata.action_ordinal=1 LIMIT 1) 
         FROM chain.transaction_trace as tt
         WHERE id = '${id}'`;    
-    
-    let transactionPromise = new Promise((resolve, reject)=>{
-      db.query(transaction_query_gen, "", (err, result) => {
-        if (err) {
-          console.error('Error executing query', err.stack);
-          resolve([]);
-        }else{
-          resolve(result.rows);     
-        }     
-      })
-    })    
-    let resultObj = await transactionPromise;  
+        
+    let pool = db.getPool();
+    const client = await pool.connect();
+    try {
+      const res = await client.query(query_gen);
+      resultObj = res.rows;
+    } finally {
+      client.release();
+    }  
 
     if(resultObj.length > 0 && resultObj[0].hasOwnProperty("block_num")){     
 
