@@ -3,43 +3,33 @@ const config = require('../env-config');
 
 let pool;
 
-pool = new Pool({
-  host: config.db.host,
-  user: config.db.user,
-  database: config.db.database,
-  password: config.db.password,
-  port: config.db.port,
-  max: 30
-});
+const connectToDB = async (query) => {
+  let { host, user, database, password, port, max } = query;
 
-const connectToDB = () => {
-  pool = new Pool({
-    host: config.db.host,
-    user: config.db.user,
-    database: config.db.database,
-    password: config.db.password,
-    port: config.db.port,
-    max: 30
-  });
+  return new Promise((resolve, reject) => { 
+    pool = new Pool({
+      host: host || config.db.host,
+      user: user || config.db.user,
+      database: database || config.db.database,
+      password: password || config.db.password,
+      port: port || config.db.port,
+      max: max || config.db.max
+    });    
+
+    pool.on('connect', (client) => {
+      console.log("Connection to DB successful");
+      resolve("success");
+    })
+    pool.on('error', (err, client) => {
+      console.log("DB connection error");
+      reject("error");
+    })
+  })
 }
-
-const getPool = () => {
-  return pool;
-}
-
-pool.on('connect', (client) => {
-  console.log("DB connected ");
-})
-
-pool.on('error', (err, client) => {
-  if(err){
-    console.log("DB Error ", err);
-  }else{
-    console.log("DB error client " , client);
-  }
-})
 
 module.exports = {
-  connectToDB,
-  getPool
+  query: (psql_query, params, callback) => {
+    return pool.query(psql_query, params, callback)
+  },
+  connectToDB
 }
