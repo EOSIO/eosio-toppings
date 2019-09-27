@@ -14,6 +14,8 @@ declare namespace Postgres {
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
 
+  interface PermissionQuery extends ListQuery { public_key: string }
+
   interface ErrorResult {
     json: {
       code: number;
@@ -143,6 +145,12 @@ declare namespace Postgres {
     port?: string | number,
     max?: string | number
   }
+  interface PermissionResult {
+    account: string;
+    permission: string;
+    public_key: string;
+    last_updated: string;
+  }
 
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
@@ -156,6 +164,7 @@ declare namespace Postgres {
 
   function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
   function connectToDB(query?: DBConnectionQuery) : Promise<string>
+  function get_permission_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
 }
 
 export = Postgres;
