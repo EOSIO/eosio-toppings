@@ -22,15 +22,15 @@ const deploy_contract = async (query: {
       textEncoder: api.textEncoder,
       textDecoder: api.textDecoder,
     });
-    let { abi } = payload;
+    const { abi: abiString } = payload;
+    let abi = JSON.parse(abiString)
     const abiDefinition = api.abiTypes.get('abi_def');
     abi = abiDefinition!.fields.reduce(
-      (res, { name: fieldName }) => ({
-        ...res,
-        [fieldName]: res[fieldName],
-      }),
-      JSON.parse(abi)
+        (acc: any, { name: fieldName}) => Object.assign(acc, { [fieldName]: acc[fieldName] || [] }),
+        abi,
     );
+    abiDefinition!.serialize(buffer, abi);
+    abi = Buffer.from(buffer.asUint8Array()).toString('hex');
     return await api.transact(
       {
         actions: [
@@ -61,7 +61,7 @@ const deploy_contract = async (query: {
             ],
             data: {
               account: account_name,
-              abi: Buffer.from(buffer.asUint8Array()).toString('hex'),
+              abi: abi,
             },
           },
         ],

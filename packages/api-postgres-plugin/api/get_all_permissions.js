@@ -9,18 +9,15 @@ const get_all_permissions = async (query) => {
       WHERE auth_keys::text <> '{}'::text ${(account_name !== undefined) ? `AND owner = '${account_name}'`:  '' }
       LIMIT 100`;
 
-    let promise = new Promise((resolve, reject)=>{
-      db.query(query_gen, "", (err, result) => {
-        if (err) {
-          console.error('Error executing query', err.stack);
-          resolve([]);
-        }else{
-          resolve(result.rows);     
-        }     
-      })
-    })    
-    return await promise;  
-    
+
+    let pool = db.getPool();
+    const client = await pool.connect();
+    try {
+      const res = await client.query(query_gen);
+      return res.rows;
+    } finally {
+      client.release();
+    }   
   }catch(err){
     console.log("caught exception ", err)
     return err;
