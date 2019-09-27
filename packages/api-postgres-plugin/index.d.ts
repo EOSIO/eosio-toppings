@@ -122,6 +122,15 @@ declare namespace Postgres {
     present: boolean
   }
 
+  interface DBConnectionQuery{
+    host?: string,
+    user?: string,
+    database?: string,
+    password?: string,
+    port?: string | number,
+    max?: string | number
+  }
+
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult>;
 
@@ -133,6 +142,7 @@ declare namespace Postgres {
   function get_action_details(query: ActionDetailsQuery) : Promise<ActionDetailsResult>;
 
   function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
+  function connectToDB(query?: DBConnectionQuery) : Promise<string>
 }
 
 export = Postgres;
