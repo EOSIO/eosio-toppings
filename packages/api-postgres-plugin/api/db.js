@@ -31,5 +31,8 @@ module.exports = {
   query: (psql_query, params, callback) => {
     return pool.query(psql_query, params, callback)
   },
+  queryAsync: async (psql_query, params) => new Promise((resolve, reject) => {
+    pool.query(psql_query, params, (err, result) => err ? reject(err) : resolve(result) )
+  }),
   connectToDB
 }

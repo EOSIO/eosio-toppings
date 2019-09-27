@@ -164,7 +164,7 @@ declare namespace Postgres {
 
   function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
   function connectToDB(query?: DBConnectionQuery) : Promise<string>
-  function get_permission_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
+  function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
 }
 
 export = Postgres;
