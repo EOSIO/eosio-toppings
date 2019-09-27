@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
+var fetch = require('node-fetch');
 var get_producers = function (query) { return __awaiter(_this, void 0, void 0, function () {
     var endpoint, rpc, response, e_1;
     return __generator(this, function (_a) {
@@ -44,7 +45,7 @@ var get_producers = function (query) { return __awaiter(_this, void 0, void 0, f
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint;
-                rpc = new eosjs_1.JsonRpc(endpoint);
+                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 return [4 /*yield*/, rpc.get_producers()];
             case 1:
                 response = _a.sent();
