@@ -4,9 +4,10 @@ const apiRpc = require('@eosio-toppings/api-rpc').default;
 const get_block_details = async (query) => {
   try{    
     let { id_or_num, endpoint} = query;
+    
     // Transaction trace with action data cannot be retrieved from POstgresDB, so call RPC API
     let blockDetailsRpcRes = await  apiRpc["get_block"]({endpoint: endpoint, id_or_num: id_or_num});
-    
+    id_or_num = id_or_num.toUpperCase();
     let result = [];
     let query_gen = `
         SELECT * FROM chain.block_info 

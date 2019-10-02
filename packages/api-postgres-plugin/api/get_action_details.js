@@ -5,6 +5,8 @@ const get_action_details = async (query) => {
   try{
     let result = [];
     let { id, action_ordinal, endpoint, block_num } = query;
+    id = id.toUpperCase();
+    
     let query_gen = `
         SELECT * FROM chain.action_trace
         WHERE transaction_id = '${id}' AND action_ordinal = ${action_ordinal} ${(block_num !== undefined) ? `AND block_num = '${block_num}'` : ''}`;
