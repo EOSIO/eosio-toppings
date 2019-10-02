@@ -20,6 +20,9 @@
     "lerna": "^3.13.1",
     "lerna-changelog": "^0.8.2"
   },
+  "resolutions": { 
+    "**/**/lodash": "^4.17.12"
+  },
   "changelog": {
     "labels": {
       "breaking": "Breaking Change",
