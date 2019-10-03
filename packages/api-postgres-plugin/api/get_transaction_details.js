@@ -4,6 +4,7 @@ const apiRpc = require('@eosio-toppings/api-rpc').default;
 const get_transaction_details = async (query) => {
   try{
     let { id, endpoint } = query;
+    id = id.toUpperCase();
     let result = [];
     let query_gen = `
         SELECT tt.*,

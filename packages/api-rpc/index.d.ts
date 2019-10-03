@@ -1,9 +1,40 @@
+import { promises } from "fs";
 
 declare namespace Rpc {
 
   interface GetInfoQuery { endpoint: string }
 
-  interface GetBlockQuery { endpoint: string, id_or_num: string|number }
+  interface CreateAccountQuery{
+    endpoint: string,
+    private_key: string,
+    actor: string,
+    permission: string,
+    new_account_name: string,
+    new_account_owner_key: string,
+    new_account_active_key: string
+  }
+
+  interface GetAccountQuery{
+    endpoint: string,
+    account_name: string
+  }
+
+  interface GetBlockQuery { 
+    endpoint: string, 
+    id_or_num: string|number 
+  }
+
+  interface GetTableRowsQuery{
+    endpoint: string,
+    contract_name: string,
+    table_name: string,
+    scope_name: string,
+    index_position?: string,
+    key_type?: string,
+    encode_type?: string,
+    upper_bound?: string,
+    lower_bound?: string
+  }
 
   interface PushActionQuery {
     endpoint: string,
@@ -83,10 +114,26 @@ declare namespace Rpc {
     quantity: any
   }
 
+  interface UpdateAuthQuery{
+    endpoint: string,
+    account_name: string,
+    private_key: string,
+    new_key: string,
+    permission: string,
+    parent: string
+  }
+
   function get_info(query: GetInfoQuery) : Promise<any>;
-  function get_block(query: GetBlockQuery) : Promise<any>;
-  function push_action(query: PushActionQuery) : Promise<any>;
+  function create_account_with_delegate(query: CreateAccountQuery): Promise<any>;
+  function create_account(query: CreateAccountQuery): Promise<any>;
   function deploy_contract(query: DeployContractQuery): Promise<any>;
+  function get_abi(query: GetAccountQuery): Promise<any>
+  function get_account_details(query: GetAccountQuery): Promise<any>
+  function get_block(query: GetBlockQuery) : Promise<any>;
+  function get_producer_schedule(query: GetInfoQuery): Promise<any>;
+  function get_producers(query: GetInfoQuery): Promise<any>;
+  function get_table_rows(query: GetTableRowsQuery): Promise<any>
+  function push_action(query: PushActionQuery) : Promise<any>;  
   function request_tokens(query: RequestTokensQuery): Promise<any>;
   function buy_ram(query: BuyRamQuery): Promise<any>;
   function sell_ram(query: SellRamQuery): Promise<any>;
@@ -94,6 +141,7 @@ declare namespace Rpc {
   function unstake_cpu(query: UnstakeCpuQuery): Promise<any>;  
   function stake_net(query: StakeNetQuery): Promise<any>;
   function unstake_net(query: UnstakeNetQuery): Promise<any>;  
+  function update_auth(query: UpdateAuthQuery): Promise<any>
 }
 
 export = Rpc;

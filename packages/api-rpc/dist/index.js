@@ -19,6 +19,8 @@ var buy_ram_1 = __importDefault(require("./api/buy_ram"));
 var sell_ram_1 = __importDefault(require("./api/sell_ram"));
 var create_account_with_delegate_1 = __importDefault(require("./api/create_account_with_delegate"));
 var deploy_contract_1 = __importDefault(require("./api/deploy_contract"));
+var get_producer_schedule_1 = __importDefault(require("./api/get_producer_schedule"));
+var get_producers_1 = __importDefault(require("./api/get_producers"));
 exports.default = {
     get_info: get_info_1.default,
     create_account: create_account_1.default,
@@ -36,4 +38,6 @@ exports.default = {
     sell_ram: sell_ram_1.default,
     create_account_with_delegate: create_account_with_delegate_1.default,
     deploy_contract: deploy_contract_1.default,
+    get_producer_schedule: get_producer_schedule_1.default,
+    get_producers: get_producers_1.default
 };
