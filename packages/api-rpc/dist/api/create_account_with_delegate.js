@@ -44,14 +44,12 @@ var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
 var text_encoding_1 = require("text-encoding");
 var fetch = require('node-fetch');
 var create_account_with_delegate = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, initial_ram_bytes, initial_net_cpu_quantity, rpc, signatureProvider, api, result, e_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var endpoint, creator_private_key, creator_account_name, creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key, _a, ram_bytes_buy_quantity, _b, stake_net_quantity, _c, stake_cpu_quantity, rpc, signatureProvider, api, result, e_1;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key;
-                initial_ram_bytes = 8192;
-                initial_net_cpu_quantity = '1.0000 TNT';
+                _d.trys.push([0, 2, , 3]);
+                endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key, _a = query.ram_bytes_buy_quantity, ram_bytes_buy_quantity = _a === void 0 ? 8192 : _a, _b = query.stake_net_quantity, stake_net_quantity = _b === void 0 ? '1.0000 SYS' : _b, _c = query.stake_cpu_quantity, stake_cpu_quantity = _c === void 0 ? '1.0000 SYS' : _c;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 signatureProvider = new eosjs_jssig_1.default([creator_private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
@@ -96,7 +94,7 @@ var create_account_with_delegate = function (query) { return __awaiter(_this, vo
                                 data: {
                                     payer: 'eosio',
                                     receiver: new_account_name,
-                                    bytes: initial_ram_bytes,
+                                    bytes: ram_bytes_buy_quantity,
                                 },
                             },
                             {
@@ -109,9 +107,23 @@ var create_account_with_delegate = function (query) { return __awaiter(_this, vo
                                 data: {
                                     from: 'eosio',
                                     receiver: new_account_name,
-                                    stake_net_quantity: initial_net_cpu_quantity,
-                                    stake_cpu_quantity: initial_net_cpu_quantity,
+                                    stake_net_quantity: stake_net_quantity,
+                                    stake_cpu_quantity: stake_cpu_quantity,
                                     transfer: true,
+                                }
+                            },
+                            {
+                                account: 'eosio.token',
+                                name: 'transfer',
+                                authorization: [{
+                                        actor: process.env.EOSIO_OWNER_ACCOUNT_NAME,
+                                        permission: process.env.EOSIO_OWNER_ACCOUNT_PERMISSION,
+                                    }],
+                                data: {
+                                    from: 'eosio',
+                                    to: new_account_name,
+                                    quantity: "100.0000 TNT",
+                                    memo: "Initial transfer"
                                 }
                             }]
                     }, {
@@ -119,10 +131,10 @@ var create_account_with_delegate = function (query) { return __awaiter(_this, vo
                         expireSeconds: 30,
                     })];
             case 1:
-                result = _a.sent();
+                result = _d.sent();
                 return [2 /*return*/, result];
             case 2:
-                e_1 = _a.sent();
+                e_1 = _d.sent();
                 console.log('Caught exception: ' + e_1);
                 throw (e_1);
             case 3: return [2 /*return*/];

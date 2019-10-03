@@ -9,13 +9,15 @@ const create_account_with_delegate = async (query: {
   permission: string,
   new_account_name: string,
   new_account_owner_key: string,
-  new_account_active_key: string
+  new_account_active_key: string,
+  ram_bytes_buy_quantity: number,
+  stake_net_quantity: string,
+  stake_cpu_quantity: string
 }) => {
   try{
-    let { endpoint, private_key: creator_private_key, actor: creator_account_name, permission: creator_account_permission, new_account_name, new_account_owner_key, new_account_active_key } = query;
-    let initial_ram_bytes = 8192;
-    let initial_net_cpu_quantity = '1.0000 TNT';
-
+    let { endpoint, private_key: creator_private_key, actor: creator_account_name, permission: creator_account_permission, new_account_name,
+          new_account_owner_key, new_account_active_key,ram_bytes_buy_quantity=8192, stake_net_quantity='1.0000 SYS', stake_cpu_quantity='1.0000 SYS' } = query;
+    
     const rpc = new JsonRpc(endpoint, { fetch });
     const signatureProvider = new JsSignatureProvider([creator_private_key]);
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
@@ -61,7 +63,7 @@ const create_account_with_delegate = async (query: {
         data: {
           payer: 'eosio',
           receiver: new_account_name,
-          bytes: initial_ram_bytes,
+          bytes: ram_bytes_buy_quantity,
         },
       },
       {
@@ -74,9 +76,23 @@ const create_account_with_delegate = async (query: {
         data: {
           from: 'eosio',
           receiver: new_account_name,
-          stake_net_quantity: initial_net_cpu_quantity,
-          stake_cpu_quantity: initial_net_cpu_quantity,
+          stake_net_quantity: stake_net_quantity,
+          stake_cpu_quantity: stake_cpu_quantity,
           transfer: true,
+        }
+      },
+      {
+        account: 'eosio.token',
+        name: 'transfer',
+        authorization: [{
+          actor: process.env.EOSIO_OWNER_ACCOUNT_NAME,
+          permission: process.env.EOSIO_OWNER_ACCOUNT_PERMISSION,
+        }],
+        data: {
+          from: 'eosio',
+          to: new_account_name,
+          quantity: "100.0000 TNT",
+          memo: "Initial transfer"
         }
       }]
     }, {
