@@ -5,7 +5,7 @@ const get_permissions_by_public_key = async query => {
   const query_gen = `
   SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated
   FROM chain.permission
-  WHERE permission.auth_keys::text LIKE '{"(${public_key}%';
+  WHERE permission.auth_keys::text LIKE '%${public_key}%';
   `
   let res;
   let error;
