@@ -10,7 +10,6 @@ RUN apt-get -y install wget
 WORKDIR /root
 RUN git clone --recursive https://github.com/EOSIO/history-tools.git
 
-
 WORKDIR /root/history-tools/
 RUN git checkout empty-block-filter
 RUN git submodule update --init --recursive

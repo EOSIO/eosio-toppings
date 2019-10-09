@@ -13,7 +13,7 @@ const get_trx_action_list = async (query) => {
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
         if (err) {
-          console.error('Error executing query', err.stack);
+          console.error('Error executing get trx with action query::', err.stack);
           resolve([]);
         }else{
           resolve(result.rows);     
