@@ -12,6 +12,7 @@ declare namespace Rpc {
     new_account_name: string,
     new_account_owner_key: string,
     new_account_active_key: string,
+    delegate?: boolean,
     ram_bytes_buy_quantity?: number,
     stake_net_quantity?: string,
     stake_cpu_quantity?: string
