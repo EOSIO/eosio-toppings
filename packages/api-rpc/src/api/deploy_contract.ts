@@ -1,5 +1,5 @@
 import { Api, JsonRpc, Serialize } from 'eosjs';
-import JsSignatureProvider from 'eosjs/dist/eosjs-jssig';
+import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 import { TextDecoder, TextEncoder } from 'text-encoding';
 const fetch = require('node-fetch');
 
