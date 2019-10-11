@@ -9,7 +9,7 @@ const del = require('del');
 const path = require('path');
 const Helper = require('./helpers');
 const { Api, JsonRpc, Serialize } = require('eosjs');
-const JsSignatureProvider = require('eosjs/dist/eosjs-jssig').default;
+const {JsSignatureProvider} = require('eosjs/dist/eosjs-jssig').default;
 const { TextEncoder, TextDecoder } = require('util'); 
 const fetch = require('node-fetch'); 
 
