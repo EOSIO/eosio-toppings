@@ -2,12 +2,17 @@ const db = require('./db');
 
 const get_all_permissions = async (query) => {
   try{
-    let { account_name, records_count } = query;
+    let { account_name, records_count, fetch_eosio=false } = query;
     let query_gen = `
-      SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated 
+      (SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated 
       FROM chain.permission 
       WHERE auth_keys::text <> '{}'::text ${(account_name !== undefined) ? `AND owner = '${account_name}'`:  '' }
-      LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  100}`;
+      ORDER BY block_num DESC
+      LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  100})
+      ${(fetch_eosio) ?
+      `UNION
+      SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated FROM chain.permission WHERE owner='eosio'`
+      : ''}`;
 
       let promise = new Promise((resolve, reject)=>{
         db.query(query_gen, "", (err, result) => {
