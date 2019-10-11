@@ -39,6 +39,7 @@ If you want to stake cpu, stake net and buy ram, pass the required parameters.
 * `new_account_name` - string
 * `new_account_owner_key` - string
 * `new_account_active_key` - string
+* `delagate` - boolean (If the delagate is true then buy ram, stake cpu, and stake net actions are executed)
 * `ram_bytes_buy_quantity` - number (default to 8192)
 * `stake_net_quantity` - string (default to '1.0000 SYS')
 * `stake_cpu_quantity` - string (default to '1.0000 SYS')
