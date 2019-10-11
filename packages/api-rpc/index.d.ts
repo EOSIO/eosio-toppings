@@ -12,6 +12,7 @@ declare namespace Rpc {
     new_account_name: string,
     new_account_owner_key: string,
     new_account_active_key: string,
+    delegate?: boolean,
     ram_bytes_buy_quantity?: number,
     stake_net_quantity?: string,
     stake_cpu_quantity?: string
@@ -127,7 +128,6 @@ declare namespace Rpc {
   }
 
   function get_info(query: GetInfoQuery) : Promise<any>;
-  function create_account_with_delegate(query: CreateAccountQuery): Promise<any>;
   function create_account(query: CreateAccountQuery): Promise<any>;
   function deploy_contract(query: DeployContractQuery): Promise<any>;
   function get_abi(query: GetAccountQuery): Promise<any>
