@@ -45,11 +45,9 @@ const request_tokens = async (query: {
           permission: permission,
         }],
         data: {
-          from: requested_from,
           to: requested_by,
           quantity: quantity,
-          limit: limit,
-          memo: "Requested Tokens"
+          limit: limit
         }
       }]
     }, {
