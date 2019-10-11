@@ -16,7 +16,7 @@ const get_block_details = async (query) => {
     let blocksPromise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
         if (err) {
-          console.error('Error executing query', err.stack);
+          console.error('Error executing get block details query:: ', err.stack);
           resolve([]);
         }else{
           resolve(result.rows);     

@@ -11,13 +11,13 @@ var get_account_details_1 = __importDefault(require("./api/get_account_details")
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
 var get_block_1 = __importDefault(require("./api/get_block"));
+var request_tokens_1 = __importDefault(require("./api/request_tokens"));
 var stake_cpu_1 = __importDefault(require("./api/stake_cpu"));
 var unstake_cpu_1 = __importDefault(require("./api/unstake_cpu"));
 var stake_net_1 = __importDefault(require("./api/stake_net"));
 var unstake_net_1 = __importDefault(require("./api/unstake_net"));
 var buy_ram_1 = __importDefault(require("./api/buy_ram"));
 var sell_ram_1 = __importDefault(require("./api/sell_ram"));
-var create_account_with_delegate_1 = __importDefault(require("./api/create_account_with_delegate"));
 var deploy_contract_1 = __importDefault(require("./api/deploy_contract"));
 var get_producer_schedule_1 = __importDefault(require("./api/get_producer_schedule"));
 var get_producers_1 = __importDefault(require("./api/get_producers"));
@@ -30,13 +30,13 @@ exports.default = {
     update_auth: update_auth_1.default,
     get_abi: get_abi_1.default,
     get_block: get_block_1.default,
+    request_tokens: request_tokens_1.default,
     stake_cpu: stake_cpu_1.default,
     unstake_cpu: unstake_cpu_1.default,
     stake_net: stake_net_1.default,
     unstake_net: unstake_net_1.default,
     buy_ram: buy_ram_1.default,
     sell_ram: sell_ram_1.default,
-    create_account_with_delegate: create_account_with_delegate_1.default,
     deploy_contract: deploy_contract_1.default,
     get_producer_schedule: get_producer_schedule_1.default,
     get_producers: get_producers_1.default

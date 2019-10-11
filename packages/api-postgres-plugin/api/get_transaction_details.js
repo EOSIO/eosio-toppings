@@ -16,7 +16,7 @@ const get_transaction_details = async (query) => {
     let transactionPromise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
         if (err) {
-          console.error('Error executing query', err.stack);
+          console.error('Error executing get transaction details query:: ', err.stack);
           resolve([]);
         }else{
           resolve(result.rows);     

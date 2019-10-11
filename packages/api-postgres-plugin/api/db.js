@@ -4,15 +4,14 @@ const config = require('../env-config');
 let pool;
 
 const connectToDB = async (query) => {
-  let { host, user, database, password, port, max } = query;
-
+  let { host, user, database, password, port, max } = query; 
   return new Promise((resolve, reject) => { 
     pool = new Pool({
       host: host || config.db.host,
       user: user || config.db.user,
       database: database || config.db.database,
       password: password || config.db.password,
-      port: port || config.db.port,
+      port: Number(port) || Number(config.db.port),
       max: max || config.db.max
     });    
 
