@@ -11,6 +11,7 @@ var get_account_details_1 = __importDefault(require("./api/get_account_details")
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
 var get_block_1 = __importDefault(require("./api/get_block"));
+var request_tokens_1 = __importDefault(require("./api/request_tokens"));
 var stake_cpu_1 = __importDefault(require("./api/stake_cpu"));
 var unstake_cpu_1 = __importDefault(require("./api/unstake_cpu"));
 var stake_net_1 = __importDefault(require("./api/stake_net"));
@@ -29,6 +30,7 @@ exports.default = {
     update_auth: update_auth_1.default,
     get_abi: get_abi_1.default,
     get_block: get_block_1.default,
+    request_tokens: request_tokens_1.default,
     stake_cpu: stake_cpu_1.default,
     unstake_cpu: unstake_cpu_1.default,
     stake_net: stake_net_1.default,

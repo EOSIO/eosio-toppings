@@ -6,6 +6,7 @@ import get_account_details from './api/get_account_details';
 import update_auth from './api/update_auth';
 import get_abi from './api/get_abi';
 import get_block from './api/get_block';
+import request_tokens from './api/request_tokens';
 import stake_cpu from './api/stake_cpu';
 import unstake_cpu from './api/unstake_cpu';
 import stake_net from './api/stake_net';
@@ -25,6 +26,7 @@ export default {
     update_auth,
     get_abi,
     get_block,
+    request_tokens,
     stake_cpu,
     unstake_cpu,
     stake_net,
