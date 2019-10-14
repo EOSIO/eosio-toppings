@@ -34,13 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
-var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
+var eosjs_jssig_1 = require("eosjs/dist/eosjs-jssig");
 var text_encoding_1 = require("text-encoding");
 var fetch = require('node-fetch');
 var update_auth = function (query) { return __awaiter(_this, void 0, void 0, function () {
@@ -51,7 +48,7 @@ var update_auth = function (query) { return __awaiter(_this, void 0, void 0, fun
                 _a.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, account_name = query.account_name, private_key = query.private_key, new_key = query.new_key, permission = query.permission, parent_1 = query.parent;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
-                signatureProvider = new eosjs_jssig_1.default([private_key]);
+                signatureProvider = new eosjs_jssig_1.JsSignatureProvider([private_key]);
                 api = new eosjs_1.Api({ rpc: rpc, signatureProvider: signatureProvider, textDecoder: new text_encoding_1.TextDecoder(), textEncoder: new text_encoding_1.TextEncoder() });
                 generatedActions = [generate_action(account_name, permission, parent_1, new_key)];
                 return [4 /*yield*/, api.transact({

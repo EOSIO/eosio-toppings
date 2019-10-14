@@ -1,7 +1,7 @@
 
 declare namespace Postgres {
 
-  interface ListQuery { records_count: number }
+  interface ListQuery { records_count?: number }
 
   interface BlocksQuery extends ListQuery { show_empty: string }
   interface BlockDetailsQuery { id_or_num: string, endpoint: string }
@@ -151,6 +151,11 @@ declare namespace Postgres {
     public_key: string;
     last_updated: string;
   }
+  interface GetAllPermissionsQuery{
+    account_name? : string;
+    records_count? : number;
+    fetch_eosio? : boolean;
+  }
 
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
@@ -165,6 +170,7 @@ declare namespace Postgres {
   function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
   function connectToDB(query?: DBConnectionQuery) : Promise<string>
   function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
+  function get_all_permissions(query: GetAllPermissionsQuery) : Promise<any>
 }
 
 export = Postgres;

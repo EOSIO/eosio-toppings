@@ -34,13 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
-var eosjs_jssig_1 = __importDefault(require("eosjs/dist/eosjs-jssig"));
+var eosjs_jssig_1 = require("eosjs/dist/eosjs-jssig");
 var text_encoding_1 = require("text-encoding");
 var fetch = require('node-fetch');
 var create_account = function (query) { return __awaiter(_this, void 0, void 0, function () {
@@ -51,7 +48,7 @@ var create_account = function (query) { return __awaiter(_this, void 0, void 0, 
                 _e.trys.push([0, 2, , 3]);
                 endpoint = query.endpoint, creator_private_key = query.private_key, creator_account_name = query.actor, creator_account_permission = query.permission, new_account_name = query.new_account_name, new_account_owner_key = query.new_account_owner_key, new_account_active_key = query.new_account_active_key, _a = query.delegate, delegate = _a === void 0 ? false : _a, _b = query.ram_bytes_buy_quantity, ram_bytes_buy_quantity = _b === void 0 ? 8192 : _b, _c = query.stake_net_quantity, stake_net_quantity = _c === void 0 ? '1.0000 SYS' : _c, _d = query.stake_cpu_quantity, stake_cpu_quantity = _d === void 0 ? '1.0000 SYS' : _d;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
-                signatureProvider = new eosjs_jssig_1.default([creator_private_key]);
+                signatureProvider = new eosjs_jssig_1.JsSignatureProvider([creator_private_key]);
                 api = new eosjs_1.Api({
                     rpc: rpc,
                     signatureProvider: signatureProvider,
