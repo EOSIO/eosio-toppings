@@ -17,7 +17,7 @@
     "access": "public"
   },
   "dependencies": {
-    "eosjs": "20.0.0-beta3",
+    "eosjs": "20.0.0",
     "node-fetch": "^2.6.0",
     "text-encoding": "^0.7.0"
   },
