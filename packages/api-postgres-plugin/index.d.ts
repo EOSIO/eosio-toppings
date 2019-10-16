@@ -10,7 +10,14 @@ declare namespace Postgres {
   interface TransactionDetailsQuery { id: string, endpoint: string }
 
   interface ActionsQuery extends ListQuery { account_name?: string, fetch_failed_action?: boolean, no_limit?: boolean, records_count?: number }
-  interface ActionsWithFilterQuery extends ListQuery { account_name?: string, signed_name?: string, page_size?: number, page_num?: number, max_rgs?: string, show_data_size?: boolean }
+  interface ActionsWithFilterQuery extends ListQuery {
+    action_filter: 'sent' | 'received' | 'signed' | 'contract',
+    account_name: string,
+    page_size?: number,
+    page_num?: number,
+    max_rgs?: string,
+    show_data_size?: boolean
+  }
   interface ActionDetailsQuery { id: string, action_ordinal: number, endpoint: string, block_num: number }
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
