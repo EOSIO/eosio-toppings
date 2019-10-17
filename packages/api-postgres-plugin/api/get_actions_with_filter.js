@@ -28,7 +28,7 @@ const get_actions_with_filter = async (query) => {
     FROM
       ${table}
     ORDER BY
-      a.block_num DESC, a.action_ordinal DESC
+      a.receipt_global_sequence DESC
     LIMIT ${page_size}
     ${(max_rgs !== undefined) ? `OFFSET ${page_size * (page_num - 1)}` : ''}
   `;
