@@ -19,10 +19,12 @@ const get_actions_with_filter = async (query) => {
       timestamp,
       act_account,
       act_name,
+      actor,
       receipt_global_sequence,
       token_to,
       token_from,
-      amount
+      amount,
+      symbol
     FROM
       ${table}
     ORDER BY
