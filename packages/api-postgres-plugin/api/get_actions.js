@@ -10,7 +10,7 @@ const get_actions = async (query) => {
     (SELECT ata.permission FROM chain.action_trace_authorization ata WHERE ata.block_num = at.block_num AND ata.transaction_id = at.transaction_id AND ata.action_ordinal = at.action_ordinal LIMIT 1)
     FROM chain.action_trace at
     WHERE at.creator_action_ordinal = 0 ${(account_name !== undefined) ? `AND at.act_account = '${account_name}'`:  '' }  
-    ORDER BY at.block_num DESC  
+    ORDER BY at.block_num DESC
     LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  100}`;
 
     let promise = new Promise((resolve, reject)=>{
