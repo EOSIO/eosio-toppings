@@ -15,7 +15,8 @@ declare namespace Rpc {
     delegate?: boolean,
     ram_bytes_buy_quantity?: number,
     stake_net_quantity?: string,
-    stake_cpu_quantity?: string
+    stake_cpu_quantity?: string,
+    initial_transfer_quantity?: string
   }
 
   interface GetAccountQuery {

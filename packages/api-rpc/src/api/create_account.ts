@@ -14,7 +14,8 @@ const create_account = async (query: {
   delegate?: boolean,
   ram_bytes_buy_quantity?: number,
   stake_net_quantity?: string,
-  stake_cpu_quantity?: string
+  stake_cpu_quantity?: string,
+  initial_transfer_quantity?: string
 }) => {
   try {
     let {
@@ -28,7 +29,8 @@ const create_account = async (query: {
       delegate = false,
       ram_bytes_buy_quantity = 8192,
       stake_net_quantity = '1.0000 SYS',
-      stake_cpu_quantity = '1.0000 SYS'
+      stake_cpu_quantity = '1.0000 SYS',
+      initial_transfer_quantity = '1.0000 SYS'
     } = query;
     const rpc = new JsonRpc(endpoint, { fetch });
     const signatureProvider = new JsSignatureProvider([creator_private_key]);
@@ -124,7 +126,7 @@ const create_account = async (query: {
           data: {
             from: 'eosio',
             to: new_account_name,
-            quantity: '100.0000 TNT',
+            quantity: initial_transfer_quantity,
             memo: 'Initial transfer'
           }
         }
