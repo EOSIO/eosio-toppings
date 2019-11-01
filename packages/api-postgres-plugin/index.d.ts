@@ -165,6 +165,10 @@ declare namespace Postgres {
     fetch_eosio? : boolean;
   }
 
+  interface GetPermissionQuery{
+    account_name: string;
+  }
+
   function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
   function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
 
@@ -180,6 +184,7 @@ declare namespace Postgres {
   function connectToDB(query?: DBConnectionQuery) : Promise<string>
   function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
   function get_all_permissions(query: GetAllPermissionsQuery) : Promise<any>
+  function get_permission_link(query: GetPermissionQuery) : Promise<any>
 }
 
 export = Postgres;

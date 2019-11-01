@@ -11,6 +11,7 @@ const get_actions = require('./api/get_actions');
 const get_action_details = require('./api/get_action_details');
 const get_actions_with_filter = require('./api/get_actions_with_filter');
 const get_permissions_by_public_key = require('./api/get_permissions_by_public_key');
+const get_permission_link = require('./api/get_permission_link');
 const { connectToDB } = require('./api/db');
 
 module.exports = {
@@ -25,5 +26,6 @@ module.exports = {
   get_action_details,
   get_actions_with_filter,
   get_permissions_by_public_key,
+  get_permission_link,
   connectToDB
 };
