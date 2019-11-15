@@ -14,7 +14,7 @@ declare namespace Postgres {
     action_filter: 'sent' | 'received' | 'signed' | 'contract',
     account_name: string,
     page_size?: number,
-    page_num?: number,
+    direction?: 'next' | 'prev',
     max_rgs?: string,
     show_data_size?: boolean
   }
