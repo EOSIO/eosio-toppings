@@ -1,7 +1,8 @@
 const db = require('./db');
 
 const get_actions_with_filter = async (query) => {
-  const { action_filter, account_name, max_rgs, page_size = 100, page_num = 1, show_data_size = "false" } = query;
+  const { action_filter, account_name, max_rgs, current_rgs, page_size=100, direction = 'next', show_data_size = "false" } = query;
+  console.log("query ", query)
   const table = `
     chain.action_trace
     WHERE  
@@ -9,7 +10,13 @@ const get_actions_with_filter = async (query) => {
       ${(action_filter === 'signed') ? `creator_action_ordinal = 0 AND actor = '${account_name}'` : ''}
       ${(action_filter === 'received') ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` : ''}
       ${(action_filter === 'sent') ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` : ''}
-      ${(max_rgs !== undefined) ? `AND receipt_global_sequence <= ${max_rgs}` : ''}
+      ${(max_rgs !== undefined) 
+        ? `${(direction === 'next') 
+          ? `${(current_rgs !== undefined) 
+            ? `AND receipt_global_sequence < ${current_rgs}` 
+            : `AND receipt_global_sequence <= ${max_rgs}`}`
+          : `AND receipt_global_sequence > ${current_rgs} AND receipt_global_sequence <= ${max_rgs}` }`
+        : ''}
   `;
 
   const result_statement = `
@@ -28,19 +35,20 @@ const get_actions_with_filter = async (query) => {
     FROM
       ${table}
     ORDER BY
-      receipt_global_sequence DESC
+      receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
     LIMIT ${page_size}
-    ${(max_rgs !== undefined) ? `OFFSET ${page_size * (page_num - 1)}` : ''}
   `;
 
   const count_statement = `SELECT COUNT(*) AS count FROM ${table}`;
   
   try {
     const data = (await db.queryAsync(result_statement, "")).rows;
+    if(direction === 'prev'){
+      data.reverse();
+    }
     const result = {
       action_filter,
       data,
-      page_num,
       max_rgs: max_rgs !== undefined ? max_rgs : data.length > 0 ? data[0].receipt_global_sequence : ''
     };
 
@@ -53,8 +61,7 @@ const get_actions_with_filter = async (query) => {
     console.error('Error executing get trx with action query::', error.stack);
 
     return {
-      action_filter,
-      page_num
+      action_filter
     };
   }
 }
