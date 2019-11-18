@@ -38,7 +38,6 @@ const get_actions_with_filter = async (query) => {
       receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
     LIMIT ${page_size}
   `;
-  console.log("result_statement", result_statement)
 
   const count_statement = `SELECT COUNT(*) AS count FROM ${table}`;
   
