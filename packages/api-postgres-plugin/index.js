@@ -8,6 +8,7 @@ const get_transaction_details = require('./api/get_transaction_details');
 const get_all_permissions = require('./api/get_all_permissions');
 const get_smart_contracts = require('./api/get_smart_contracts');
 const get_actions = require('./api/get_actions');
+const get_action_history = require('./api/get_action_history');
 const get_action_details = require('./api/get_action_details');
 const get_actions_with_filter = require('./api/get_actions_with_filter');
 const get_permissions_by_public_key = require('./api/get_permissions_by_public_key');
@@ -23,6 +24,7 @@ module.exports = {
   get_all_permissions,
   get_smart_contracts,
   get_actions,
+  get_action_history,
   get_action_details,
   get_actions_with_filter,
   get_permissions_by_public_key,

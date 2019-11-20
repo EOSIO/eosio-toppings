@@ -10,6 +10,7 @@ declare namespace Postgres {
   interface TransactionDetailsQuery { id: string, endpoint: string }
 
   interface ActionsQuery extends ListQuery { account_name?: string, fetch_failed_action?: boolean, no_limit?: boolean, records_count?: number }
+  interface ActionHistoryQuery extends ListQuery { account_name?: string | string[], actor_name?: string | string[], fetch_failed_action?: boolean, no_limit?: boolean, records_count?: number }
   interface ActionsWithFilterQuery extends ListQuery {
     action_filter: 'sent' | 'received' | 'signed' | 'contract',
     account_name: string,
@@ -177,6 +178,7 @@ declare namespace Postgres {
   function get_transaction_details(query: TransactionDetailsQuery) : Promise<any>;
 
   function get_actions(query: ActionsQuery) : Promise<ActionResult[]>;
+  function get_action_history(query: ActionHistoryQuery) : Promise<ActionResult[]>;
   function get_action_details(query: ActionDetailsQuery) : Promise<ActionDetailsResult>;
   function get_actions_with_filter(query: ActionsWithFilterQuery) : Promise<TransactionResult[]>;
 
