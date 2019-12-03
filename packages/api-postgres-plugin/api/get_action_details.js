@@ -22,15 +22,14 @@ const get_action_details = async (query) => {
       })
     })    
     let resultObj = await promise;
-
+    
     if(resultObj.length > 0 && resultObj[0].hasOwnProperty("transaction_id")){  
       // Delete serialized act data from response
       delete resultObj[0].act_data;
       // Fetch action data from blockchain
       let blockDetailsRpcRes = await apiRpc["get_block"]({endpoint: endpoint, id_or_num: resultObj[0].block_num});
-      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => eachTrx.trx.id.toUpperCase() === resultObj[0].transaction_id);
+      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => (eachTrx.trx.id !== undefined ? eachTrx.trx.id.toUpperCase() : eachTrx.id) === resultObj[0].transaction_id);
       let action_data = transaction.length > 0 ? transaction[0].trx.transaction.actions[action_ordinal-1] : {};
-
       result.push({
         ...resultObj[0],
         "action_data" : action_data

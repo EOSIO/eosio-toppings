@@ -28,8 +28,7 @@ const get_transaction_details = async (query) => {
     if(resultObj.length > 0 && resultObj[0].hasOwnProperty("block_num")){     
 
       let blockDetailsRpcRes = await apiRpc["get_block"]({endpoint: endpoint, id_or_num: resultObj[0].block_num});
-
-      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => eachTrx.trx.id.toUpperCase() === resultObj[0].id);
+      let transaction = blockDetailsRpcRes.transactions.filter(eachTrx => (eachTrx.trx.id !== undefined ? eachTrx.trx.id.toUpperCase() : eachTrx.id) === resultObj[0].id);
       let action_traces = transaction.length > 0 ? transaction[0].trx.transaction : [];
         
       result.push({
