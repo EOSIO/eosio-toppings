@@ -1,6 +1,7 @@
 const db = require('./db');
 
 const get_action_history = async (query) => {
+  console.log("request received in api-postgres ", new Date());
   try{
     let { account_name, actor_name, records_count } = query;
 
@@ -17,14 +18,16 @@ const get_action_history = async (query) => {
     ``}
     ORDER BY block_num DESC
     LIMIT ${(records_count !== undefined) ? parseInt(records_count) :  100}`;
+     
+    console.log("query gen ", query_gen)
     
-
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
         if (err) {
           console.error('Error executing get action history query: ', err.stack);
           resolve([]);
         }else{
+          console.log("response received from database, sending to back end", new Date());
           resolve(result.rows);     
         }     
       })
