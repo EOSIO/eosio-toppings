@@ -1,5 +1,38 @@
 # Changelog
 
+## api-eosio-compiler, docker-eosio-nodeos, docker-ship, api-mongodb-plugin, api-postgres-plugin, api-rpc v1.0.0 (2019-12-05)
+
+#### Enhancement
+* `api-eosio-compiler`, `docker-eosio-nodeos`, `docker-ship`
+  * [#119](https://github.com/EOSIO/eosio-toppings/pull/119) V1.8.6 ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-postgres-plugin`
+  * [#118](https://github.com/EOSIO/eosio-toppings/pull/118) Action filter - Accept multiple account names ([@mjk90](https://github.com/mjk90))
+  * [#115](https://github.com/EOSIO/eosio-toppings/pull/115) Action filter ([@b1-johnwong](https://github.com/b1-johnwong))
+* `api-mongodb-plugin`, `api-postgres-plugin`
+  * [#117](https://github.com/EOSIO/eosio-toppings/pull/117) Action fliter modified ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-rpc`
+  * [#113](https://github.com/EOSIO/eosio-toppings/pull/113) Fogbugz 3880 - Token faucet ([@mjk90](https://github.com/mjk90))
+  * [#110](https://github.com/EOSIO/eosio-toppings/pull/110) Update create blockchain account method ([@b1-johnwong](https://github.com/b1-johnwong))
+* `api-eosio-compiler`, `api-mongodb-plugin`, `api-postgres-plugin`, `api-rpc`
+  * [#114](https://github.com/EOSIO/eosio-toppings/pull/114) Permission fix ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-postgres-plugin`, `api-rpc`
+  * [#107](https://github.com/EOSIO/eosio-toppings/pull/107) Postgres/interface change ([@gandalf-apprentice](https://github.com/gandalf-apprentice))
+* `api-postgres-plugin`, `docker-ship`
+  * [#102](https://github.com/EOSIO/eosio-toppings/pull/102) Remove inline actions ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-postgres-plugin`, `api-rpc`, `docker-eosio-nodeos`, `docker-ship`
+  * [#99](https://github.com/EOSIO/eosio-toppings/pull/99) Integrate ship ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
+#### Bug Fix
+* `api-postgres-plugin`
+  * [#109](https://github.com/EOSIO/eosio-toppings/pull/109) fix the problem that some keys cannot be search ([@gandalf-apprentice](https://github.com/gandalf-apprentice))
+
+#### Committers: 4
+- Gordon Yip ([@gandalf-apprentice](https://github.com/gandalf-apprentice))
+- John Wong ([@b1-johnwong](https://github.com/b1-johnwong))
+- Matthew Kelly ([@mjk90](https://github.com/mjk90))
+- [@varshajnagaraja](https://github.com/varshajnagaraja)
+
+
 ## api-eosio-compiler v0.3.8 (2019-07-16)
 
 #### Bug Fix
