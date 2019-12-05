@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/docker-ship",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "block.one",
   "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/docker-ship",
