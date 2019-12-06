@@ -23,8 +23,5 @@
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
     "@types/mongoose": "^5.3.20"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }
