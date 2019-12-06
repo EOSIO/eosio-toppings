@@ -2,11 +2,13 @@ const db = require('./db');
 
 const get_transactions = async (query) => {
   try{
-    let { records_count} = query;
+    let { records_count = 100 } = query;
+    records_count = isNaN(records_count) ? 100 : parseInt(records_count) <= 100 ? records_count : 100;
+    
     let query_gen = `
       SELECT tt.id, tt.block_num, tt.partial_expiration, tt.status FROM chain.transaction_trace tt 
       ORDER BY block_num DESC, transaction_ordinal DESC
-      LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100}`;
+      LIMIT ${records_count}`;
 
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {

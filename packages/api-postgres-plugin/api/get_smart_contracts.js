@@ -3,7 +3,8 @@ var sd = require('string_decoder').StringDecoder;
 
 const get_smart_contracts = async (query) => {
   try {
-    let { smart_contract_name, records_count } = query;
+    let { smart_contract_name, records_count = 100 } = query;
+    records_count = isNaN(records_count) ? 100 : parseInt(records_count) <= 100 ? records_count : 100;
     let query_gen = `
       SELECT * FROM chain.account 
       WHERE abi <> '' 

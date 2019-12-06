@@ -6,7 +6,7 @@ const get_permission_link = async (query) => {
 
     let query_gen = `
     SELECT account, code as contract, message_type as action_name, required_permission as permission  FROM chain.permission_link
-    WHERE ${(account_name !== undefined) ? `account = '${account_name}'`:  '' }  `;
+    WHERE ${(account_name !== undefined) ? `account = '${account_name}'`:  'abc' }  `;
 
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {

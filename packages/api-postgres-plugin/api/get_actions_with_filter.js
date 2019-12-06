@@ -1,8 +1,9 @@
 const db = require('./db');
 
 const get_actions_with_filter = async (query) => {
-  const { action_filter, account_name, max_rgs, current_rgs, page_size=100, direction = 'next', show_data_size = "false" } = query;
-  console.log("query ", query)
+  let { action_filter, account_name, max_rgs, current_rgs, page_size=100, direction = 'next', show_data_size = "false" } = query;
+  page_size = isNaN(page_size) ? 100 : parseInt(page_size) <= 100 ? page_size : 100;
+  
   const table = `
     chain.action_trace
     WHERE  
