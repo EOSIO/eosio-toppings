@@ -9,8 +9,8 @@ declare namespace Postgres {
   interface TransactionsQuery extends ListQuery { }
   interface TransactionDetailsQuery { id: string, endpoint: string }
 
-  interface ActionsQuery extends ListQuery { account_name?: string, fetch_failed_action?: boolean, no_limit?: boolean, records_count?: number }
-  interface ActionHistoryQuery extends ListQuery { account_name?: string | string[], actor_name?: string | string[], fetch_failed_action?: boolean, no_limit?: boolean, records_count?: number }
+  interface ActionsQuery extends ListQuery { account_name?: string }
+  interface ActionHistoryQuery extends ListQuery { account_name?: string | string[], actor_name?: string | string[] }
   interface ActionsWithFilterQuery extends ListQuery {
     action_filter: 'sent' | 'received' | 'signed' | 'contract',
     account_name: string,
@@ -19,6 +19,7 @@ declare namespace Postgres {
     max_rgs?: string,
     show_data_size?: boolean
   }
+
   interface ActionDetailsQuery { id: string, action_ordinal: number, endpoint: string, block_num: number }
 
   interface SmartContractsQuery extends ListQuery { smart_contract_name: string }
@@ -44,7 +45,7 @@ declare namespace Postgres {
     transaction_count: number,
     timestamp: Date
   }
-  
+
   interface BlockDetailsResult {
     block_num: string,
     block_id: string,
@@ -146,7 +147,7 @@ declare namespace Postgres {
     present: boolean
   }
 
-  interface DBConnectionQuery{
+  interface DBConnectionQuery {
     host?: string,
     user?: string,
     database?: string,
@@ -154,39 +155,40 @@ declare namespace Postgres {
     port?: string | number,
     max?: string | number
   }
+
   interface PermissionResult {
     account: string;
     permission: string;
     public_key: string;
     last_updated: string;
   }
-  interface GetAllPermissionsQuery{
-    account_name? : string;
-    records_count? : number;
-    fetch_eosio? : boolean;
+
+  interface GetAllPermissionsQuery extends ListQuery {
+    account_name?: string;
+    fetch_eosio?: string;
   }
 
-  interface GetPermissionQuery{
+  interface GetPermissionQuery extends ListQuery {
     account_name: string;
   }
 
-  function get_blocks(query: BlocksQuery) : Promise<BlockResult[]>;
-  function get_block_details(query: BlockDetailsQuery) : Promise<BlockDetailsResult | ErrorResult>;
+  function get_blocks(query: BlocksQuery): Promise<BlockResult[]>;
+  function get_block_details(query: BlockDetailsQuery): Promise<BlockDetailsResult | ErrorResult>;
 
-  function get_transactions(query: TransactionsQuery) : Promise<TransactionResult[]>;
-  function get_trx_action_list(query: ActionsQuery) : Promise<TransactionResult[]>;
-  function get_transaction_details(query: TransactionDetailsQuery) : Promise<any>;
+  function get_transactions(query: TransactionsQuery): Promise<TransactionResult[]>;
+  function get_trx_action_list(query: ActionsQuery): Promise<TransactionResult[]>;
+  function get_transaction_details(query: TransactionDetailsQuery): Promise<any>;
 
-  function get_actions(query: ActionsQuery) : Promise<ActionResult[]>;
-  function get_action_history(query: ActionHistoryQuery) : Promise<ActionResult[]>;
-  function get_action_details(query: ActionDetailsQuery) : Promise<ActionDetailsResult>;
-  function get_actions_with_filter(query: ActionsWithFilterQuery) : Promise<TransactionResult[]>;
+  function get_actions(query: ActionsQuery): Promise<ActionResult[]>;
+  function get_action_history(query: ActionHistoryQuery): Promise<ActionResult[]>;
+  function get_action_details(query: ActionDetailsQuery): Promise<ActionDetailsResult>;
+  function get_actions_with_filter(query: ActionsWithFilterQuery): Promise<TransactionResult[]>;
 
-  function get_smart_contracts(query: SmartContractsQuery) : Promise<SmartContractsResult>;
-  function connectToDB(query?: DBConnectionQuery) : Promise<string>
+  function get_smart_contracts(query: SmartContractsQuery): Promise<SmartContractsResult>;
+  function connectToDB(query?: DBConnectionQuery): Promise<string>
   function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
-  function get_all_permissions(query: GetAllPermissionsQuery) : Promise<any>
-  function get_permission_link(query: GetPermissionQuery) : Promise<any>
+  function get_all_permissions(query: GetAllPermissionsQuery): Promise<any>
+  function get_permission_link(query: GetPermissionQuery): Promise<any>
 }
 
 export = Postgres;

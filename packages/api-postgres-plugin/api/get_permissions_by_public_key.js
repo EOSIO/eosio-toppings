@@ -1,28 +1,24 @@
 const db = require('./db');
 
 const get_permissions_by_public_key = async query => {
-  const { public_key } = query;
-  const query_gen = `
-  SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated
-  FROM chain.permission
-  WHERE permission.auth_keys::text LIKE '%${public_key}%';
-  `
-  let res;
-  let error;
   try {
-    res = await db.queryAsync(query_gen)
+    const { public_key, records_count } = query;
+    const limit = Math.min(parseInt(records_count) || 100, 100);
+    const statement = `
+      SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated
+      FROM chain.permission
+      WHERE permission.auth_keys::text LIKE '%${public_key}%'
+      LIMIT ${limit}
+    `;
+
+    return (await db.queryAsync(statement, '')).rows;
+  } catch (error) {
+    console.error(
+      'Caught exception in get permissions by public key query: ',
+      error.stack
+    );
+    return [];
   }
-  catch (err) {
-    console.log('ERROR::DB:', err);
-    error = err;
-  }
-  finally {
-    return (
-      !error && res && res.rows
-        ? res.rows
-        : []
-    )
-  }
-}
+};
 
 module.exports = get_permissions_by_public_key;
