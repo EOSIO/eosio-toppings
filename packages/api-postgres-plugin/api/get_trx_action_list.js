@@ -14,7 +14,10 @@ const get_trx_action_list = async query => {
 
     return (await db.queryAsync(statement, '')).rows;
   } catch (error) {
-    console.error('Caught exception in trx with action list query: ', error);
+    console.error(
+      'Caught exception in trx with action list query: ',
+      error.stack
+    );
     return [];
   }
 };

@@ -20,7 +20,7 @@ const get_blocks = async query => {
     `;
 
     return (await db.queryAsync(statement, '')).rows;
-  } catch (err) {
+  } catch (error) {
     console.error('Caught exception in get blocks query: ', error.stack);
     return [];
   }

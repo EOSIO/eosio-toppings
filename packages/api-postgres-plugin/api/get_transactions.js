@@ -13,7 +13,10 @@ const get_transactions = async query => {
 
     return (await db.queryAsync(statement, '')).rows;
   } catch (error) {
-    console.error('Caught exception in get transactions query: ', error.stack);
+    console.error(
+      'Caught exception in get transactions query: ',
+      error.stack
+    );
     return [];
   }
 };
