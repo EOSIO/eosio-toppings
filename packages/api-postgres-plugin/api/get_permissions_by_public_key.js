@@ -7,7 +7,7 @@ const get_permissions_by_public_key = async query => {
     const statement = `
       SELECT owner AS account, name AS permission, auth_keys AS public_key, last_updated
       FROM chain.permission
-      WHERE permission.auth_keys::text LIKE '%${public_key}%'
+      ${public_key !== undefined ? `WHERE permission.auth_keys::text LIKE '%${public_key}%'` : ''}
       LIMIT ${limit}
     `;
 

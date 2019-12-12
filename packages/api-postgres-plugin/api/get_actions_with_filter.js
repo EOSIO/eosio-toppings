@@ -13,11 +13,14 @@ const get_actions_with_filter = async query => {
   const limit = Math.min(parseInt(page_size) || 100, 100);
   const table = `
     chain.action_trace
-    WHERE  
-      ${action_filter === 'contract' ? `creator_action_ordinal = 0 AND act_account = '${account_name}'` : ''}
-      ${action_filter === 'signed' ? `creator_action_ordinal = 0 AND actor = '${account_name}'` : '' }
-      ${action_filter === 'received' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` : ''}
-      ${action_filter === 'sent' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` : ''}
+    WHERE
+      ${action_filter !== undefined && account_name !== undefined
+        ? action_filter === 'contract' ? `creator_action_ordinal = 0 AND act_account = '${account_name}'` : 
+          action_filter === 'signed' ? `creator_action_ordinal = 0 AND actor = '${account_name}'` : 
+          action_filter === 'received' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` : 
+          action_filter === 'sent' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` : 
+          'transaction_id IS NOT NULL'
+        : 'transaction_id IS NOT NULL'}
       ${max_rgs !== undefined
         ? `${direction === 'next'
           ? `${current_rgs !== undefined
@@ -50,7 +53,7 @@ const get_actions_with_filter = async query => {
     LIMIT ${limit}
   `;
 
-  const count_statement = `SELECT COUNT(*) AS count FROM ${table}`;
+  const count_statement = `SELECT COUNT(transaction_id) AS count FROM ${table}`;
 
   try {
     const data = (await db.queryAsync(statement, '')).rows;

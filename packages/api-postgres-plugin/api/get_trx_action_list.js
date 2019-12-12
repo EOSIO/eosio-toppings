@@ -2,7 +2,7 @@ const db = require('./db');
 
 const get_trx_action_list = async query => {
   try {
-    const { records_count, account_name } = query;
+    const { account_name, records_count } = query;
     const limit = Math.min(parseInt(records_count) || 100, 100);
     const statement = `
       SELECT transaction_id AS id, block_num, timestamp, act_account, act_name, action_ordinal
