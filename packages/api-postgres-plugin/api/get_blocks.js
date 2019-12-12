@@ -1,35 +1,29 @@
 const db = require('./db');
 
-const get_blocks = async (query) => {
-  try{
-    let { show_empty, records_count} = query;
-    let query_gen = 
-      (show_empty === undefined || show_empty !== 'true') 
-      ?`SELECT * FROM chain.received_nonempty_block
+const get_blocks = async query => {
+  try {
+    const { records_count, show_empty } = query;
+    const limit = Math.min(parseInt(records_count) || 100, 100);
+    const statement = `
+      ${show_empty === 'true'
+        ? `
+        SELECT block_id, block_num, timestamp, transaction_count, producer
+        FROM chain.block_info
+        `
+        : `
+        SELECT *
+        FROM chain.received_nonempty_block
+        `
+      }
         ORDER BY block_num DESC
-        LIMIT  ${(records_count !== undefined) ? parseInt(records_count) : 100}`
-      :`SELECT bi.block_id, bi.block_num, bi.timestamp, bi.transaction_count, bi.producer      
-        FROM chain.block_info AS bi        
-        ORDER BY block_num DESC
-        LIMIT  ${(records_count !== undefined) ? parseInt(records_count) : 100}`
-      ;    
+        LIMIT ${limit}
+    `;
 
-    let promise = new Promise((resolve, reject)=>{
-      db.query(query_gen, "", (err, result) => {
-        if (err) {
-          console.error('Error executing get blocks query:: ', err.stack);
-          resolve([]);
-        }else{
-          resolve(result.rows);     
-        }     
-      })
-    })    
-    return await promise;
-
-  }catch(err){
-    console.log("caught exception ", err)
-    return err;
+    return (await db.queryAsync(statement, '')).rows;
+  } catch (error) {
+    console.error('Caught exception in get blocks query: ', error.stack);
+    return [];
   }
-}
+};
 
 module.exports = get_blocks;

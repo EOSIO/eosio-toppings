@@ -1,31 +1,25 @@
 const db = require('./db');
 
-const get_trx_action_list = async (query) => {
-  try{
-    let { records_count, account_name, no_limit = false} = query;
-    let query_gen = `
+const get_trx_action_list = async query => {
+  try {
+    const { account_name, records_count } = query;
+    const limit = Math.min(parseInt(records_count) || 100, 100);
+    const statement = `
       SELECT transaction_id AS id, block_num, timestamp, act_account, act_name, action_ordinal
       FROM chain.action_trace 
-      WHERE creator_action_ordinal = 0 ${(account_name !== undefined) ? `AND act_account = '${account_name}'`:  '' }
+      WHERE creator_action_ordinal = 0 ${account_name !== undefined ? `AND act_account = '${account_name}'` : ''}
       ORDER BY block_num DESC
-      ${ no_limit ? '' : `LIMIT ${(records_count !== undefined) ? parseInt(records_count) : 100} `}`;
+      LIMIT ${limit}
+    `;
 
-    let promise = new Promise((resolve, reject)=>{
-      db.query(query_gen, "", (err, result) => {
-        if (err) {
-          console.error('Error executing get trx with action query::', err.stack);
-          resolve([]);
-        }else{
-          resolve(result.rows);     
-        }     
-      })
-    })    
-    return await promise;   
-
-  }catch(err){
-    console.log("caught exception ", err)
-    return err;
+    return (await db.queryAsync(statement, '')).rows;
+  } catch (error) {
+    console.error(
+      'Caught exception in trx with action list query: ',
+      error.stack
+    );
+    return [];
   }
-}
+};
 
 module.exports = get_trx_action_list;
