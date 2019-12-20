@@ -19,5 +19,21 @@
   "dependencies": {
     "@eosio-toppings/api-rpc": "^1.0.0",
     "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "@databases/pg-test": "^1.0.3",
+    "jest": "^24.9.0",
+    "pg-connection-string": "^2.1.0",
+    "ts-jest": "^24.2.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "scripts": {
+    "test": "jest",
+    "test:dev": "jest --watch"
   }
 }
