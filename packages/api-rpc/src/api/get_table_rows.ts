@@ -10,10 +10,11 @@ const get_table_rows = async (query: {
   key_type: string,
   encode_type: string,
   upper_bound: string,
-  lower_bound: string
+  lower_bound: string,
+  reverse: boolean
 }) => {
   try{
-    let { endpoint, contract_name, table_name, scope_name, index_position='',key_type='',encode_type='', upper_bound='', lower_bound=''  } = query;
+    let { endpoint, contract_name, table_name, scope_name, index_position='',key_type='',encode_type='', upper_bound='', lower_bound='', reverse=false } = query;
     const rpc = new JsonRpc(endpoint,{ fetch });
     const result = await rpc.get_table_rows({
       "json": true,
@@ -24,7 +25,8 @@ const get_table_rows = async (query: {
       "key_type": key_type,
       "encode_type": encode_type,
       "upper_bound": upper_bound,
-      "lower_bound": lower_bound
+      "lower_bound": lower_bound,
+      "reverse": reverse
     });
     return result.rows;
   }catch(e){

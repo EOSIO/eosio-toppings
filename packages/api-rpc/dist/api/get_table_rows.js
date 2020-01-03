@@ -39,12 +39,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var eosjs_1 = require("eosjs");
 var fetch = require('node-fetch');
 var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, function () {
-    var endpoint, contract_name, table_name, scope_name, _a, index_position, _b, key_type, _c, encode_type, _d, upper_bound, _e, lower_bound, rpc, result, e_1;
-    return __generator(this, function (_f) {
-        switch (_f.label) {
+    var endpoint, contract_name, table_name, scope_name, _a, index_position, _b, key_type, _c, encode_type, _d, upper_bound, _e, lower_bound, _f, reverse, rpc, result, e_1;
+    return __generator(this, function (_g) {
+        switch (_g.label) {
             case 0:
-                _f.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name, _a = query.index_position, index_position = _a === void 0 ? '' : _a, _b = query.key_type, key_type = _b === void 0 ? '' : _b, _c = query.encode_type, encode_type = _c === void 0 ? '' : _c, _d = query.upper_bound, upper_bound = _d === void 0 ? '' : _d, _e = query.lower_bound, lower_bound = _e === void 0 ? '' : _e;
+                _g.trys.push([0, 2, , 3]);
+                endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name, _a = query.index_position, index_position = _a === void 0 ? '' : _a, _b = query.key_type, key_type = _b === void 0 ? '' : _b, _c = query.encode_type, encode_type = _c === void 0 ? '' : _c, _d = query.upper_bound, upper_bound = _d === void 0 ? '' : _d, _e = query.lower_bound, lower_bound = _e === void 0 ? '' : _e, _f = query.reverse, reverse = _f === void 0 ? false : _f;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 return [4 /*yield*/, rpc.get_table_rows({
                         "json": true,
@@ -55,13 +55,14 @@ var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, 
                         "key_type": key_type,
                         "encode_type": encode_type,
                         "upper_bound": upper_bound,
-                        "lower_bound": lower_bound
+                        "lower_bound": lower_bound,
+                        "reverse": reverse
                     })];
             case 1:
-                result = _f.sent();
+                result = _g.sent();
                 return [2 /*return*/, result.rows];
             case 2:
-                e_1 = _f.sent();
+                e_1 = _g.sent();
                 console.log('Caught exception: ' + e_1);
                 throw (e_1);
             case 3: return [2 /*return*/];

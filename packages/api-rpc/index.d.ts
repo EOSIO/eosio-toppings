@@ -38,7 +38,8 @@ declare namespace Rpc {
     key_type?: string,
     encode_type?: string,
     upper_bound?: string,
-    lower_bound?: string
+    lower_bound?: string,
+    reverse?: boolean
   }
 
   interface PushActionQuery {
