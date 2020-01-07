@@ -7,6 +7,6 @@ steps:
       queue: hk-infra-ci-agent
   - wait
   - label: ':yarn: test'
-    command: yarn test:ci
+    command: cd packages/api-postgres-plugin/ && yarn test:ci
     agents:
       queue: hk-infra-ci-agent
