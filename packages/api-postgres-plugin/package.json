@@ -19,5 +19,16 @@
   "dependencies": {
     "@eosio-toppings/api-rpc": "^1.0.0",
     "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "@databases/pg-test": "^1.0.3",
+    "jest": "^24.9.0",
+    "pg-connection-string": "^2.1.0",
+    "ts-jest": "^24.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test:dev": "./node_modules/.bin/jest --watch",
+    "test:ci": "set CI=true && ./node_modules/.bin/jest --coverage"
   }
 }
