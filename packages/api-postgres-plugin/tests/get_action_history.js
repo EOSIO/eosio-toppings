@@ -1,13 +1,14 @@
 const Postgres = require('../api/db');
-const get_actions = require('../api/get_actions');
+const get_action_history = require('../api/get_action_history');
 
 const testcaseParameters = [
-  [undefined, undefined],
-  ['eosio', undefined],
-  ['eosio', 100000],
-  ['eosio', '10'],
-  ['eosio', 'sdfsdf'],
-  ['sdfsdf', 100]
+  [undefined, undefined, undefined],
+  ['eosio', undefined, undefined],
+  ['eosio', 'eosio', undefined],
+  ['eosio', 'eosio', 100000],
+  ['eosio', 'eosio', '10'],
+  ['eosio', 'eosio', 'sdfsdf'],
+  ['sdfsdf', 'eosio', 100]
 ];
 
 module.exports = () => {
@@ -16,8 +17,9 @@ module.exports = () => {
       .spyOn(Postgres, 'queryAsync')
       .mockRejectedValue(new Error('failed for whatever reason'));
 
-    const actions = await get_actions({
+    const actions = await get_action_history({
       account_name: 'eosio',
+      actor_name: 'eosio',
       records_count: 100
     });
 
@@ -29,12 +31,16 @@ module.exports = () => {
   });
 
   describe.each(testcaseParameters)(
-    'account_name = %s, records_count = %i',
-    (account_name, records_count) => {
+    'account_name = %s, actor_name = %s, records_count = %i',
+    (account_name, actor_name, records_count) => {
       it('format validation', async done => {
         const queryAsyncCall = jest.spyOn(Postgres, 'queryAsync');
 
-        const actions = await get_actions({ account_name, records_count });
+        const actions = await get_action_history({
+          account_name,
+          actor_name,
+          records_count
+        });
 
         expect(queryAsyncCall).toBeCalledTimes(1);
         expect(actions).toBeInstanceOf(Array);

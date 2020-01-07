@@ -6,18 +6,10 @@ module.exports = {
   // add it explicitly here.
   rootDir: '../..',
   roots: ['<rootDir>'],
-  coverageReporters: ['json-summary'],
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
-  transform: {
-    '^.+\\.(tsx?)$': 'ts-jest'
-  },
-  globals: {
-    'ts-jest': {
-      tsConfig: 'tsconfig.json'
-    }
-  },
+  coverageReporters: ['json-summary', 'text', 'lcov', 'clover'],
+  moduleFileExtensions: ['js'],
   testRegex: '(/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  collectCoverageFrom: ['**/*.{js,ts}'],
+  collectCoverageFrom: ['<rootDir>/packages/api-postgres-plugin/api/**/*.js'],
   reporters: ['default'],
   testEnvironment: 'node',
   setupFiles: ['dotenv/config'],

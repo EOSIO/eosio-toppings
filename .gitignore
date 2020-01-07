@@ -18,3 +18,5 @@ yarn-error.log*
 
 # local config
 config.file.local
+
+coverage
