@@ -1,12 +1,7 @@
 env:
   BUILDKITE_CLEAN_CHECKOUT: true
 steps:
-  - label: ':yarn: install'
-    command: cd packages/api-postgres-plugin/ && yarn install
-    agents:
-      queue: hk-infra-ci-agent
-  - wait
-  - label: ':yarn: test'
-    command: cd packages/api-postgres-plugin/ && yarn test:ci
+  - label: ':yarn: install & test'
+    command: yarn install && cd packages/api-postgres-plugin/ && yarn test:ci
     agents:
       queue: hk-infra-ci-agent
