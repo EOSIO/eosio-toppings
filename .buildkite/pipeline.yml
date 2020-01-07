@@ -1,0 +1,12 @@
+env:
+  BUILDKITE_CLEAN_CHECKOUT: true
+steps:
+  - label: ':yarn: install'
+    command: yarn install
+    agents:
+      queue: hk-infra-ci-agent
+  - wait
+  - label: ':yarn: test'
+    command: yarn test:ci
+    agents:
+      queue: hk-infra-ci-agent
