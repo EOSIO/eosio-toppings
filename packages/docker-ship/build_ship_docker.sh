@@ -15,7 +15,8 @@ if [ -f "./config.file.local" ]; then
 fi
 
 echo "Pulling docker image $SHIP_IMAGE_PREFIX version $SHIP_VERSION, this may take some time..."
-docker pull $SHIP_IMAGE_NAME
+docker build -t $SHIP_IMAGE_NAME .
+# docker build -t eosio/eosio-explorer:fill-pg-1.4 .
 
 # # docker build -t $SHIP_IMAGE_NAME .
 # # build docker image, if necessary
