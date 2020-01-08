@@ -27,8 +27,8 @@
     "ts-jest": "^24.2.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "test:dev": "./node_modules/.bin/jest --watch",
-    "test:ci": "set CI=true && ./node_modules/.bin/jest --coverage"
+    "test": "jest",
+    "test:dev": "jest --watch",
+    "test:ci": "set CI=true && jest --coverage --silent"
   }
 }
