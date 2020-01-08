@@ -1,4 +1,10 @@
-const { startConnection, endConnection } = require('./connection');
+const {
+  startConnection,
+  endConnection,
+  testConnection,
+  testQuery,
+  testQueryAsync
+} = require('./db');
 const get_blocks = require('./get_blocks');
 const get_actions = require('./get_actions');
 const get_actions_with_filter = require('./get_actions_with_filter');
@@ -7,16 +13,20 @@ const get_transactions = require('./get_transactions');
 const get_action_history = require('./get_action_history');
 const get_all_permissions = require('./get_all_permissions');
 const get_permissions_by_public_key = require('./get_permissions_by_public_key');
+const get_permission_link = require('./get_permission_link');
 
 describe('PostgreSQL Plugin Tests', () => {
-  beforeEach(() => {
-    jest.restoreAllMocks();
-  });
+  beforeEach(() => jest.restoreAllMocks());
 
-  it('Check connection to PostgreSQL', async done => {
-    await startConnection();
-    await endConnection();
-    done();
+  describe('Check connection to PostgreSQL', testConnection);
+
+  describe('Check PG query methods', () => {
+    beforeAll(async () => await startConnection());
+
+    describe('Postgres.query', testQuery);
+    describe('Postgres.queryAsync', testQueryAsync);
+
+    afterAll(() => endConnection());
   });
 
   describe('Check API methods', () => {
@@ -30,6 +40,7 @@ describe('PostgreSQL Plugin Tests', () => {
     describe('get_action_history', get_action_history);
     describe('get_all_permissions', get_all_permissions);
     describe('get_permissions_by_public_key', get_permissions_by_public_key);
+    describe('get_permission_link', get_permission_link);
 
     afterAll(() => endConnection());
   });
