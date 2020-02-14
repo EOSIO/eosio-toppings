@@ -6,7 +6,7 @@ const get_table_rows = async (query: {
   contract_name: string,
   table_name: string,
   scope_name: string,
-  index_position: string,
+  index_position: number,
   key_type: string,
   encode_type: string,
   upper_bound: string,
@@ -14,7 +14,7 @@ const get_table_rows = async (query: {
   reverse: boolean
 }) => {
   try{
-    let { endpoint, contract_name, table_name, scope_name, index_position='',key_type='',encode_type='', upper_bound='', lower_bound='', reverse=false } = query;
+    let { endpoint, contract_name, table_name, scope_name, index_position=1, key_type='', encode_type='', upper_bound='', lower_bound='', reverse=false } = query;
     const rpc = new JsonRpc(endpoint,{ fetch });
     const result = await rpc.get_table_rows({
       "json": true,

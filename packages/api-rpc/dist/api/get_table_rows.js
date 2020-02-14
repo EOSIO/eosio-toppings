@@ -44,7 +44,7 @@ var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, 
         switch (_g.label) {
             case 0:
                 _g.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name, _a = query.index_position, index_position = _a === void 0 ? '' : _a, _b = query.key_type, key_type = _b === void 0 ? '' : _b, _c = query.encode_type, encode_type = _c === void 0 ? '' : _c, _d = query.upper_bound, upper_bound = _d === void 0 ? '' : _d, _e = query.lower_bound, lower_bound = _e === void 0 ? '' : _e, _f = query.reverse, reverse = _f === void 0 ? false : _f;
+                endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name, _a = query.index_position, index_position = _a === void 0 ? 1 : _a, _b = query.key_type, key_type = _b === void 0 ? '' : _b, _c = query.encode_type, encode_type = _c === void 0 ? '' : _c, _d = query.upper_bound, upper_bound = _d === void 0 ? '' : _d, _e = query.lower_bound, lower_bound = _e === void 0 ? '' : _e, _f = query.reverse, reverse = _f === void 0 ? false : _f;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 return [4 /*yield*/, rpc.get_table_rows({
                         "json": true,

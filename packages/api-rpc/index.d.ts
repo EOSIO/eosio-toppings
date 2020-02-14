@@ -34,7 +34,7 @@ declare namespace Rpc {
     contract_name: string,
     table_name: string,
     scope_name: string,
-    index_position?: string,
+    index_position?: number,
     key_type?: string,
     encode_type?: string,
     upper_bound?: string,
