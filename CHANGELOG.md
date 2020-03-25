@@ -2,11 +2,20 @@
 
 ## docker-ship v1.1.0, api-postgres-plugin v1.1.0, api-rpc v1.1.0 (2020-03-25)
 
+#### Enhancement
+* `api-rpc`
+  * [#126](https://github.com/EOSIO/eosio-toppings/pull/126) Fogbugz 4370: Smart Contract Multi-Index Table Upper / Lower Bound input ([@varshajnagaraja](https://github.com/varshajnagaraja))
+* `api-postgres-plugin`
+  * [#123](https://github.com/EOSIO/eosio-toppings/pull/123) add more test case and silent logs ([@b1-johnwong](https://github.com/b1-johnwong))
+  * [#122](https://github.com/EOSIO/eosio-toppings/pull/122) Unit test ([@b1-johnwong](https://github.com/b1-johnwong))
+  * [#121](https://github.com/EOSIO/eosio-toppings/pull/121) Fogbugz 4170: Push action page, action history is slow. ([@b1-johnwong](https://github.com/b1-johnwong))
+
 #### Bug Fix
 * `docker-ship`
   * [#127](https://github.com/EOSIO/eosio-toppings/pull/127) Handle postgres docker image update issue and fix the postgres docker image version ([@varshajnagaraja](https://github.com/varshajnagaraja))
 
-#### Committers: 1
+#### Committers: 2
+- John Wong ([@b1-johnwong](https://github.com/b1-johnwong))
 - Varsha Nagaraja ([@varshajnagaraja](https://github.com/varshajnagaraja))
 
 ## api-eosio-compiler, docker-eosio-nodeos, docker-ship, api-mongodb-plugin, api-postgres-plugin, api-rpc v1.0.0 (2019-12-05)
