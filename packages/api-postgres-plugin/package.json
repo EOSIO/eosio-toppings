@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/api-postgres-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "block.one",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@eosio-toppings/api-rpc": "^1.0.0",
+    "@eosio-toppings/api-rpc": "^1.1.0",
     "pg": "^7.11.0"
   },
   "devDependencies": {
