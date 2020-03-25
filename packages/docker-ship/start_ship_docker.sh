@@ -38,8 +38,8 @@ if [ ! "$(docker ps -q -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
   docker run -d -p $POSTGRES_PORT:5432 \
   --name $POSTGRES_CONTAINER_NAME \
   -v $POSTGRES_VOLUME_NAME:/var/lib/postgresql/data \
-  -e POSTGRES_PASSWORD=$eosio_postgres_password \
-  postgres
+  -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
+  postgres:12
   sleep 10
 else
     echo "docker is already running"
