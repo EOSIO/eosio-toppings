@@ -1,6 +1,6 @@
 # Changelog
 
-## docker-ship v1.0.1 (2020-03-25)
+## docker-ship v1.1.0, api-postgres-plugin v1.1.0, api-rpc v1.1.0 (2020-03-25)
 
 #### Bug Fix
 * `docker-ship`
