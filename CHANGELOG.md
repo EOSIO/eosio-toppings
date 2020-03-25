@@ -1,5 +1,14 @@
 # Changelog
 
+## docker-ship v1.0.1 (2020-03-25)
+
+#### Bug Fix
+* `docker-ship`
+  * [#127](https://github.com/EOSIO/eosio-toppings/pull/127) Handle postgres docker image update issue and fix the postgres docker image version ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
+#### Committers: 1
+- Varsha Nagaraja ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
 ## api-eosio-compiler, docker-eosio-nodeos, docker-ship, api-mongodb-plugin, api-postgres-plugin, api-rpc v1.0.0 (2019-12-05)
 
 #### Enhancement
