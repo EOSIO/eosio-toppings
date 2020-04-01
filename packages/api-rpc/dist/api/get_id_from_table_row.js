@@ -44,17 +44,18 @@ var get_table_rows = function (query) { return __awaiter(_this, void 0, void 0, 
         switch (_f.label) {
             case 0:
                 _f.trys.push([0, 2, , 3]);
+
                 endpoint = query.endpoint, contract_name = query.contract_name, table_name = query.table_name, scope_name = query.scope_name, _a = query.index_position, index_position = _a === void 0 ? '' : _a, _b = query.key_type, key_type = _b === void 0 ? '' : _b, _c = query.encode_type, encode_type = _c === void 0 ? '' : _c, _d = query.upper_bound, upper_bound = _d === void 0 ? '' : _d, _e = query.lower_bound, lower_bound = _e === void 0 ? '' : _e;
                 rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
                 return [4 /*yield*/, rpc.get_table_rows({
                         "json": true,
+                        "limit": 1,
                         "code": contract_name,
                         "scope": scope_name,
                         "table": table_name,
                         "index_position": index_position,
                         "key_type": key_type,
                         "encode_type": encode_type,
-                        "upper_bound": upper_bound,
                         "lower_bound": lower_bound
                     })];
             case 1:

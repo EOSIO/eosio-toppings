@@ -7,6 +7,7 @@ var get_info_1 = __importDefault(require("./api/get_info"));
 var create_account_1 = __importDefault(require("./api/create_account"));
 var push_action_1 = __importDefault(require("./api/push_action"));
 var get_table_rows_1 = __importDefault(require("./api/get_table_rows"));
+var get_id_from_table_row_1 = __importDefault(require("./api/get_id_from_table_row"));
 var get_account_details_1 = __importDefault(require("./api/get_account_details"));
 var update_auth_1 = __importDefault(require("./api/update_auth"));
 var get_abi_1 = __importDefault(require("./api/get_abi"));
@@ -26,6 +27,7 @@ exports.default = {
     create_account: create_account_1.default,
     push_action: push_action_1.default,
     get_table_rows: get_table_rows_1.default,
+    get_id_from_table_row: get_id_from_table_row_1.default,
     get_account_details: get_account_details_1.default,
     update_auth: update_auth_1.default,
     get_abi: get_abi_1.default,

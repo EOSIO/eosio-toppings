@@ -2,6 +2,7 @@ import get_info from './api/get_info';
 import create_account from "./api/create_account";
 import push_action from './api/push_action';
 import get_table_rows from './api/get_table_rows';
+import get_id_from_table_row from './api/get_id_from_table_row';
 import get_account_details from './api/get_account_details';
 import update_auth from './api/update_auth';
 import get_abi from './api/get_abi';
@@ -22,6 +23,7 @@ export default {
     create_account,
     push_action,
     get_table_rows,
+    get_id_from_table_row,
     get_account_details,
     update_auth,
     get_abi,

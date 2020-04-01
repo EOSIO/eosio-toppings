@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/api-postgres-plugin",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "block.one",
   "main": "index.js",
@@ -17,18 +17,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@eosio-toppings/api-rpc": "^1.1.0",
+    "@eosio-toppings/api-rpc": "^1.0.0",
     "pg": "^7.11.0"
-  },
-  "devDependencies": {
-    "@databases/pg-test": "^1.0.3",
-    "jest": "^24.9.0",
-    "pg-connection-string": "^2.1.0",
-    "ts-jest": "^24.2.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test:dev": "jest --watch",
-    "test:ci": "set CI=true && jest --coverage --silent"
   }
 }

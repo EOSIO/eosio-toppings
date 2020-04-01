@@ -30,7 +30,7 @@ if [ ! "$(docker ps -q -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
     script="./start_history_tool.sh"
     # recreate fresh volume
     docker volume create --name=$POSTGRES_VOLUME_NAME
-    
+
   fi
 
   # start the postgres docker
@@ -39,7 +39,7 @@ if [ ! "$(docker ps -q -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
   --name $POSTGRES_CONTAINER_NAME \
   -v $POSTGRES_VOLUME_NAME:/var/lib/postgresql/data \
   -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-  postgres:12
+  postgres
   sleep 10
 else
     echo "docker is already running"

@@ -34,12 +34,22 @@ declare namespace Rpc {
     contract_name: string,
     table_name: string,
     scope_name: string,
-    index_position?: number,
+    index_position?: string,
     key_type?: string,
     encode_type?: string,
     upper_bound?: string,
-    lower_bound?: string,
-    reverse?: boolean
+    lower_bound?: string
+  }
+
+  interface GetIdFromTableRowQuery {
+    endpoint: string,
+    contract_name: string,
+    table_name: string,
+    scope_name: string,
+    index_position?: string,
+    key_type?: string,
+    encode_type?: string,
+    lower_bound?: string
   }
 
   interface PushActionQuery {
@@ -135,12 +145,13 @@ declare namespace Rpc {
   function get_info(query: GetInfoQuery) : Promise<any>;
   function create_account(query: CreateAccountQuery): Promise<any>;
   function deploy_contract(query: DeployContractQuery): Promise<any>;
-  function get_abi(query: GetAccountQuery): Promise<any>
-  function get_account_details(query: GetAccountQuery): Promise<any>
+  function get_abi(query: GetAccountQuery): Promise<any>;
+  function get_account_details(query: GetAccountQuery): Promise<any>;
   function get_block(query: GetBlockQuery): Promise<any>;
   function get_producer_schedule(query: GetInfoQuery): Promise<any>;
   function get_producers(query: GetInfoQuery): Promise<any>;
-  function get_table_rows(query: GetTableRowsQuery): Promise<any>
+  function get_table_rows(query: GetTableRowsQuery): Promise<any>;
+  function get_id_from_table_row(query: GetIdFromTableRowQuery): Promise<any>;
   function push_action(query: PushActionQuery): Promise<any>;
   function buy_ram(query: BuyRamQuery): Promise<any>;
   function sell_ram(query: SellRamQuery): Promise<any>;
@@ -148,11 +159,11 @@ declare namespace Rpc {
   function unstake_cpu(query: UnstakeCpuQuery): Promise<any>;
   function stake_net(query: StakeNetQuery): Promise<any>;
   function unstake_net(query: UnstakeNetQuery): Promise<any>;
-  function update_auth(query: UpdateAuthQuery): Promise<any>
+  function update_auth(query: UpdateAuthQuery): Promise<any>;
 
   /**
   * request_tokens
-  * Requests {quantity} tokens from account {requested_from}, for account {requested_by}. 
+  * Requests {quantity} tokens from account {requested_from}, for account {requested_by}.
   * Limited to a request every {limit} minutes.
   * Only used in testnet for requesting TNT.
   * @param endpoint
