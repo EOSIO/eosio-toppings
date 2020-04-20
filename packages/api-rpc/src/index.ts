@@ -17,6 +17,7 @@ import sell_ram from './api/sell_ram';
 import deploy_contract from './api/deploy_contract';
 import get_producer_schedule from './api/get_producer_schedule';
 import get_producers from './api/get_producers';
+import get_currency_stats from './api/get_currency_stats';
 
 export default {
     get_info,
@@ -37,5 +38,6 @@ export default {
     sell_ram,
     deploy_contract,
     get_producer_schedule,
-    get_producers
+    get_producers,
+    get_currency_stats
 }

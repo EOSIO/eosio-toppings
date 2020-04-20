@@ -41,6 +41,11 @@ declare namespace Rpc {
     lower_bound?: string
   }
 
+  interface GetCurrencyStats {
+    endpoint: string,
+    symbol: string
+  }
+
   interface GetIdFromTableRowQuery {
     endpoint: string,
     contract_name: string,
@@ -148,6 +153,7 @@ declare namespace Rpc {
   function get_abi(query: GetAccountQuery): Promise<any>;
   function get_account_details(query: GetAccountQuery): Promise<any>;
   function get_block(query: GetBlockQuery): Promise<any>;
+  function get_currency_stats(query: GetCurrencyStats): Promise<any>;
   function get_producer_schedule(query: GetInfoQuery): Promise<any>;
   function get_producers(query: GetInfoQuery): Promise<any>;
   function get_table_rows(query: GetTableRowsQuery): Promise<any>;
