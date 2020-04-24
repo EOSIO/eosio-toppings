@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "block.one",
   "main": "index.js",
-  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-ship-plugin",
+  "repository": "https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-postgres-plugin",
   "contributors": [
     "Terry Leung",
     "Jonathan Cardenas",
