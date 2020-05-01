@@ -27,6 +27,7 @@ const get_actions_with_filter = async (query) => {
       timestamp,
       act_account,
       act_name,
+      act_data,
       actor,
       receipt_global_sequence,
       token_to,
