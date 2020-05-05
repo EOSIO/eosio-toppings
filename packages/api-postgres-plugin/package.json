@@ -1,6 +1,6 @@
 {
   "name": "@eosio-toppings/api-postgres-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "author": "block.one",
   "main": "index.js",
