@@ -1,5 +1,14 @@
 # Changelog
 
+## docker-ship v1.2.0, docker-eosio-nodeos v1.1.0 (2020-05-05)
+
+#### Enhancement
+* `docker-eosio-nodeos`, `docker-ship`
+  * [#132](https://github.com/EOSIO/eosio-toppings/pull/132) Upgrade to eos2.0.5 and fill-pg2.0 ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
+#### Committers: 1
+- Varsha Nagaraja ([@varshajnagaraja](https://github.com/varshajnagaraja))
+
 ## docker-ship v1.1.0, api-postgres-plugin v1.1.0, api-rpc v1.1.0 (2020-03-25)
 
 #### Enhancement
