@@ -184,10 +184,7 @@ declare namespace Postgres {
   function get_action_details(query: ActionDetailsQuery): Promise<ActionDetailsResult>;
   function get_actions_with_filter(query: ActionsWithFilterQuery): Promise<TransactionResult[]>;
 
-  function get_smart_contracts(query: SmartContractsQuery): Promise<SmartContractsResult>;
   function connectToDB(query?: DBConnectionQuery): Promise<string>
-  function get_permissions_by_public_key(query: PermissionQuery): Promise<PermissionResult>;
-  function get_all_permissions(query: GetAllPermissionsQuery): Promise<any>
   function get_permission_link(query: GetPermissionQuery): Promise<any>
 }
 
