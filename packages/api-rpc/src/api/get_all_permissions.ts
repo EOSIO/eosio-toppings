@@ -1,13 +1,11 @@
 var request = require("request");
 
-const config = require('./configuration').config;
-
 const get_all_permissions = async query => {
    try {
       // console.log("config: ", config);
       // console.log("query: ", query);
 
-      const { account_name, records_count, fetch_eosio } = query;
+      const { endpoint, account_name, records_count } = query;
       const limit = Math.min(parseInt(records_count) || 200, 200);
 
       var upper_bound = "";
@@ -35,7 +33,7 @@ const get_all_permissions = async query => {
       // console.log("options: ", options);
 
       const result = await new Promise(function (resolve, reject) {
-         request.post({ url: config.endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+         request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
             if (err) {
                reject(err);
             } else {

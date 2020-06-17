@@ -1,13 +1,11 @@
 var request = require("request");
 
-const config = require('./configuration').config;
-
 const get_smart_contracts = async query => {
    try {
       // console.log("config: ", config);
       // console.log("query: ", query);
 
-      const { smart_contract_name, records_count } = query;
+      const { endpoint, smart_contract_name, records_count } = query;
       const limit = Math.min(parseInt(records_count) || 100, 100);
 
       var upper_bound = "";
@@ -35,7 +33,7 @@ const get_smart_contracts = async query => {
       // console.log("options: ", options);
 
       const result = await new Promise(function (resolve, reject) {
-         request.post({ url: config.endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+         request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
             if (err) {
                reject(err);
             } else {
