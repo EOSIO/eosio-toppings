@@ -11,7 +11,6 @@ const get_actions_with_filter = require('./get_actions_with_filter');
 const get_trx_action_list = require('./get_trx_action_list');
 const get_transactions = require('./get_transactions');
 const get_action_history = require('./get_action_history');
-const get_permission_link = require('./get_permission_link');
 
 describe('PostgreSQL Plugin Tests', () => {
   beforeEach(() => jest.restoreAllMocks());
@@ -36,7 +35,6 @@ describe('PostgreSQL Plugin Tests', () => {
     describe('get_trx_action_list', get_trx_action_list);
     describe('get_transactions', get_transactions);
     describe('get_action_history', get_action_history);
-    describe('get_permission_link', get_permission_link);
 
     afterAll(() => endConnection());
   });

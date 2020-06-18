@@ -9,7 +9,6 @@ const get_actions = require('./api/get_actions');
 const get_action_history = require('./api/get_action_history');
 const get_action_details = require('./api/get_action_details');
 const get_actions_with_filter = require('./api/get_actions_with_filter');
-const get_permission_link = require('./api/get_permission_link');
 const { connectToDB } = require('./api/db');
 
 module.exports = {
@@ -22,6 +21,5 @@ module.exports = {
   get_action_history,
   get_action_details,
   get_actions_with_filter,
-  get_permission_link,
   connectToDB
 };
