@@ -111,6 +111,7 @@ var get_permissions_by_public_key = function (query) { return __awaiter(void 0, 
                     });
                     return value;
                 });
+                // console.log("res: ", res);
                 return res;
             });
             return [2 /*return*/, result];
