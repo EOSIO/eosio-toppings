@@ -8,7 +8,7 @@ const get_blocks = async query => {
       ${show_empty === 'true'
         ? `
         SELECT block_id, block_num, timestamp, transaction_count, producer
-        FROM chain.block_info
+        FROM testnet.block_info
         `
         : `
         SELECT *

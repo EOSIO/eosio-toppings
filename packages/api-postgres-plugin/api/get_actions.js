@@ -6,10 +6,10 @@ const get_actions = async query => {
     const limit = Math.min(parseInt(records_count) || 100, 100);
     const statement = `
       SELECT transaction_id, action_ordinal, act_account, act_name, act_data, timestamp, block_num, actor, permission
-      FROM chain.action_trace
+      FROM testnet.action_trace
       WHERE
         creator_action_ordinal = 0
-        ${account_name !== undefined ? `AND act_account = '${account_name}'` : ''}  
+        ${account_name !== undefined ? `AND act_account = '${account_name}'` : ''}
       ORDER BY block_num DESC
       LIMIT ${limit}
     `;
