@@ -58,7 +58,6 @@ var get_permission_link = function (query) { return __awaiter(void 0, void 0, vo
                 "reverse": false,
                 "show_payer": false
             };
-            console.log("options: ", options);
             req = new Promise(function (resolve, reject) {
                 request.post({ url: endpoint_1 + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
                     if (err) {

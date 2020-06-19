@@ -28,7 +28,7 @@ const get_permission_link = async (query: {
       "show_payer": false
     };
 
-    console.log("options: ", options);
+    // console.log("options: ", options);
 
     var req = new Promise(function (resolve, reject) {
       request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err: any, resp: any, body: any) {
