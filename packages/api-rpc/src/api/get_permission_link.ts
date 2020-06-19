@@ -1,6 +1,10 @@
 var request = require("request");
 
-const get_permission_link = async query => {
+const get_permission_link = async (query: {
+  endpoint: string,
+  account_name: string,
+  records_count: string
+}) => {
   try {
     // console.log("config: ", config);
     // console.log("query: ", query);
@@ -27,7 +31,7 @@ const get_permission_link = async query => {
     console.log("options: ", options);
 
     var req = new Promise(function (resolve, reject) {
-      request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+      request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err: any, resp: any, body: any) {
         if (err) {
           reject(err);
         } else {
@@ -47,4 +51,5 @@ const get_permission_link = async query => {
   };
 };
 
-module.exports = get_permission_link;
+export default get_permission_link;
+
