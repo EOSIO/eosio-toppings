@@ -36,26 +36,47 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var eosjs_1 = require("eosjs");
-var fetch = require('node-fetch');
-var get_producers = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-    var endpoint, rpc, response, e_1;
+var request = require("request");
+var get_permission_link = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+    var endpoint_1, account_name, records_count, limit, options, req;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                endpoint = query.endpoint;
-                rpc = new eosjs_1.JsonRpc(endpoint, { fetch: fetch });
-                return [4 /*yield*/, rpc.get_producers()];
-            case 1:
-                response = _a.sent();
-                return [2 /*return*/, response];
-            case 2:
-                e_1 = _a.sent();
-                console.log('Caught exception: ' + e_1);
-                throw (e_1);
-            case 3: return [2 /*return*/];
+        try {
+            endpoint_1 = query.endpoint, account_name = query.account_name, records_count = query.records_count;
+            limit = Math.min(parseInt(records_count) || 100, 100);
+            options = {
+                "json": true,
+                "code": "eosio.authlink",
+                "scope": account_name,
+                "table": "authlinks",
+                "table_key": "",
+                "lower_bound": "",
+                "upper_bound": "",
+                "limit": limit,
+                "key_type": "",
+                "index_position": "",
+                "encode_type": "dec",
+                "reverse": false,
+                "show_payer": false
+            };
+            req = new Promise(function (resolve, reject) {
+                request.post({ url: endpoint_1 + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        // console.log("body: ", body);
+                        resolve(body.rows);
+                    }
+                });
+            });
+            return [2 /*return*/, req];
         }
+        catch (error) {
+            console.error('Caught exception in get all permissions query: ', error.stack);
+            return [2 /*return*/, []];
+        }
+        ;
+        return [2 /*return*/];
     });
 }); };
-exports.default = get_producers;
+exports.default = get_permission_link;

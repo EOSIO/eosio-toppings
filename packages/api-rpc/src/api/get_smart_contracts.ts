@@ -37,7 +37,7 @@ const get_smart_contracts = async (query: {
       // console.log("options: ", options);
 
       const result = await new Promise(function (resolve, reject) {
-         request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+         request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err: any, resp: any, body: any) {
             if (err) {
                reject(err);
             } else {

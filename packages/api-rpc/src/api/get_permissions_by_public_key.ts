@@ -57,10 +57,10 @@ const get_permissions_by_public_key = async (query: {
       "show_payer": false
     };
 
-    console.log("options: ", options);
+    // console.log("options: ", options);
 
     var req = new Promise(function (resolve, reject) {
-      request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
+      request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err: any, resp: any, body: any) {
         if (err) {
           reject(err);
         } else {
@@ -70,17 +70,17 @@ const get_permissions_by_public_key = async (query: {
       });
     });
 
-    result = req.then(function(res) {
+    var result = req.then(function(res: any) {
       // res[0].keyseg = "comment";
       // console.log("then result: ", res);
-      res = res.filter(function(value, index, array) {
-        return value.keypermslist.some(function(value, index, array) {
+      res = res.filter(function(value: any, index: any, array: any) {
+        return value.keypermslist.some(function(value: any, index: any, array: any) {
           return value.key == public_key;
         });
       });
 
-      res = res.map(function(value, index, array) {
-        value.keypermslist = value.keypermslist.filter(function(value, inidex, array) {
+      res = res.map(function(value: any, index: any, array: any) {
+        value.keypermslist = value.keypermslist.filter(function(value: any, inidex: any, array: any) {
           return value.key == public_key;
         });
         return value;
