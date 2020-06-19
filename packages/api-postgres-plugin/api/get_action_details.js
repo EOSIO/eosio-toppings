@@ -6,24 +6,24 @@ const get_action_details = async (query) => {
     let result = [];
     let { id, action_ordinal, endpoint, block_num } = query;
     id = id.toUpperCase();
-    
+
     let query_gen = `
-        SELECT * FROM chain.action_trace
+        SELECT * FROM testnet.action_trace
         WHERE transaction_id = '${id}' AND action_ordinal = ${action_ordinal} ${(block_num !== undefined) ? `AND block_num = '${block_num}'` : ''}`;
-    
+
     let promise = new Promise((resolve, reject)=>{
       db.query(query_gen, "", (err, result) => {
         if (err) {
           console.error('Error executing get action details query:: ', err.stack);
           resolve([]);
-        }else{          
-          resolve(result.rows);     
-        }     
+        }else{
+          resolve(result.rows);
+        }
       })
-    })    
+    })
     let resultObj = await promise;
-    
-    if(resultObj.length > 0 && resultObj[0].hasOwnProperty("transaction_id")){  
+
+    if(resultObj.length > 0 && resultObj[0].hasOwnProperty("transaction_id")){
       // Delete serialized act data from response
       delete resultObj[0].act_data;
       // Fetch action data from blockchain
@@ -36,9 +36,9 @@ const get_action_details = async (query) => {
       });
     }else{
       result = resultObj;
-    } 
-    
-    return result;   
+    }
+
+    return result;
 
   }catch(err){
     console.log("caught exception ", err)
