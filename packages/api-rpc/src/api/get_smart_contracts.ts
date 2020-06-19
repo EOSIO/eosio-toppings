@@ -1,6 +1,10 @@
 var request = require("request");
 
-const get_smart_contracts = async query => {
+const get_smart_contracts = async (query: {
+  endpoint: string,
+  smart_contract_name: string,
+  records_count: string
+}) => {
    try {
       // console.log("config: ", config);
       // console.log("query: ", query);
@@ -53,4 +57,4 @@ const get_smart_contracts = async query => {
    };
 };
 
-module.exports = get_smart_contracts;
+export default get_smart_contracts;

@@ -1,6 +1,10 @@
 var request = require("request");
 
-const get_permissions_by_public_key = async query => {
+const get_permissions_by_public_key = async (query: {
+  endpoint: string,
+  public_key: string,
+  records_count: string
+}) => {
   try {
     // console.log("config: ", config);
     // console.log("query: ", query);
@@ -26,7 +30,7 @@ const get_permissions_by_public_key = async query => {
 
     if (keyseg != "" && keyseg.length >= 8) {
       // get the keyseg 8 bytes, convert it to integer
-      scope = BigInt(0);
+      var scope = BigInt(0);
       for (var i = 0; i < 8; ++i) {
         scope = (scope * BigInt(256)) + BigInt(keyseg.charCodeAt(i));
         // console.log("i: ", i, " scope: ", scope);
@@ -95,4 +99,4 @@ const get_permissions_by_public_key = async query => {
   };
 };
 
-module.exports = get_permissions_by_public_key;
+export default get_permissions_by_public_key;

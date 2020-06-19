@@ -1,6 +1,10 @@
 var request = require("request");
 
-const get_all_permissions = async query => {
+const get_all_permissions = async (query: {
+  endpoint: string,
+  account_name: string,
+  records_count: string
+}) => {
    try {
       // console.log("config: ", config);
       // console.log("query: ", query);
@@ -53,4 +57,4 @@ const get_all_permissions = async query => {
    };
 };
 
-module.exports = get_all_permissions;
+export default get_all_permissions;
