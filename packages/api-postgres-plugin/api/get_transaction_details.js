@@ -7,7 +7,7 @@ const get_transaction_details = async (query) => {
     id = id.toUpperCase();
     let result = [];
     let query_gen = `
-        SELECT tt.*,
+        SELECT tt.*
         FROM testnet.transaction_trace as tt
         WHERE id = '${id}'`;    
     
