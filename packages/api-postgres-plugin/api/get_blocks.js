@@ -11,8 +11,8 @@ const get_blocks = async query => {
         FROM testnet.block_info
         `
         : `
-        SELECT *
-        FROM chain.received_nonempty_block
+        SELECT block_id, block_num, timestamp, transaction_count, producer
+        FROM testnet.block_info where transaction_count != 0
         `
       }
         ORDER BY block_num DESC

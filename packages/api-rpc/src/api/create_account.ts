@@ -18,6 +18,7 @@ const create_account = async (query: {
   initial_transfer_quantity?: string
 }) => {
   try {
+    console.log("000000000",query)
     let {
       endpoint,
       private_key: creator_private_key,
