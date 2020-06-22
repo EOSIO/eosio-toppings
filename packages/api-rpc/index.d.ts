@@ -132,12 +132,6 @@ declare namespace Rpc {
     parent: string
   }
 
-  interface GetPermissionLinkQuery {
-    endpoint: string,
-    account_name: string,
-    records_count: string
-  }
-
   function get_info(query: GetInfoQuery) : Promise<any>;
   function create_account(query: CreateAccountQuery): Promise<any>;
   function deploy_contract(query: DeployContractQuery): Promise<any>;
@@ -146,7 +140,6 @@ declare namespace Rpc {
   function get_block(query: GetBlockQuery): Promise<any>;
   function get_producer_schedule(query: GetInfoQuery): Promise<any>;
   function get_producers(query: GetInfoQuery): Promise<any>;
-  function get_permission_link(query: GetPermissionLinkQuery): Promise<any>;
   function get_table_rows(query: GetTableRowsQuery): Promise<any>
   function push_action(query: PushActionQuery): Promise<any>;
   function buy_ram(query: BuyRamQuery): Promise<any>;

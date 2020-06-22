@@ -7,14 +7,14 @@ const get_permission_link = async (query: {
 }) => {
   try {
     // console.log("config: ", config);
-    // console.log("query: ", query);
+    console.log("query: ", query);
     const { endpoint, account_name, records_count } = query;
 
     const limit = Math.min(parseInt(records_count) || 100, 100);
 
     var options = {
       "json": true,
-      "code": "eosio.authlink",
+      "code": "eosio.authln",
       "scope": account_name,
       "table": "authlinks",
       "table_key": "",
@@ -28,7 +28,7 @@ const get_permission_link = async (query: {
       "show_payer": false
     };
 
-    // console.log("options: ", options);
+    console.log("options: ", options);
 
     var req = new Promise(function (resolve, reject) {
       request.post({ url: endpoint + "/v1/chain/get_table_rows", json: true, body: options }, function (err: any, resp: any, body: any) {
@@ -40,6 +40,8 @@ const get_permission_link = async (query: {
         }
       });
     });
+    
+    console.log("req: ", req);
 
     return req;
   } catch (error) {

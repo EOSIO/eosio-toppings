@@ -6,7 +6,6 @@ const get_permissions_by_public_key = async (query: {
   records_count: string
 }) => {
   try {
-    // console.log("config: ", config);
     // console.log("query: ", query);
     const { endpoint, public_key, records_count } = query;
 
@@ -85,6 +84,8 @@ const get_permissions_by_public_key = async (query: {
         });
         return value;
       });
+
+      // console.log("res: ", res);
 
       return res;
     });

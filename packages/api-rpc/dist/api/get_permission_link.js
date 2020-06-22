@@ -41,11 +41,13 @@ var get_permission_link = function (query) { return __awaiter(void 0, void 0, vo
     var endpoint_1, account_name, records_count, limit, options, req;
     return __generator(this, function (_a) {
         try {
+            // console.log("config: ", config);
+            console.log("query: ", query);
             endpoint_1 = query.endpoint, account_name = query.account_name, records_count = query.records_count;
             limit = Math.min(parseInt(records_count) || 100, 100);
             options = {
                 "json": true,
-                "code": "eosio.authlink",
+                "code": "eosio.authln",
                 "scope": account_name,
                 "table": "authlinks",
                 "table_key": "",
@@ -58,6 +60,7 @@ var get_permission_link = function (query) { return __awaiter(void 0, void 0, vo
                 "reverse": false,
                 "show_payer": false
             };
+            console.log("options: ", options);
             req = new Promise(function (resolve, reject) {
                 request.post({ url: endpoint_1 + "/v1/chain/get_table_rows", json: true, body: options }, function (err, resp, body) {
                     if (err) {
@@ -69,6 +72,7 @@ var get_permission_link = function (query) { return __awaiter(void 0, void 0, vo
                     }
                 });
             });
+            console.log("req: ", req);
             return [2 /*return*/, req];
         }
         catch (error) {
