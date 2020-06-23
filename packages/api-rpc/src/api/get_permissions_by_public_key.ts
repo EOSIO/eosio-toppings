@@ -3,13 +3,13 @@ var request = require("request");
 const get_permissions_by_public_key = async (query: {
   endpoint: string,
   public_key: string,
-  records_count: string
+  records_count: number
 }) => {
   try {
     // console.log("query: ", query);
     const { endpoint, public_key, records_count } = query;
 
-    const limit = Math.min(parseInt(records_count) || 100, 100);
+    const limit = Math.min(records_count || 100, 100);
 
     var scopeStr = "";
     var keyseg = "";

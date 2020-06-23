@@ -3,14 +3,14 @@ var request = require("request");
 const get_permission_link = async (query: {
   endpoint: string,
   account_name: string,
-  records_count: string
+  records_count: number
 }) => {
   try {
     // console.log("config: ", config);
     console.log("query: ", query);
     const { endpoint, account_name, records_count } = query;
 
-    const limit = Math.min(parseInt(records_count) || 100, 100);
+    const limit = Math.min(records_count || 100, 100);
 
     var options = {
       "json": true,
@@ -54,4 +54,3 @@ const get_permission_link = async (query: {
 };
 
 export default get_permission_link;
-

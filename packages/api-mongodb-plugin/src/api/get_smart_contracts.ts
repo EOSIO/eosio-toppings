@@ -1,6 +1,6 @@
 import AccountsModel from '../models/account';
 
-const get_smart_contracts = async (query: { records_count: string }) => {
+const get_smart_contracts = async (query: { records_count: number }) => {
   try{
     let { records_count } = query;
     let result: object;
@@ -12,7 +12,7 @@ const get_smart_contracts = async (query: { records_count: string }) => {
     query_gen.sort({_id: -1});
     
     (records_count !== undefined) ?
-        query_gen.limit(parseInt(records_count)): query_gen.limit(100);
+        query_gen.limit(records_count): query_gen.limit(100);
     
     result = await query_gen.exec();  
     return result;
