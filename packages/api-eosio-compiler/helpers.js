@@ -78,6 +78,7 @@ const filterHeaderFiles = (fileName) => (fileName.includes('.hpp'));
 const parseDirectoriesToInclude = (sourcePath) => {
   let directories = [];
   let i = 0;
+  directories.push("/opt/eosio/bin/contracts");
 
   try {
       fileManip.walkSync(sourcePath, (ds, dirPath, dirs, files) => {
