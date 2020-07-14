@@ -7,7 +7,7 @@ const get_trx_action_list = async query => {
     const statement = `
       SELECT transaction_id AS id, block_num, timestamp, act_account, act_name, action_ordinal
       FROM chain.action_trace
-      WHERE creator_action_oridnal = 0 ${account_name !== undefined ? `AND act_account = '${account_name}'` : ''}
+      WHERE creator_action_ordinal = 0 ${account_name !== undefined ? `AND act_account = '${account_name}'` : ''}
       ORDER BY block_num DESC
       LIMIT ${limit}
     `;

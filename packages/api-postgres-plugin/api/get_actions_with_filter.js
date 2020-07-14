@@ -15,8 +15,8 @@ const get_actions_with_filter = async query => {
     chain.action_trace
     WHERE
       ${action_filter !== undefined && account_name !== undefined
-        ? action_filter === 'contract' ? `creator_action_oridnal = 0 AND act_account = '${account_name}'` : 
-          action_filter === 'signed' ? `creator_action_oridnal = 0 AND actor = '${account_name}'` : 
+        ? action_filter === 'contract' ? `creator_action_ordinal = 0 AND act_account = '${account_name}'` : 
+          action_filter === 'signed' ? `creator_action_ordinal = 0 AND actor = '${account_name}'` : 
           // action_filter === 'received' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` : 
           // action_filter === 'sent' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` : 
           'transaction_id IS NOT NULL'
