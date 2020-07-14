@@ -8,11 +8,11 @@ const get_blocks = async query => {
       ${show_empty === 'true'
         ? `
         SELECT block_id, block_num, timestamp, transaction_count, producer
-        FROM testnet.block_info
+        FROM chain.block_info
         `
         : `
         SELECT block_id, block_num, timestamp, transaction_count, producer
-        FROM testnet.block_info where transaction_count != 0
+        FROM chain.block_info where transaction_count != 0
         `
       }
         ORDER BY block_num DESC

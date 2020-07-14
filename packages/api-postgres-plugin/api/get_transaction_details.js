@@ -8,7 +8,7 @@ const get_transaction_details = async (query) => {
     let result = [];
     let query_gen = `
         SELECT tt.*
-        FROM testnet.transaction_trace as tt
+        FROM chain.transaction_trace as tt
         WHERE id = '${id}'`;    
     
     let transactionPromise = new Promise((resolve, reject)=>{

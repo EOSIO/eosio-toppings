@@ -12,7 +12,7 @@ const get_actions_with_filter = async query => {
   } = query;
   const limit = Math.min(parseInt(page_size) || 100, 100);
   var table = `
-    testnet.action_trace
+    chain.action_trace
     WHERE
       ${action_filter !== undefined && account_name !== undefined
         ? action_filter === 'contract' ? `creator_action_oridnal = 0 AND act_account = '${account_name}'` : 
@@ -55,54 +55,54 @@ const get_actions_with_filter = async query => {
   if(action_filter === 'received'){
     statement = `
     SELECT
-      testnet.transfer_t.transaction_id AS id,
-      testnet.transfer_t.block_num AS block_num,
-      testnet.transfer_t.timestamp AS timestamp,
-      testnet.action_trace.act_account AS act_account,
-      testnet.action_trace.act_name AS act_name,
-      testnet.action_trace.actor AS actor,
-      testnet.action_trace.receipt_global_sequence AS receipt_global_sequence,
-      testnet.transfer_t.token_to AS token_to,
-      testnet.transfer_t.token_from AS token_from,
-      testnet.transfer_t.quantity_amount as amount,
-      testnet.transfer_t.quantity_symbol as symbol
-    FROM testnet.transfer_t
-    INNER JOIN testnet.action_trace ON testnet.action_trace.transaction_id = testnet.transfer_t.transaction_id
+      chain.transfer_t.transaction_id AS id,
+      chain.transfer_t.block_num AS block_num,
+      chain.transfer_t.timestamp AS timestamp,
+      chain.action_trace.act_account AS act_account,
+      chain.action_trace.act_name AS act_name,
+      chain.action_trace.actor AS actor,
+      chain.action_trace.receipt_global_sequence AS receipt_global_sequence,
+      chain.transfer_t.token_to AS token_to,
+      chain.transfer_t.token_from AS token_from,
+      chain.transfer_t.quantity_amount as amount,
+      chain.transfer_t.quantity_symbol as symbol
+    FROM chain.transfer_t
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id
     WHERE
       token_to = '${account_name}'
     ORDER BY
-      testnet.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
+      chain.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
     LIMIT ${limit}
     `
 
-    count_statement = `SELECT COUNT(transaction_id) AS count FROM testnet.transfer_t WHERE token_to = '${account_name}'`
+    count_statement = `SELECT COUNT(transaction_id) AS count FROM chain.transfer_t WHERE token_to = '${account_name}'`
   }
 
 
   if(action_filter === 'sent'){
     statement = `
     SELECT
-      testnet.transfer_t.transaction_id AS id,
-      testnet.transfer_t.block_num AS block_num,
-      testnet.transfer_t.timestamp AS timestamp,
-      testnet.action_trace.act_account AS act_account,
-      testnet.action_trace.act_name AS act_name,
-      testnet.action_trace.actor AS actor,
-      testnet.action_trace.receipt_global_sequence AS receipt_global_sequence,
-      testnet.transfer_t.token_to AS token_to,
-      testnet.transfer_t.token_from AS token_from,
-      testnet.transfer_t.quantity_amount as amount,
-      testnet.transfer_t.quantity_symbol as symbol
-    FROM testnet.transfer_t
-    INNER JOIN testnet.action_trace ON testnet.action_trace.transaction_id = testnet.transfer_t.transaction_id
+      chain.transfer_t.transaction_id AS id,
+      chain.transfer_t.block_num AS block_num,
+      chain.transfer_t.timestamp AS timestamp,
+      chain.action_trace.act_account AS act_account,
+      chain.action_trace.act_name AS act_name,
+      chain.action_trace.actor AS actor,
+      chain.action_trace.receipt_global_sequence AS receipt_global_sequence,
+      chain.transfer_t.token_to AS token_to,
+      chain.transfer_t.token_from AS token_from,
+      chain.transfer_t.quantity_amount as amount,
+      chain.transfer_t.quantity_symbol as symbol
+    FROM chain.transfer_t
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id
     WHERE
       token_from = '${account_name}'
     ORDER BY
-      testnet.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
+      chain.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
     LIMIT ${limit}
     `
 
-    count_statement = `SELECT COUNT(transaction_id) AS count FROM testnet.transfer_t WHERE token_from = '${account_name}'`
+    count_statement = `SELECT COUNT(transaction_id) AS count FROM chain.transfer_t WHERE token_from = '${account_name}'`
   }
 
 

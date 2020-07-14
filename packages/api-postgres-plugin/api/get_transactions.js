@@ -6,7 +6,7 @@ const get_transactions = async query => {
     const limit = Math.min(parseInt(records_count) || 100, 100);
     const statement = `
       SELECT id, block_num, transaction_expiration, status
-      FROM testnet.transaction_trace
+      FROM chain.transaction_trace
       ORDER BY block_num DESC, transaction_ordinal DESC
       LIMIT ${limit}
     `;

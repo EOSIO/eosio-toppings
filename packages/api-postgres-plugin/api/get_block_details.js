@@ -10,7 +10,7 @@ const get_block_details = async (query) => {
     id_or_num = id_or_num.toUpperCase();
     let result = [];
     let query_gen = `
-        SELECT * FROM testnet.block_info 
+        SELECT * FROM chain.block_info 
         WHERE ${isNaN(Number(id_or_num)) ? `block_id = '${id_or_num}'` : `block_num = ${id_or_num}`}`;      
     
     let blocksPromise = new Promise((resolve, reject)=>{
