@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("fast-text-encoding");
 var get_info_1 = __importDefault(require("./api/get_info"));
 var create_account_1 = __importDefault(require("./api/create_account"));
 var push_action_1 = __importDefault(require("./api/push_action"));
