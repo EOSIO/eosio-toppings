@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -37,10 +38,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var account_1 = __importDefault(require("../models/account"));
-var get_smart_contracts = function (query) { return __awaiter(_this, void 0, void 0, function () {
+var get_smart_contracts = function (query) { return __awaiter(void 0, void 0, void 0, function () {
     var records_count, result, query_gen, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -53,7 +53,7 @@ var get_smart_contracts = function (query) { return __awaiter(_this, void 0, voi
                 query_gen.exists("abi");
                 query_gen.sort({ _id: -1 });
                 (records_count !== undefined) ?
-                    query_gen.limit(parseInt(records_count)) : query_gen.limit(100);
+                    query_gen.limit(records_count) : query_gen.limit(100);
                 return [4 /*yield*/, query_gen.exec()];
             case 1:
                 result = _a.sent();

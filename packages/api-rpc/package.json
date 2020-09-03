@@ -17,11 +17,13 @@
     "access": "public"
   },
   "dependencies": {
-    "eosjs": "20.0.0",
-    "node-fetch": "^2.6.0",
-    "text-encoding": "^0.7.0"
+    "eosjs": "21.0.3",
+    "fast-text-encoding": "^1.0.3",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@types/elliptic": "^6.4.12",
+    "@types/fast-text-encoding": "^1.0.1",
     "@types/text-encoding": "^0.0.35"
   }
 }
