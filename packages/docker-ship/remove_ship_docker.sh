@@ -15,7 +15,7 @@ fi
 echo "waiting for docker to stop"
 # check if mongodb container is running
 if [ "$(docker ps -q -f name=^$SHIP_CONTAINER_NAME$)" ]; then
-  docker stop $SHIP_CONTAINER_NAME 
+  docker stop $SHIP_CONTAINER_NAME
   sleep 10
 fi
 
@@ -24,7 +24,7 @@ if [ "$(docker ps -q -a -f name=^$SHIP_CONTAINER_NAME$)" ]; then
 fi
 
 if [ "$(docker ps -q -f name=^$POSTGRES_CONTAINER_NAME$)" ]; then
-  docker stop $POSTGRES_CONTAINER_NAME 
+  docker stop $POSTGRES_CONTAINER_NAME
   sleep 10
 fi
 
