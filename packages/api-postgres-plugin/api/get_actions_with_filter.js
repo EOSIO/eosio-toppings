@@ -68,7 +68,7 @@ const get_actions_with_filter = async query => {
       chain.transfer_t.quantity_amount as amount,
       chain.transfer_t.quantity_symbol as symbol
     FROM chain.transfer_t
-    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id AND chain.action_trace.action_ordinal = chain.transfer_t.action_ordinal
     WHERE
       receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND actor != 'eosio' AND token_to = '${account_name}'
     ORDER BY
@@ -96,7 +96,7 @@ const get_actions_with_filter = async query => {
       chain.transfer_t.quantity_amount as amount,
       chain.transfer_t.quantity_symbol as symbol
     FROM chain.transfer_t
-    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id AND chain.action_trace.action_ordinal = chain.transfer_t.action_ordinal
     WHERE
       receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND actor != 'eosio' AND token_from = '${account_name}'
     ORDER BY
