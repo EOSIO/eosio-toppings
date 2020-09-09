@@ -132,6 +132,30 @@ declare namespace Rpc {
     parent: string
   }
 
+  interface GetSmartContractsQuery {
+    endpoint: string,
+    records_count: number
+  }
+
+
+  interface GetSmartContractsQuery {
+    endpoint: string,
+    smart_contract_name: string,
+    records_count: number
+  }
+
+  interface GetPermissionsByPublicKeyQuery {
+    endpoint: string,
+    public_key: string,
+    records_count: number
+  }
+
+  interface GetPermissionLinkQuery {
+    endpoint: string,
+    account_name: string,
+    records_count: number
+  }
+
   function get_info(query: GetInfoQuery) : Promise<any>;
   function create_account(query: CreateAccountQuery): Promise<any>;
   function deploy_contract(query: DeployContractQuery): Promise<any>;
@@ -148,7 +172,10 @@ declare namespace Rpc {
   function unstake_cpu(query: UnstakeCpuQuery): Promise<any>;
   function stake_net(query: StakeNetQuery): Promise<any>;
   function unstake_net(query: UnstakeNetQuery): Promise<any>;
-  function update_auth(query: UpdateAuthQuery): Promise<any>
+  function update_auth(query: UpdateAuthQuery): Promise<any>;
+  function get_smart_contracts(query: GetSmartContractsQuery): Promise<any>;
+  function get_permissions_by_public_key(query: GetPermissionsByPublicKeyQuery): Promise<any>
+  function get_permission_link(query: GetPermissionLinkQuery): Promise<any>
 
   /**
   * request_tokens

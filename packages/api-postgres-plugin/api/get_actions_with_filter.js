@@ -11,14 +11,14 @@ const get_actions_with_filter = async query => {
     show_data_size = 'false'
   } = query;
   const limit = Math.min(parseInt(page_size) || 100, 100);
-  const table = `
+  var table = `
     chain.action_trace
     WHERE
       ${action_filter !== undefined && account_name !== undefined
-        ? action_filter === 'contract' ? `creator_action_ordinal = 0 AND act_account = '${account_name}'` : 
-          action_filter === 'signed' ? `creator_action_ordinal = 0 AND actor = '${account_name}'` : 
-          action_filter === 'received' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` : 
-          action_filter === 'sent' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` : 
+        ? action_filter === 'contract' ? `creator_action_ordinal = 0 AND act_account = '${account_name}'` :
+          action_filter === 'signed' ? `creator_action_ordinal = 0 AND actor = '${account_name}'` :
+          // action_filter === 'received' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_to = '${account_name}'` :
+          // action_filter === 'sent' ? `receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND token_from = '${account_name}'` :
           'transaction_id IS NOT NULL'
         : 'transaction_id IS NOT NULL'}
       ${max_rgs !== undefined
@@ -33,7 +33,7 @@ const get_actions_with_filter = async query => {
       }
   `;
 
-  const statement = `
+  let statement = `
     SELECT
       transaction_id AS id,
       block_num,
@@ -41,11 +41,7 @@ const get_actions_with_filter = async query => {
       act_account,
       act_name,
       actor,
-      receipt_global_sequence,
-      token_to,
-      token_from,
-      amount,
-      symbol
+      receipt_global_sequence
     FROM
       ${table}
     ORDER BY
@@ -53,7 +49,67 @@ const get_actions_with_filter = async query => {
     LIMIT ${limit}
   `;
 
-  const count_statement = `SELECT COUNT(transaction_id) AS count FROM ${table}`;
+  let count_statement = `SELECT COUNT(transaction_id) AS count FROM ${table}`;
+
+
+  if(action_filter === 'received'){
+    statement = `
+    SELECT
+      chain.transfer_t.transaction_id AS id,
+      chain.transfer_t.block_num AS block_num,
+      chain.transfer_t.timestamp AS timestamp,
+      chain.action_trace.receiver AS receiver,
+      chain.action_trace.act_account AS act_account,
+      chain.action_trace.act_name AS act_name,
+      chain.action_trace.actor AS actor,
+      chain.action_trace.receipt_global_sequence AS receipt_global_sequence,
+      chain.transfer_t.token_to AS token_to,
+      chain.transfer_t.token_from AS token_from,
+      chain.transfer_t.quantity_amount as amount,
+      chain.transfer_t.quantity_symbol as symbol
+    FROM chain.transfer_t
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id AND chain.action_trace.action_ordinal = chain.transfer_t.action_ordinal
+    WHERE
+      receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND actor != 'eosio' AND token_to = '${account_name}'
+    ORDER BY
+      chain.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
+    LIMIT ${limit}
+    `
+
+    count_statement = `SELECT COUNT(transaction_id) AS count FROM chain.transfer_t WHERE token_to = '${account_name}'`
+  }
+
+
+  if(action_filter === 'sent'){
+    statement = `
+    SELECT
+      chain.transfer_t.transaction_id AS id,
+      chain.transfer_t.block_num AS block_num,
+      chain.transfer_t.timestamp AS timestamp,
+      chain.action_trace.receiver AS receiver,
+      chain.action_trace.act_account AS act_account,
+      chain.action_trace.act_name AS act_name,
+      chain.action_trace.actor AS actor,
+      chain.action_trace.receipt_global_sequence AS receipt_global_sequence,
+      chain.transfer_t.token_to AS token_to,
+      chain.transfer_t.token_from AS token_from,
+      chain.transfer_t.quantity_amount as amount,
+      chain.transfer_t.quantity_symbol as symbol
+    FROM chain.transfer_t
+    INNER JOIN chain.action_trace ON chain.action_trace.transaction_id = chain.transfer_t.transaction_id AND chain.action_trace.action_ordinal = chain.transfer_t.action_ordinal
+    WHERE
+      receiver = 'eosio.token' AND act_account = 'eosio.token' AND act_name = 'transfer' AND actor != 'eosio' AND token_from = '${account_name}'
+    ORDER BY
+      chain.action_trace.receipt_global_sequence ${direction === 'next' ? 'DESC' : 'ASC'}
+    LIMIT ${limit}
+    `
+
+    count_statement = `SELECT COUNT(transaction_id) AS count FROM chain.transfer_t WHERE token_from = '${account_name}'`
+  }
+
+
+
+  console.log(statement)
 
   try {
     const data = (await db.queryAsync(statement, '')).rows;

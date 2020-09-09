@@ -53,7 +53,7 @@ module.exports = () => {
           expect(action.action_ordinal).toBeDefined();
           expect(action.act_account).toBeDefined();
           expect(action.act_name).toBeDefined();
-          expect(action.act_data).toBeDefined();
+          // expect(action.act_data).toBeDefined();
           expect(action.timestamp).toBeInstanceOf(Date);
           expect(action.block_num).toBeDefined();
           expect(action.actor).toBeDefined();

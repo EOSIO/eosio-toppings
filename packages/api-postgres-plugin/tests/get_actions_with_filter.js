@@ -81,10 +81,6 @@ module.exports = () => {
           expect(action.act_account).toBeDefined();
           expect(action.act_name).toBeDefined();
           expect(action.receipt_global_sequence).toBeDefined();
-          expect(action.token_to).toBeDefined();
-          expect(action.token_from).toBeDefined();
-          expect(action.amount).toBeDefined();
-          expect(action.symbol).toBeDefined();
 
           if (index > 0) {
             expect(parseInt(action.receipt_global_sequence, 10)).toBeLessThan(

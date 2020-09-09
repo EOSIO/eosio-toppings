@@ -7,7 +7,7 @@ const get_action_history = async query => {
     const statement = `
       ${account_name !== undefined
         ? `
-        SELECT transaction_id, action_ordinal, act_account, act_name, act_data, timestamp, block_num, actor, permission
+        SELECT transaction_id, action_ordinal, act_account, act_name, timestamp, block_num, actor, permission
         FROM chain.action_trace
         WHERE creator_action_ordinal = 0 AND act_account = ANY('{${account_name}}')
         `
@@ -16,7 +16,7 @@ const get_action_history = async query => {
       ${account_name !== undefined && actor_name !== undefined ? `UNION` : ``}
       ${actor_name !== undefined
         ? `
-        SELECT transaction_id, action_ordinal, act_account, act_name, act_data, timestamp, block_num, actor, permission
+        SELECT transaction_id, action_ordinal, act_account, act_name, timestamp, block_num, actor, permission
         FROM chain.action_trace
         WHERE creator_action_ordinal = 0 AND actor = ANY('{${actor_name}}')
         `

@@ -17,6 +17,10 @@ import sell_ram from './api/sell_ram';
 import deploy_contract from './api/deploy_contract';
 import get_producer_schedule from './api/get_producer_schedule';
 import get_producers from './api/get_producers';
+import get_all_permissions from './api/get_all_permissions';
+import get_permissions_by_public_key from './api/get_permissions_by_public_key';
+import get_permission_link from './api/get_permission_link';
+import get_smart_contracts from './api/get_smart_contracts';
 
 export default {
     get_info,
@@ -36,5 +40,9 @@ export default {
     sell_ram,
     deploy_contract,
     get_producer_schedule,
-    get_producers
+    get_producers,
+    get_all_permissions,
+    get_permissions_by_public_key,
+    get_permission_link,
+    get_smart_contracts
 }
